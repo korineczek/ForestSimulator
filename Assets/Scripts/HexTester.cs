@@ -6,26 +6,35 @@ public class HexTester : MonoBehaviour
 {
 
     public Transform DebugCube;
+    private Transform[,] hexesTransforms;
 
 	// Use this for initialization
 	void Start ()
 	{
-	    Debug.Log(HexCoords.Offset2World(0, 0, 0));
-        Debug.Log(HexCoords.Offset2World(1, 0, 0));
-        Debug.Log(HexCoords.Offset2World(2, 0, 0));
+        hexesTransforms = new Transform[10,10];
 
-        Debug.Log(HexCoords.Offset2World(0, 0, 1));
-        Debug.Log(HexCoords.Offset2World(1, 0, 1));
-        Debug.Log(HexCoords.Offset2World(2, 0, 1));
-
-	    for (int i = 0; i < 7; i++)
+	    for (int i = 0; i < 10; i++)
 	    {
-	        for (int j = 0; j < 7; j++)
+	        for (int j = 0; j < 10; j++)
 	        {
 	            Transform hex = Instantiate(DebugCube);
 	            hex.position = HexCoords.Offset2World(i, 0, j);
+	            hexesTransforms[i,j] = hex;
 	        }
 	    }
+
+
+	    List<Vector3> testRange = HexCoords.HexRange(HexCoords.Offset2Cube(4,4), 2);
+	    foreach (Vector3 hex in testRange)
+	    {
+	        Debug.Log(hex);
+	        Vector2 offsetHex = HexCoords.Cube2Offset(hex);
+	        hexesTransforms[(int) offsetHex.x, (int) offsetHex.y].GetComponent<Renderer>().material.color = Color.green;
+	    }
+
+
+
+
 	}
 	
 	// Update is called once per frame

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 19da2774dc1ee78448d8f754b3433056
-timeCreated: 1487343754
-licenseType: Free
+guid: aa96f890bfcce834da9ad3697e434d34
+timeCreated: 1487667870
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -11,37 +11,42 @@ ModelImporter:
     100006: Cube.006
     100008: Cube.010
     100010: Cube.013
-    100012: //RootNode
-    100014: SizeDummy
+    100012: Cylinder
+    100014: //RootNode
+    100016: SizeDummy
     400000: Cube.000
     400002: Cube.002
     400004: Cube.004
     400006: Cube.006
     400008: Cube.010
     400010: Cube.013
-    400012: //RootNode
-    400014: SizeDummy
+    400012: Cylinder
+    400014: //RootNode
+    400016: SizeDummy
     2300000: Cube.000
     2300002: Cube.002
     2300004: Cube.004
     2300006: Cube.006
     2300008: Cube.010
     2300010: Cube.013
-    2300012: SizeDummy
+    2300012: Cylinder
+    2300014: SizeDummy
     3300000: Cube.000
     3300002: Cube.002
     3300004: Cube.004
     3300006: Cube.006
     3300008: Cube.010
     3300010: Cube.013
-    3300012: SizeDummy
-    4300000: SizeDummy
-    4300002: Cube.002
-    4300004: Cube.000
-    4300006: Cube.010
-    4300008: Cube.013
-    4300010: Cube.006
-    4300012: Cube.004
+    3300012: Cylinder
+    3300014: SizeDummy
+    4300000: Cylinder
+    4300002: SizeDummy
+    4300004: Cube.002
+    4300006: Cube.000
+    4300008: Cube.010
+    4300010: Cube.013
+    4300012: Cube.006
+    4300014: Cube.004
   materials:
     importMaterials: 1
     materialName: 0

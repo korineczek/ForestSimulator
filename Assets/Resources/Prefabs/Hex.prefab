@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23653179224795984}
   - component: {fileID: 64279549775313630}
   m_Layer: 0
-  m_Name: TestHex
+  m_Name: Hex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

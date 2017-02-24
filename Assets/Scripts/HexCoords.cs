@@ -33,11 +33,43 @@ internal static class HexCoords
     /// <returns></returns>
     public static Vector2 World2Offset(Vector3 pos)
     {
-        float q = (pos.x*(float) Math.Sqrt(3)/3f - pos.z/3f) / (HEIGHT/2);
-        float r = pos.z*2/3/(HEIGHT/2);
-        return Cube2Offset(new Vector3(q, -q - r, r));
-        //TODO: ADD ROUNDING TO HEXES
+        float q = (pos.x*(float) Math.Sqrt(3)/3f - pos.z/3f) / (HEIGHT/2f);
+        float r = pos.z*2f/3f/(HEIGHT/2f);
+        return Cube2Offset(RoundToNearest(new Vector3(q, -q - r, r)));
     }
+
+    /// <summary>
+    /// Round floating point hex coords because reasons
+    /// </summary>
+    /// <param name="hex"></param>
+    /// <returns></returns>
+    public static Vector3 RoundToNearest(Vector3 hex)
+    {
+        int rx = (int) hex.x;
+        int ry = (int) hex.y;
+        int rz = (int) hex.z;
+
+        float xdiff = Mathf.Abs(rx - hex.x);
+        float ydiff = Mathf.Abs(ry - hex.y);
+        float zdiff = Mathf.Abs(rz - hex.z);
+
+        //this is where the magic happens :^)
+        if (xdiff > ydiff && xdiff > zdiff)
+        {
+            rx = -ry - rz;
+        }
+        else if (ydiff > zdiff)
+        {
+            ry = -rx - rz;
+        }
+        else
+        {
+            rz = -rx - ry;
+        }
+        return new Vector3(rx, ry, rz);
+    }
+
+
 
     /*
     public static Vector3 RoundToNearest(Vector3 hex)

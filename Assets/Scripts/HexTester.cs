@@ -50,7 +50,7 @@ public class HexTester : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray,out hit))
         {
-            Debug.Log(HexCoords.World2Offset(hit.point));
+            Debug.Log(hit.point + "   " +HexCoords.World2Offset(hit.point));
         }
         
     }

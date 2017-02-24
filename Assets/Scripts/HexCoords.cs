@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,13 +18,33 @@ internal static class HexCoords
     /// <param name="y"></param>
     /// <param name="z"></param>
     /// <returns></returns>
-    public static Vector3 Offset2World(int x, int y, int z)
+    public static Vector3 Offset2World(int x, float y, int z)
     {
         float width = (Mathf.Sqrt(3f)/2f)*HEIGHT;
         float xCoord = x*width + (z%2 == 0 ? width/2f : width);
         float zCoord = z*0.75f; //TODO: fix this so it is not hardcoded
         return new Vector3(xCoord, y, zCoord);
     }
+
+    /// <summary>
+    /// Convert betwetween world position 
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    public static Vector2 World2Offset(Vector3 pos)
+    {
+        float q = (pos.x*(float) Math.Sqrt(3)/3f - pos.z/3f) / (HEIGHT/2);
+        float r = pos.z*2/3/(HEIGHT/2);
+        return Cube2Offset(new Vector3(q, -q - r, r));
+        //TODO: ADD ROUNDING TO HEXES
+    }
+
+    /*
+    public static Vector3 RoundToNearest(Vector3 hex)
+    {
+        
+    }
+     */
 
     /// <summary>
     /// Conversion between offset coordinates and cube coordinates

@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// The class used for storing information about individual tiles
 /// </summary>
+[System.Serializable]
 public class Tile
 {
 
@@ -12,7 +13,7 @@ public class Tile
     public Vector3 CubeCoordinates;
     public Vector3 WorldCoordinates;
 
-    public Tile(int col, int row, int height)
+    public Tile(int col, int row, float height)
     {
         OffsetCoordinates = new Vector2(col,row);
         CubeCoordinates = HexCoords.Offset2Cube(col, row);

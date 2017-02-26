@@ -16,6 +16,7 @@ public class HexTester : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        /*
         hexesTransforms = new Transform[gridSize,gridSize];
         tileArray = new Tile[gridSize , gridSize];
 
@@ -41,6 +42,7 @@ public class HexTester : MonoBehaviour
 	        Vector2 offsetHex = HexCoords.Cube2Offset(hex);
 	        hexesTransforms[(int) offsetHex.x, (int) offsetHex.y].GetComponent<Renderer>().material.color = Color.green;
 	    }
+         */
     }
 
     void Update()

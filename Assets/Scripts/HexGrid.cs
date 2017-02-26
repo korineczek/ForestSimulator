@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +30,8 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
 
-        InstantiateGrid();
+        //InstantiateGrid();
+        LoadLevel();
 
     }
 
@@ -49,6 +53,47 @@ public class HexGrid : MonoBehaviour
             }
         }
         //TODO: SERIALIZE LEVEL AS A LIST INTO XML
+        Level xmlLevel = new Level(tileArray);
+        XmlSerializer xsSubmit = new XmlSerializer(typeof(Level));
+        string xml = "";
+        using (StringWriter sww = new StringWriter())
+        {
+            using (XmlWriter writer = XmlWriter.Create(sww))
+            {
+                xsSubmit.Serialize(writer,xmlLevel);
+                xml = sww.ToString();
+                Debug.Log(xml);
+            }
+        }
+        File.WriteAllText(Application.dataPath+"\\mapXML.xml",xml);
+    }
+
+    private void LoadLevel()
+    {
+        Level loadedLevel = new Level();
+
+        XmlSerializer deserializer = new XmlSerializer(typeof(Level));
+        using (TextReader reader = new StreamReader(Application.dataPath+"\\mapXML.xml"))
+        {
+            object obj = deserializer.Deserialize(reader);
+            loadedLevel = (Level)obj;
+            reader.Close(); 
+        }
+        
+        foreach (Tile tile in loadedLevel.Map)
+        {
+            Debug.Log(tile.CubeCoordinates);
+        }
+
+        for (int i = 0; i < gridSize; i++)
+        {
+            for (int j = 0; j < gridSize; j++)
+            {
+                Transform hex = Instantiate(tile);
+                hex.position = loadedLevel.Map[i*gridSize + j].WorldCoordinates;
+                tileArray[i, j] = loadedLevel.Map[i*gridSize + j];
+            }
+        }
     }
 
 }

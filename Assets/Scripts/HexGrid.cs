@@ -52,7 +52,7 @@ public class HexGrid : MonoBehaviour
 
             }
         }
-        //TODO: SERIALIZE LEVEL AS A LIST INTO XML
+        
         Level xmlLevel = new Level(tileArray);
         XmlSerializer xsSubmit = new XmlSerializer(typeof(Level));
         string xml = "";
@@ -92,6 +92,8 @@ public class HexGrid : MonoBehaviour
                 Transform hex = Instantiate(tile);
                 hex.position = loadedLevel.Map[i*gridSize + j].WorldCoordinates;
                 tileArray[i, j] = loadedLevel.Map[i*gridSize + j];
+                hexesTransforms[i, j] = hex;
+                hexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + tileArray[i, j].CubeCoordinates;
             }
         }
     }

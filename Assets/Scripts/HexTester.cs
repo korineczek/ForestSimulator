@@ -13,9 +13,9 @@ public class HexTester : MonoBehaviour
     private const int gridSize = 15;
     private float perlinScale = 5f;
 
-	// Use this for initialization
-	void Start ()
-	{
+    // Use this for initialization
+    void Start()
+    {
         /*
         hexesTransforms = new Transform[gridSize,gridSize];
         tileArray = new Tile[gridSize , gridSize];
@@ -45,15 +45,4 @@ public class HexTester : MonoBehaviour
          */
     }
 
-    void Update()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
-        RaycastHit hit;
-        if (Physics.Raycast(ray,out hit))
-        {
-            Debug.Log(hit.point + "   " +HexCoords.World2Offset(hit.point));
-        }
-        
-    }
 }

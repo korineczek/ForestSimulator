@@ -8,6 +8,11 @@ using UnityEngine;
 [System.Serializable]
 public class Tile
 {
+    public enum State
+    {
+        Healthy, Dying, Dead, Inactive
+    }
+
     //Coordinate systems of tiles
     public Vector2 OffsetCoordinates;
     public Vector3 CubeCoordinates;
@@ -17,6 +22,7 @@ public class Tile
     public int Resource = 4;
     public Tree PlacedTree;
     public bool IsActive = false;
+    public State TileState = State.Inactive; 
 
     //public Tree PlantedTree;
 

@@ -25,8 +25,21 @@ public class GameRenderer : MonoBehaviour
 
     public void ChangeState(Tile tile)
     {
-        grid.HexesTransforms[(int) tile.OffsetCoordinates.x, (int) tile.OffsetCoordinates.y].GetComponent<Renderer>()
-            .material = aliveMat;
+        if (tile.TileState == Tile.State.Healthy)
+        {
+            grid.HexesTransforms[(int) tile.OffsetCoordinates.x, (int) tile.OffsetCoordinates.y].GetComponent<Renderer>()
+                .material = aliveMat;
+        }
+        else if (tile.TileState == Tile.State.Dying)
+        {
+            grid.HexesTransforms[(int) tile.OffsetCoordinates.x, (int) tile.OffsetCoordinates.y].GetComponent<Renderer>()
+                .material = deadMat;
+        }
+        else
+        {
+            grid.HexesTransforms[(int)tile.OffsetCoordinates.x, (int)tile.OffsetCoordinates.y].GetComponent<Renderer>()
+                   .material = defaultMat;   
+        }
     }
 
 

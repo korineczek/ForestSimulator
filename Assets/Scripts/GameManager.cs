@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
             if (ActiveTile.PlacedTree.Upkeep <= ActiveTile.Resource)
             {
                 //tree has enough energy to sustain itself, move to heatly trees
+                ActiveTile.TileState = Tile.State.Healthy;
                 gameRenderer.ChangeState(ActiveTile);
                 HealthyTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
@@ -75,6 +76,8 @@ public class GameManager : MonoBehaviour
             else
             {
                 //tree doesnt have enough energy to sustain itself - move to dying
+                ActiveTile.TileState = Tile.State.Dying;
+                gameRenderer.ChangeState(ActiveTile);
                 DyingTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
             }  
@@ -94,6 +97,8 @@ public class GameManager : MonoBehaviour
             //add some resource to the ground for debug purposes
             dyingTile.Resource += 5;
             dyingTile.IsActive = false;
+            dyingTile.TileState = Tile.State.Inactive;  
+            gameRenderer.ChangeState(dyingTile);
             DyingTiles.RemoveAt(0);
         }
         //execute other events

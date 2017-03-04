@@ -158,6 +158,22 @@ internal static class HexCoords
             }    
         }
         return results;
-    } 
+    }
+
+    /// <summary>
+    /// get the slope between a pair of tiles
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static float HexSlope(Tile a, Tile b)
+    {
+        //TODO: OPTIMIZE THE USE OF SQUARE ROOT
+        float dist = (a.WorldCoordinates - b.WorldCoordinates).magnitude;
+        float height = Math.Abs(a.WorldCoordinates.y - b.WorldCoordinates.y);
+        float slope = (height/dist);
+        return slope;
+    }
+
 }
 

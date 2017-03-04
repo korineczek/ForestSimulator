@@ -17,9 +17,11 @@ public class Tile
     public Vector2 OffsetCoordinates;
     public Vector3 CubeCoordinates;
     public Vector3 WorldCoordinates;
+    //Physical properties
+    public float Slope;
     
     //Tile properties
-    public int Resource = 4;
+    public int Resource = 10;
     public Tree PlacedTree;
     public bool IsActive = false;
     public State TileState = State.Inactive; 
@@ -39,5 +41,4 @@ public class Tile
     {
         
     }
-
 }

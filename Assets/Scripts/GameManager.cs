@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
             gameRenderer.ChangeState(dyingTile);
             DyingTiles.RemoveAt(0);
         }
+        //spread trees
         //execute other events
     }
 

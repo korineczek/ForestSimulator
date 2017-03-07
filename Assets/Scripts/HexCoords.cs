@@ -21,7 +21,7 @@ internal static class HexCoords
     public static Vector3 Offset2World(int x, float y, int z)
     {
         float width = (Mathf.Sqrt(3f)/2f)*HEIGHT;
-        float xCoord = x*width + (z%2 == 0 ? width/2f : width);
+        float xCoord = (x*width + (z%2 == 0 ? width/2f : width))-(0.5f*width) ; //TODO THIS IS A TEMP FIX FOR HEX SELECTION - REVIEW LATER
         float zCoord = z*0.75f; //TODO: fix this so it is not hardcoded
         return new Vector3(xCoord, y, zCoord);
     }
@@ -31,12 +31,42 @@ internal static class HexCoords
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    public static Vector2 World2Offset(Vector3 pos)
+    public static Vector3 World2Offset(Vector3 pos)
     {
-        float q = (pos.x*(float) Math.Sqrt(3)/3f - pos.z/3f) / (HEIGHT/2f);
+        float q = (pos.x*Mathf.Sqrt(3)/3f - pos.z/3f) / (HEIGHT/2f);
         float r = pos.z*2f/3f/(HEIGHT/2f);
-        return Cube2Offset(RoundToNearest(new Vector3(q, -q - r, r)));
+        return RoundCubeCoord(new Vector3(q, -q - r, r));
     }
+
+    
+    public static Vector3 World2Cube(Vector3 pos)
+    {
+        float q = (pos.x * (float)Math.Sqrt(3) / 3f - pos.z / 3f) / (HEIGHT / 2f);
+        float r = pos.z * 2f / 3f / (HEIGHT / 2f);
+        return RoundToNearest(new Vector3(q, -q - r, r));
+    }
+
+    public static Vector3 RoundCubeCoord(Vector3 hex)
+    {
+        int ix = Mathf.RoundToInt((Mathf.Floor(hex.x - hex.y) - Mathf.Floor(hex.z - hex.x))/3);
+        int iy = Mathf.RoundToInt((Mathf.Floor(hex.y - hex.z) - Mathf.Floor(hex.x - hex.y))/3);
+        int iz = Mathf.RoundToInt((Mathf.Floor(hex.z - hex.x) - Mathf.Floor(hex.y - hex.z))/3);
+        return new Vector3(ix,iy,iz);
+    }
+    /*
+    function pixtocoord(x, y) {
+    x = (x - this.hexw/2) / this.hexw;
+    var t1 = y / (this.hexh), t2 = Math.floor(x + t1);
+    var r = Math.floor((Math.floor(t1 - x) + t2) / 3);
+    var q = Math.floor((Math.floor(2 * x + 1) + t2) / 3) - Math.floor(r/2) - r%2;
+    return [q, r];
+    }
+    */
+    /*
+     * It appears that there is a concise formula for pixel-to-hex problem in cube coordinates. Specifically, if x+y+z=0, integer coordinates satisfy
+ix=round((floor(x-y)-floor(z-x))/3)
+(and cyclic substitution for the y and z coordinates).
+     */
 
     /// <summary>
     /// Round floating point hex coords because reasons

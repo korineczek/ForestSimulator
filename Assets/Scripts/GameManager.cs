@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(HexGrid))]
 [RequireComponent(typeof(GameRenderer))]
@@ -95,7 +96,6 @@ public class GameManager : MonoBehaviour
         foreach (Tile dyingTile in DyingTiles.ToArray())
         {
             //add some resource to the ground for debug purposes
-            dyingTile.Resource += 5;
             dyingTile.IsActive = false;
             dyingTile.TileState = Tile.State.Inactive;  
             gameRenderer.ChangeState(dyingTile);
@@ -118,9 +118,22 @@ public class GameManager : MonoBehaviour
         foreach (Tile dyingTile in DyingTiles)
         {
             ActiveTiles.Add(dyingTile);
+            dyingTile.PlacedTree.Destroy(grid.TileArray,dyingTile.CubeCoordinates);
         }
         DyingTiles.Clear();
         //recalculate
+        //TODO: CLEANUP THIS PART AFTER BASE COLORING WORKS
+        for (int i = 0; i < grid.TileArray.GetLength(0); i++)
+        {
+            for (int j = 0; j < grid.TileArray.GetLength(0); j++)
+            {
+                grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
+                grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
+                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
+            }
+        }
+
+        //End of update
         s = string.Format("Cleanup phase finished, there are {0} active tiles for next turn.", ActiveTiles.Count);
         Debug.Log(s);
     }

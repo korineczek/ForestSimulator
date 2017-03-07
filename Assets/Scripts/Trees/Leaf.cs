@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pine : Tree
+public class Leaf : Tree
 {
-    private int[] aoeMask = new[] {0, 4, 5};
-    public static int PineUpkeep = 3;
+    private int[] aoeMask = new[] { 0, 1, 2, 4, 5, 6 };
+    public static int LeafUpkeep = 2;
 
 
-    public Pine()
+    public Leaf()
     {
-        Upkeep = PineUpkeep;
+        Upkeep = LeafUpkeep;
         AreaOfInfluence = 1;
     }
 
-    public Pine(Tile[,] grid, Vector3 position)
+    public Leaf(Tile[,] grid, Vector3 position)
     {
         Upkeep = 5;
         AreaOfInfluence = 1;
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
-        
         foreach (int index in aoeMask)
         {
             //convert cube coord into offset coord
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] = true ;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1] = true;
         }
-        
+
 
     }
 
@@ -44,7 +43,7 @@ public class Pine : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] = false;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1] = false;
         }
     }
 }

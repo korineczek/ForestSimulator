@@ -31,13 +31,21 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
 
-        //InstantiateGrid();
-        LoadLevel();
+        InstantiateGrid();
+        //LoadLevel();
 
     }
 
     void Update()
     {
+        Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray2.origin, ray2.direction * 10, Color.yellow);
+            RaycastHit hit2;
+        if (Physics.Raycast(ray2, out hit2))
+        {
+            Debug.Log(hit2.point + "   " + HexCoords.World2Offset(hit2.point));
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,7 +55,7 @@ public class HexGrid : MonoBehaviour
             {
                 Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
                 //testplant tree
-                this.GetComponent<GameManager>().PlantTree(new Pine(), HexCoords.World2Offset(hit.point));
+                this.GetComponent<GameManager>().PlantTree(new Pine(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -66,7 +74,7 @@ public class HexGrid : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 //get random height for tiles based on noise
-                float randomHeight = (Mathf.PerlinNoise(i / 20f, j / 20f) * perlinScale +(UnityEngine.Random.Range(-0.5f,0.5f)/1))*1f;
+                float randomHeight = (Mathf.PerlinNoise(i / 20f, j / 20f) * perlinScale +(UnityEngine.Random.Range(-0.5f,0.5f)/1))*0f;
                 Transform hex = Instantiate(tile);
                 hex.position = HexCoords.Offset2World(i, randomHeight, j);
                 //assign transforms to the appropriate arrays
@@ -87,11 +95,11 @@ public class HexGrid : MonoBehaviour
                 TileArray[i, j].Slope = GetMaxSlope(i, j);
                 //Debug.Log(TileArray[i, j].Slope);
                 //TODO: NORMALIZE SLOPES SO THAT THE COLOR DOENST OVERFLOW
-                TileArray[i, j].Resource = (int)(TileArray[i, j].Resource * (1-TileArray[i, j].Slope));
+                TileArray[i, j].BaseResource = (int)(TileArray[i, j].BaseResource * (1-TileArray[i, j].Slope));
                 //Debug.Log(TileArray[i, j].Resource * TileArray[i, j].Slope);
 
-                HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1- ((TileArray[i, j].Resource*20f) / 255f), 1, 1- ((TileArray[i, j].Resource*20f) / 255f));
-                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + TileArray[i, j].Resource;
+                HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((TileArray[i, j].BaseResource * 20f) / 255f), 1, 1 - ((TileArray[i, j].BaseResource * 20f) / 255f));
+                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + TileArray[i, j].BaseResource;
             }
         }
 

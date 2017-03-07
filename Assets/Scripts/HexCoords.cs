@@ -70,14 +70,6 @@ internal static class HexCoords
     }
 
 
-
-    /*
-    public static Vector3 RoundToNearest(Vector3 hex)
-    {
-        
-    }
-     */
-
     /// <summary>
     /// Conversion between offset coordinates and cube coordinates
     /// </summary>

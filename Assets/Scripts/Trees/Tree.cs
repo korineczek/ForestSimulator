@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 
 [System.Serializable]
 [XmlInclude(typeof(Pine))]
+[XmlInclude(typeof(Leaf))]
+[XmlInclude(typeof(Pink))]
 public abstract class Tree
 {
     public int Cost;

@@ -27,7 +27,7 @@ public class Pine : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] = true ;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] ++ ;
         }
         
 
@@ -44,7 +44,7 @@ public class Pine : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] = false;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0] --;
         }
     }
 }

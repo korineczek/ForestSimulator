@@ -27,7 +27,7 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] = true;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] ++;
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -35,7 +35,7 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] = true;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] ++;
         }
 
 
@@ -52,7 +52,7 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] = false;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] --;
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -60,7 +60,7 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] = false;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] --;
         }
     }
 }

@@ -66,6 +66,10 @@ public class Tile
         {
             finalResource += Pine.PineUpkeep;
         }
+        else if (!Buffs[0] && Buffs[1])
+        {
+            finalResource -= Leaf.LeafUpkeep;
+        }
         if (Buffs[2])
         {
             finalResource += Pink.PinkUpkeep;

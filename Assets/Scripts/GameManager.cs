@@ -97,7 +97,8 @@ public class GameManager : MonoBehaviour
         {
             //add some resource to the ground for debug purposes
             dyingTile.IsActive = false;
-            dyingTile.TileState = Tile.State.Inactive;  
+            dyingTile.TileState = Tile.State.Inactive;
+            dyingTile.PlacedTree.Destroy(grid.TileArray, dyingTile.CubeCoordinates);
             gameRenderer.ChangeState(dyingTile);
             DyingTiles.RemoveAt(0);
         }
@@ -118,7 +119,6 @@ public class GameManager : MonoBehaviour
         foreach (Tile dyingTile in DyingTiles)
         {
             ActiveTiles.Add(dyingTile);
-            dyingTile.PlacedTree.Destroy(grid.TileArray,dyingTile.CubeCoordinates);
         }
         DyingTiles.Clear();
         //recalculate

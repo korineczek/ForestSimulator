@@ -38,6 +38,7 @@ public class HexGrid : MonoBehaviour
 
     void Update()
     {
+        /*
         Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray2.origin, ray2.direction * 10, Color.yellow);
             RaycastHit hit2;
@@ -45,6 +46,7 @@ public class HexGrid : MonoBehaviour
         {
             Debug.Log(hit2.point + "   " + HexCoords.World2Offset(hit2.point));
         }
+        */
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -58,6 +60,42 @@ public class HexGrid : MonoBehaviour
                 this.GetComponent<GameManager>().PlantTree(new Pine(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
             }
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
+                //testplant tree
+                this.GetComponent<GameManager>().PlantTree(new Leaf(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
+                //testplant tree
+                this.GetComponent<GameManager>().PlantTree(new Pink(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector2 offset = HexCoords.World2Offset(hit.point);
+                Debug.Log(offset + " energy " + TileArray[(int)offset.x, (int)offset.y].BaseResource + "  "+TileArray[(int)offset.x, (int)offset.y].Resource);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             SaveLevel();
@@ -74,7 +112,7 @@ public class HexGrid : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 //get random height for tiles based on noise
-                float randomHeight = (Mathf.PerlinNoise(i / 20f, j / 20f) * perlinScale +(UnityEngine.Random.Range(-0.5f,0.5f)/1))*0f;
+                float randomHeight = (Mathf.PerlinNoise(i / 20f, j / 20f) * perlinScale +(UnityEngine.Random.Range(-0.5f,0.5f)/1))*1f;
                 Transform hex = Instantiate(tile);
                 hex.position = HexCoords.Offset2World(i, randomHeight, j);
                 //assign transforms to the appropriate arrays

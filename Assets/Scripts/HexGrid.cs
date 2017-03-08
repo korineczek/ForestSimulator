@@ -14,6 +14,7 @@ public class HexGrid : MonoBehaviour
     private Transform tile;
     public Transform[,] HexesTransforms;
     public Tile[,] TileArray { get; set; }
+    public Transform[,] TreeTransforms;
 
     private const int gridSize = 15;
     private float perlinScale = 10f;
@@ -25,6 +26,7 @@ public class HexGrid : MonoBehaviour
         //initialize arrays
         HexesTransforms = new Transform[gridSize, gridSize];
         TileArray = new Tile[gridSize, gridSize];
+        TreeTransforms = new Transform[gridSize,gridSize];
     }
 
     // Use this for initialization
@@ -92,7 +94,7 @@ public class HexGrid : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector2 offset = HexCoords.World2Offset(hit.point);
-                Debug.Log(offset + " energy " + TileArray[(int)offset.x, (int)offset.y].BaseResource + "  "+TileArray[(int)offset.x, (int)offset.y].Resource);
+                Debug.Log(TreeTransforms[(int)offset.x, (int)offset.y] + "  "+offset + " energy " + TileArray[(int)offset.x, (int)offset.y].BaseResource + "  "+TileArray[(int)offset.x, (int)offset.y].Resource);
             }
         }
 

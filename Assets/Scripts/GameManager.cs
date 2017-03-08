@@ -98,7 +98,9 @@ public class GameManager : MonoBehaviour
             //add some resource to the ground for debug purposes
             dyingTile.IsActive = false;
             dyingTile.TileState = Tile.State.Inactive;
+            //Kill trees
             dyingTile.PlacedTree.Destroy(grid.TileArray, dyingTile.CubeCoordinates);
+            dyingTile.PlacedTree = null;
             gameRenderer.ChangeState(dyingTile);
             DyingTiles.RemoveAt(0);
         }
@@ -130,6 +132,9 @@ public class GameManager : MonoBehaviour
                 grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
                 grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
                 grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
+
+                //cleanup and repaint trees
+                gameRenderer.UpdateTreeModel(grid.TileArray[i,j]);
             }
         }
 

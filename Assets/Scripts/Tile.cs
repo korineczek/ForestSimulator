@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class Tile
     public int BaseResource = 10;
     public Tree PlacedTree;
     public bool IsActive = false;
-    public State TileState = State.Inactive; 
+    public State TileState = State.Inactive;
     
 
     //Tile buffs
@@ -54,6 +55,7 @@ public class Tile
 
     public int EvaluateResource()
     {
+        //TODO: CHANGE TO BITMASKING + LOOKUP TABLE
         //run through buffs and evaluate the correct value for the tile
         //reset resource to base resource
         int finalResource = BaseResource;

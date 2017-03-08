@@ -26,7 +26,7 @@ public class Leaf : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1] = true;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1]  ++;
         }
 
 
@@ -43,7 +43,7 @@ public class Leaf : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1] = false;
+            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1] --;
         }
     }
 }

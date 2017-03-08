@@ -31,7 +31,7 @@ public class Tile
 
     //Tile buffs
     //TODO: REWORK TO A LOOKUP TABLE OF BUFFS INSTEAD OF THIS STUPID SHIT
-    public bool[] Buffs = new bool[5];
+    public int[] Buffs = new int[5];
     // 0 - Pine Buff
     // 1 - Oak Buff
     // 2 - Pink Positive
@@ -60,25 +60,25 @@ public class Tile
         //reset resource to base resource
         int finalResource = BaseResource;
         //check for pine debuff
-        if (Buffs[0] && !Buffs[1])
+        if (Buffs[0] > 0 && Buffs[1] == 0)
         {
-            finalResource -= Pine.PineUpkeep;
+            finalResource -= Pine.PineUpkeep*Buffs[0];
         }
-        else if (Buffs[0] && Buffs[1])
+        else if (Buffs[0] > 0 && Buffs[1] > 0)
         {
-            finalResource += Pine.PineUpkeep;
+            finalResource += Pine.PineUpkeep*Buffs[1];
         }
-        else if (!Buffs[0] && Buffs[1])
+        else if (Buffs[0] == 0 && Buffs[1] > 0)
         {
-            finalResource -= Leaf.LeafUpkeep;
+            finalResource -= Leaf.LeafUpkeep*Buffs[1];
         }
-        if (Buffs[2])
+        if (Buffs[2] > 0)
         {
-            finalResource += Pink.PinkUpkeep;
+            finalResource += Pink.PinkUpkeep*Buffs[2];
         }
-        if (Buffs[3])
+        if (Buffs[3] > 0)
         {
-            finalResource -= Pink.PinkUpkeep;
+            finalResource -= Pink.PinkUpkeep*Buffs[3];
         }
         return finalResource;
     }

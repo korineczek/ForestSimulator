@@ -11,8 +11,8 @@ public class CameraScript : MonoBehaviour {
     private float zoomS = 2.0f;
     // Use this for initialization
 
-    public float minix = -360.0f;
-    public float maxx = 360.0f;
+    public float minix = -20.0f;
+    public float maxx = 60.0f;
     public float minY = -45.0f;
     public float maxY = 45.0f;
     public float sensX = 100.0f;

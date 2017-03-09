@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private WaitForSeconds interval;
-    private float intervalLength = 2f;
+    private float fertilityThreshold = 0.5f;
+    private float intervalLength = 0.25f;
     //Internal clock represents the amount of time that has passed since the start of the game.
     private int InternalClock = 0;
     private HexGrid grid;
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
         //pay upkeep and move trees to the right lists
         foreach (Tile ActiveTile in ActiveTiles.ToArray())
         {
-            if (ActiveTile.PlacedTree.Upkeep <= ActiveTile.Resource)
+            if (ActiveTile.PlacedTree.Upkeep < ActiveTile.Resource + ActiveTile.PlacedTree.Upkeep) //check if after paying upkeep the tree still lives
             {
                 //tree has enough energy to sustain itself, move to heatly trees
                 ActiveTile.TileState = Tile.State.Healthy;
@@ -105,6 +106,42 @@ public class GameManager : MonoBehaviour
             DyingTiles.RemoveAt(0);
         }
         //spread trees
+        //tree spreading mechanics here
+        foreach (Tile healthyTile in HealthyTiles)
+        {
+            //chance to spread
+            //ROLL CHANCE FOR SPREADING
+            float baseChance = UnityEngine.Random.Range(0f, 75f);
+            float treeHealthModifier = (float)healthyTile.Resource/healthyTile.BaseResource; //increases with tile healt
+            //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
+            if (baseChance + treeHealthModifier >= fertilityThreshold)
+            {
+                Debug.Log(baseChance + treeHealthModifier);
+                //Success - new seed spawns
+                //Determine location
+                List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates,1);
+                List<Vector3> validLocations = new List<Vector3>();
+                foreach (Vector3 possibleLocation in possibleLocations)
+                {
+                    //determine possible locations for spreading
+                    Vector2 offset = HexCoords.Cube2Offset(possibleLocation);
+                    //offset.x = Mathf.Clamp(offset.x, 0, 14);
+                    //offset.x = Mathf.Clamp(offset.y, 0, 14);
+                    if ((int) offset.x > 0 && (int) offset.x < 14 && (int) offset.y > 0 &&
+                (int) offset.y < 14 && grid.TileArray[(int)offset.x, (int)offset.y].PlacedTree == null) { validLocations.Add(possibleLocation);}
+                }
+                if (validLocations.Count > 0)
+                {
+                    //If there is at least one valid location, proceed with planting a tree
+                    int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
+                    Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
+                    //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
+                    healthyTile.PlacedTree.Plant(grid.TileArray, validLocations[plantIndex]);
+                    ActiveTiles.Add(grid.TileArray[(int)offset.x, (int)offset.y]);
+                }
+            }
+        }
+
         //execute other events
     }
 
@@ -149,7 +186,7 @@ public class GameManager : MonoBehaviour
         {
             InternalClock++;
             Debug.Log("Turn " + InternalClock);
-            yield return interval;
+            //yield return interval;
             //Execute game phases each tick
             UpkeepPhase();
             yield return interval;

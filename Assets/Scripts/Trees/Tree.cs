@@ -19,5 +19,6 @@ public abstract class Tree
     public bool IsMature;
     public bool IsActive;
 
+    public abstract void Plant(Tile[,] grid, Vector3 position);
     public abstract void Destroy(Tile[,] grid, Vector3 position);
 }

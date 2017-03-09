@@ -12,10 +12,12 @@ public class Leaf : Tree
     {
         Upkeep = LeafUpkeep;
         AreaOfInfluence = 1;
+        Score = 100;
     }
 
     public Leaf(Tile[,] grid, Vector3 position)
     {
+        Score = 100;
         Upkeep = LeafUpkeep;
         AreaOfInfluence = 1;
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);

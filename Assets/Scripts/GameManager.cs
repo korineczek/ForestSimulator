@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private int InternalClock = 0;
     private HexGrid grid;
     private GameRenderer gameRenderer;
+    private Overlay UI;
 
     //Management Lists For Keeping Track of Trees
     private List<Tile> ActiveTiles = new List<Tile>(); 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
         gameRenderer = this.GetComponent<GameRenderer>();
+        UI = this.GetComponent<Overlay>();
         StartCoroutine(GameClock());
     }
 
@@ -162,10 +164,14 @@ public class GameManager : MonoBehaviour
         DyingTiles.Clear();
         //recalculate
         //TODO: CLEANUP THIS PART AFTER BASE COLORING WORKS
+        //reset score to 0
+        GameStats.Score = 0;
         for (int i = 0; i < grid.TileArray.GetLength(0); i++)
         {
             for (int j = 0; j < grid.TileArray.GetLength(0); j++)
             {
+                //calc score
+                if (grid.TileArray[i, j].PlacedTree != null) { GameStats.Score += grid.TileArray[i, j].PlacedTree.Score; }
                 grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
                 grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
                 grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
@@ -176,6 +182,7 @@ public class GameManager : MonoBehaviour
         }
 
         //End of update
+        UI.UpdateCanvas();
         s = string.Format("Cleanup phase finished, there are {0} active tiles for next turn.", ActiveTiles.Count);
         Debug.Log(s);
     }

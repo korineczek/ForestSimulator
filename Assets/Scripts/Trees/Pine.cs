@@ -10,12 +10,14 @@ public class Pine : Tree
 
     public Pine()
     {
+        Score = 50;
         Upkeep = PineUpkeep;
         AreaOfInfluence = 1;
     }
 
     public Pine(Tile[,] grid, Vector3 position)
     {
+        Score = 50;
         Upkeep = PineUpkeep;
         AreaOfInfluence = 1;
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);

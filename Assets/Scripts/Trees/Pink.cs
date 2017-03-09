@@ -13,12 +13,14 @@ public class Pink : Tree
     {
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
+        Score = 200;
     }
 
     public Pink(Tile[,] grid, Vector3 position)
     {
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
+        Score = 200;
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMaskPositive)

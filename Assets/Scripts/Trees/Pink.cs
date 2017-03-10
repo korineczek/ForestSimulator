@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pink : Tree
 {
     private int[] aoeMaskPositive = new[] {5, 8, 14};
-    private int[] aoeMaskNegative = new[] {1, 6, 15, 17, 12, 3};
+    private int[] aoeMaskNegative = new[] {1, 6, 9, 15, 17, 12, 3};
     public static int PinkUpkeep = 2;
 
 
@@ -13,12 +13,14 @@ public class Pink : Tree
     {
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
+        Score = 200;
     }
 
     public Pink(Tile[,] grid, Vector3 position)
     {
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
+        Score = 200;
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMaskPositive)
@@ -27,7 +29,11 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] ++;
+            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
+                (int) offsetCoord.y < 14)
+            {
+                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[2]++;
+            }
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -35,10 +41,21 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] ++;
+            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
+                (int) offsetCoord.y < 14)
+            {
+                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[3]++;
+            }
         }
 
 
+    }
+
+    public override void Plant(Tile[,] grid, Vector3 position) 
+    {
+        Vector2 offset = HexCoords.Cube2Offset(position);
+        grid[(int)offset.x, (int)offset.y].PlacedTree = new Pink(grid, position);
+        grid[(int)offset.x, (int)offset.y].IsActive = true;
     }
 
     public override void Destroy(Tile[,] grid, Vector3 position)
@@ -52,7 +69,11 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2] --;
+            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
+                (int) offsetCoord.y < 14)
+            {
+                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[2]--;
+            }
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -60,7 +81,11 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            grid[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3] --;
+            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
+                (int) offsetCoord.y < 14)
+            {
+                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[3]--;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4317693577592424}
   - component: {fileID: 33831660153855096}
   - component: {fileID: 23653179224795984}
-  - component: {fileID: 64279549775313630}
+  - component: {fileID: 64191373642065720}
   m_Layer: 0
   m_Name: Hex
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590767230994072}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.6651525, y: 0.5719534, z: -3.6400187}
+  m_LocalPosition: {x: -0.327, y: 0.201, z: -1.808}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 224533673314936620}
@@ -91,7 +91,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ab2f2d4e071f38a4b9e9e69839234d25, type: 2}
+  - {fileID: 2100000, guid: 58cee1b530c5f3d4784e6b6fb20e38f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,8 +115,8 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590767230994072}
-  m_Mesh: {fileID: 4300000, guid: aa96f890bfcce834da9ad3697e434d34, type: 3}
---- !u!64 &64279549775313630
+  m_Mesh: {fileID: 4300000, guid: f1f7744fb3ec29945826a0b3ab6516b8, type: 3}
+--- !u!64 &64191373642065720
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,7 +129,7 @@ MeshCollider:
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: aa96f890bfcce834da9ad3697e434d34, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f1f7744fb3ec29945826a0b3ab6516b8, type: 3}
 --- !u!114 &114247221274628252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,9 +249,9 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904588247936454}
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.001399994}
-  m_LocalScale: {x: 0.00012831225, y: 0.00012831233, z: 0.00012831233}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00056}
+  m_LocalScale: {x: 0.00012831225, y: 0.00012831239, z: 0.00012831239}
   m_Children:
   - {fileID: 224347799220584432}
   m_Father: {fileID: 4317693577592424}
@@ -259,6 +259,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.00000029057264}
+  m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

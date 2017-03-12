@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -480,13 +480,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1694480808}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.58, y: 27, z: 6}
+  m_LocalRotation: {x: 0.23168616, y: 0.024650417, z: 0.0058728987, w: 0.9724605}
+  m_LocalPosition: {x: 4.6, y: 13.8, z: -3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.764002, y: 3.2530003, z: 1.4660001}
 --- !u!114 &1694480814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,8 +500,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxZoom: 200
   minZoom: 3
-  scrollSpeed: 0
-  movementSpeed: 2
+  scrollSpeed: 2
+  movementSpeed: 4
   leftLimit: -60
   rightLimit: 60
   downLimit: -85

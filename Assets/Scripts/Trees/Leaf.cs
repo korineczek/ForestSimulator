@@ -5,7 +5,7 @@ using UnityEngine;
 public class Leaf : Tree
 {
     private int[] aoeMask = new[] { 0, 1, 2, 3, 4, 5, 6 };
-    public static int LeafUpkeep = 2;
+    public static int LeafUpkeep = 4;
 
 
     public Leaf()

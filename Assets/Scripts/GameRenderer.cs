@@ -52,7 +52,6 @@ public class GameRenderer : MonoBehaviour
             //kill tree lul
             if (grid.TreeTransforms[(int)tile.OffsetCoordinates.x, (int)tile.OffsetCoordinates.y] != null && tile.PlacedTree == null)
             {
-                Debug.Log("removing dead tree");
                 Destroy(grid.TreeTransforms[(int)tile.OffsetCoordinates.x, (int)tile.OffsetCoordinates.y].gameObject);
             }
     }

@@ -6,7 +6,7 @@ public class Pink : Tree
 {
     private int[] aoeMaskPositive = new[] {5, 8, 14};
     private int[] aoeMaskNegative = new[] {1, 6, 9, 15, 17, 12, 3};
-    public static int PinkUpkeep = 2;
+    public static int PinkUpkeep = 8;
 
 
     public Pink()

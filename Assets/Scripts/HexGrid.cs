@@ -57,6 +57,7 @@ public class HexGrid : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
+                GameStats.PlantedTrees++;
                 Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
                 //testplant tree
                 this.GetComponent<GameManager>().PlantTree(new Pine(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
@@ -69,6 +70,7 @@ public class HexGrid : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
+                GameStats.PlantedTrees++;
                 Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
                 //testplant tree
                 this.GetComponent<GameManager>().PlantTree(new Leaf(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
@@ -81,11 +83,18 @@ public class HexGrid : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
+                GameStats.PlantedTrees++;
                 Debug.Log(hit.point + "   " + HexCoords.World2Offset(hit.point));
                 //testplant tree
                 this.GetComponent<GameManager>().PlantTree(new Pink(TileArray, HexCoords.Offset2Cube((int)HexCoords.World2Offset(hit.point).x, (int)HexCoords.World2Offset(hit.point).y)), HexCoords.World2Offset(hit.point));
             }
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameStats.PlantedTrees = 0;
+            Application.LoadLevel(Application.loadedLevel);
+        }
+        /*
         if (Input.GetKeyDown(KeyCode.D))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -102,6 +111,7 @@ public class HexGrid : MonoBehaviour
         {
             SaveLevel();
         }
+        */
     }
 
     /// <summary>
@@ -114,7 +124,7 @@ public class HexGrid : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 //get random height for tiles based on noise
-                float randomHeight = (Mathf.PerlinNoise(i / 20f, j / 20f) * perlinScale +(UnityEngine.Random.Range(-0.5f,0.5f)/1))*2f;
+                float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale +(UnityEngine.Random.Range(-0.1f,0.1f)/2))*0.5f;
                 Transform hex = Instantiate(tile);
                 hex.position = HexCoords.Offset2World(i, randomHeight, j);
                 //assign transforms to the appropriate arrays
@@ -135,11 +145,13 @@ public class HexGrid : MonoBehaviour
                 TileArray[i, j].Slope = GetMaxSlope(i, j);
                 //Debug.Log(TileArray[i, j].Slope);
                 //TODO: NORMALIZE SLOPES SO THAT THE COLOR DOENST OVERFLOW
-                TileArray[i, j].BaseResource = (int)(TileArray[i, j].BaseResource * (1-TileArray[i, j].Slope));
+                TileArray[i, j].BaseResource = (int)(TileArray[i, j].BaseResource * (1-(TileArray[i, j].Slope*2))) + (int)(10-TileArray[i,j].WorldCoordinates.y);
                 //Debug.Log(TileArray[i, j].Resource * TileArray[i, j].Slope);
 
                 HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((TileArray[i, j].BaseResource * 20f) / 255f), 1, 1 - ((TileArray[i, j].BaseResource * 20f) / 255f));
-                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + TileArray[i, j].BaseResource;
+                //HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + TileArray[i, j].BaseResource;
+                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = TileArray[i, j].BaseResource.ToString();
+
             }
         }
 

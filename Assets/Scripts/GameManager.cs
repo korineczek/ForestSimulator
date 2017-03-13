@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private HexGrid grid;
     private GameRenderer gameRenderer;
     private Overlay UI;
+    private bool gameStarted = false;
 
     //Management Lists For Keeping Track of Trees
     private List<Tile> ActiveTiles = new List<Tile>(); 
@@ -28,7 +29,16 @@ public class GameManager : MonoBehaviour
         grid = this.GetComponent<HexGrid>();
         gameRenderer = this.GetComponent<GameRenderer>();
         UI = this.GetComponent<Overlay>();
-        StartCoroutine(GameClock());
+        //StartCoroutine(GameClock());
+    }
+
+    public void Update()
+    {
+        if (GameStats.PlantedTrees > 2 && gameStarted == false)
+        {
+            gameStarted = true;
+            StartCoroutine(GameClock());
+        }
     }
 
     public void GameStart()
@@ -64,8 +74,8 @@ public class GameManager : MonoBehaviour
 
     private void UpkeepPhase()
     {
-        string s = string.Format("Entering Upkeep Phase, there are {0} active tiles", ActiveTiles.Count);
-        Debug.Log(s);
+        //string s = string.Format("Entering Upkeep Phase, there are {0} active tiles", ActiveTiles.Count);
+        //Debug.Log(s);
         //pay upkeep and move trees to the right lists
         foreach (Tile ActiveTile in ActiveTiles.ToArray())
         {
@@ -86,16 +96,16 @@ public class GameManager : MonoBehaviour
                 ActiveTiles.RemoveAt(0);
             }  
         }
-        s = string.Format("Upkeep phase finished, there are {0} healthy and {1} dying tiles.",HealthyTiles.Count, DyingTiles.Count);
-        Debug.Log(s);
+        //s = string.Format("Upkeep phase finished, there are {0} healthy and {1} dying tiles.",HealthyTiles.Count, DyingTiles.Count);
+        //Debug.Log(s);
     }
 
     private void ExecutionPhase()
     {
         //grow trees
         //kill trees
-        string s = string.Format("Killing trees, there are {0} dying tiles", DyingTiles.Count);
-        Debug.Log(s);
+        //string s = string.Format("Killing trees, there are {0} dying tiles", DyingTiles.Count);
+        //Debug.Log(s);
         foreach (Tile dyingTile in DyingTiles.ToArray())
         {
             //add some resource to the ground for debug purposes
@@ -118,7 +128,7 @@ public class GameManager : MonoBehaviour
             //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
             if (baseChance + treeHealthModifier >= fertilityThreshold)
             {
-                Debug.Log(baseChance + treeHealthModifier);
+                //Debug.Log(baseChance + treeHealthModifier);
                 //Success - new seed spawns
                 //Determine location
                 List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates,1);
@@ -149,8 +159,8 @@ public class GameManager : MonoBehaviour
 
     private void CleanupPhase()
     {
-        string s = string.Format("Entering Cleanup Phase, there are {0} healthy and {1} dying tiles.", HealthyTiles.Count, DyingTiles.Count);
-        Debug.Log(s);
+        //string s = string.Format("Entering Cleanup Phase, there are {0} healthy and {1} dying tiles.", HealthyTiles.Count, DyingTiles.Count);
+        //Debug.Log(s);
         //move all trees back into active trees
         foreach (Tile healthyTile in HealthyTiles)
         {
@@ -174,8 +184,8 @@ public class GameManager : MonoBehaviour
                 if (grid.TileArray[i, j].PlacedTree != null) { GameStats.Score += grid.TileArray[i, j].PlacedTree.Score; }
                 grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
                 grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
-                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
-
+                //grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
+                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].Resource.ToString();
                 //cleanup and repaint trees
                 gameRenderer.UpdateTreeModel(grid.TileArray[i,j]);
             }
@@ -183,15 +193,16 @@ public class GameManager : MonoBehaviour
 
         //End of update
         UI.UpdateCanvas();
-        s = string.Format("Cleanup phase finished, there are {0} active tiles for next turn.", ActiveTiles.Count);
-        Debug.Log(s);
+        //s = string.Format("Cleanup phase finished, there are {0} active tiles for next turn.", ActiveTiles.Count);
+        //Debug.Log(s);
     }
 
     public IEnumerator GameClock()
     {
-        while (true)
+        while (InternalClock < 100)
         {
             InternalClock++;
+            GameStats.Turn = InternalClock;
             Debug.Log("Turn " + InternalClock);
             //yield return interval;
             //Execute game phases each tick

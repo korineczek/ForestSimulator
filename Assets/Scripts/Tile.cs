@@ -66,7 +66,7 @@ public class Tile
         }
         else if (Buffs[0] > 0 && Buffs[1] > 0)
         {
-            finalResource += (Pine.PineUpkeep*Buffs[1] - Pine.PineUpkeep*Buffs[0]);
+            finalResource += (Pine.PineUpkeep - Pine.PineUpkeep*Buffs[0]);
         }
         else if (Buffs[0] == 0 && Buffs[1] > 0)
         {

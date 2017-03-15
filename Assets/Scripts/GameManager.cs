@@ -184,8 +184,8 @@ public class GameManager : MonoBehaviour
                 if (grid.TileArray[i, j].PlacedTree != null) { GameStats.Score += grid.TileArray[i, j].PlacedTree.Score; }
                 grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
                 grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
-                //grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + grid.TileArray[i, j].Resource;
-                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].Resource.ToString();
+                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].CubeCoordinates+ "\n" + grid.TileArray[i, j].Resource;
+                //grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].Resource.ToString();
                 //cleanup and repaint trees
                 gameRenderer.UpdateTreeModel(grid.TileArray[i,j]);
             }

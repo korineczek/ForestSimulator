@@ -124,7 +124,7 @@ public class HexGrid : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 //get random height for tiles based on noise
-                float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale +(UnityEngine.Random.Range(-0.1f,0.1f)/2))*0.5f;
+                float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale +(UnityEngine.Random.Range(-0.1f,0.1f)/2))*0f;
                 Transform hex = Instantiate(tile);
                 hex.position = HexCoords.Offset2World(i, randomHeight, j);
                 //assign transforms to the appropriate arrays
@@ -149,8 +149,8 @@ public class HexGrid : MonoBehaviour
                 //Debug.Log(TileArray[i, j].Resource * TileArray[i, j].Slope);
 
                 HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((TileArray[i, j].BaseResource * 20f) / 255f), 1, 1 - ((TileArray[i, j].BaseResource * 20f) / 255f));
-                //HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = i + " " + j + "\n" + TileArray[i, j].BaseResource;
-                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = TileArray[i, j].BaseResource.ToString();
+                HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = TileArray[i, j].OffsetCoordinates + "\n" + TileArray[i, j].BaseResource;
+                //HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = TileArray[i, j].BaseResource.ToString();
 
             }
         }

@@ -26,6 +26,14 @@ internal static class HexCoords
         return new Vector3(xCoord, y, zCoord);
     }
 
+    public static Vector3 Offset2World(Vector2 offset, float height)
+    {
+        float width = (Mathf.Sqrt(3f) / 2f) * HEIGHT;
+        float xCoord = (offset.x * width + (offset.y % 2 == 0 ? width / 2f : width)) - (0.5f * width); //TODO THIS IS A TEMP FIX FOR HEX SELECTION - REVIEW LATER
+        float zCoord = offset.y * 0.75f; //TODO: fix this so it is not hardcoded
+        return new Vector3(xCoord, height, zCoord);
+    }
+
     /// <summary>
     /// Convert betwetween world position 
     /// </summary>
@@ -84,6 +92,7 @@ internal static class HexCoords
     /// <param name="col"></param>
     /// <param name="row"></param>
     /// <returns></returns>
+    /// //TODO: MAKE OVERLOAD THAT ACCEPTS VECTOR2();
     public static Vector3 Offset2Cube(int col, int row)
     {
         float x, y, z;

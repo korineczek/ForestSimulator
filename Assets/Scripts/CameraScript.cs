@@ -28,24 +28,33 @@ public class CameraScript : MonoBehaviour {
          
 	void Start () {
         defaultRotation = transform.rotation;
+	    rotationX = transform.rotation.eulerAngles.y;
+	    rotationY = transform.rotation.eulerAngles.x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         float moveX = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
         float moveZ = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
-
+        float rotate = Input.GetAxis("Rotate"); //XBOX360 axis setup
         Vector3 flatForward = Vector3.Scale(transform.forward, new Vector3(1, 0, 1)).normalized;
 
         transform.position += transform.right * moveX;
         transform.position += flatForward * moveZ;
+        rotationX += rotate * sensX/2f * Time.deltaTime;
+        rotationX = Mathf.Clamp(rotationX, leftLimit, rightLimit);
+        transform.localEulerAngles = new Vector3(rotationY, rotationX, 0);
 
         //Vector3 newposition = new Vector3(moveX, 0, moveZ);
         //transform.position += newposition;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-
+        //Xbox controller zoom
+	    float zoom = Input.GetAxis("Zoom")*scrollSpeed;
+	    Vector3 xboxZoom = transform.forward*zoom;
         Vector3 zoomVector = transform.forward * scroll;
+	    transform.position += xboxZoom;
+
         Vector3 whereWeTryToGo = (transform.position + zoomVector);
         if (whereWeTryToGo.y > minZoom && whereWeTryToGo.y < maxZoom)
         {

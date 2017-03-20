@@ -20,6 +20,10 @@ public class Pine : Tree
         Score = 50;
         Upkeep = PineUpkeep;
         AreaOfInfluence = 1;
+        TimePlanted = GameStats.Turn;
+        TimeToGrow = 2;
+        IsMature = false;
+
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         

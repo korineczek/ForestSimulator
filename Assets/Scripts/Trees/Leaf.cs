@@ -20,6 +20,11 @@ public class Leaf : Tree
         Score = 100;
         Upkeep = LeafUpkeep;
         AreaOfInfluence = 1;
+        TimePlanted = GameStats.Turn;
+        TimeToGrow = 3;
+        IsMature = false;
+
+
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMask)

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameStats.PlantedTrees > 2 && gameStarted == false)
+        if (GameStats.PlantedTrees > 0 && gameStarted == false)
         {
             gameStarted = true;
             StartCoroutine(GameClock());
@@ -118,38 +118,53 @@ public class GameManager : MonoBehaviour
             DyingTiles.RemoveAt(0);
         }
         //spread trees
-        //tree spreading mechanics here
+        //tree spreading and growing mechanics here
         foreach (Tile healthyTile in HealthyTiles)
         {
-            //chance to spread
-            //ROLL CHANCE FOR SPREADING
-            float baseChance = UnityEngine.Random.Range(0f, 0.75f);
-            float treeHealthModifier = (float)healthyTile.Resource/healthyTile.BaseResource; //increases with tile healt
-            //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
-            if (baseChance + treeHealthModifier >= fertilityThreshold)
+            if (!healthyTile.PlacedTree.IsMature)
             {
-                //Debug.Log(baseChance + treeHealthModifier);
-                //Success - new seed spawns
-                //Determine location
-                List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates,1);
-                List<Vector3> validLocations = new List<Vector3>();
-                foreach (Vector3 possibleLocation in possibleLocations)
+                if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock) //mature a tree if it has been growing long enough
                 {
-                    //determine possible locations for spreading
-                    Vector2 offset = HexCoords.Cube2Offset(possibleLocation);
-                    //offset.x = Mathf.Clamp(offset.x, 0, 14);
-                    //offset.x = Mathf.Clamp(offset.y, 0, 14);
-                    if ((int) offset.x > 0 && (int) offset.x < 14 && (int) offset.y > 0 &&
-                (int) offset.y < 14 && grid.TileArray[(int)offset.x, (int)offset.y].PlacedTree == null) { validLocations.Add(possibleLocation);}
+                    Debug.Log(healthyTile.PlacedTree + " finished growing");
+                    healthyTile.PlacedTree.IsMature = true;
                 }
-                if (validLocations.Count > 0)
+            }
+            else if (healthyTile.PlacedTree.IsMature) //only mature trees can spread
+            {
+                //chance to spread
+                //ROLL CHANCE FOR SPREADING
+                float baseChance = UnityEngine.Random.Range(0f, 0.75f);
+                float treeHealthModifier = (float) healthyTile.Resource/healthyTile.BaseResource;
+                    //increases with tile healt
+                //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
+                if (baseChance + treeHealthModifier >= fertilityThreshold)
                 {
-                    //If there is at least one valid location, proceed with planting a tree
-                    int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
-                    Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
-                    //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
-                    healthyTile.PlacedTree.Plant(grid.TileArray, validLocations[plantIndex]);
-                    ActiveTiles.Add(grid.TileArray[(int)offset.x, (int)offset.y]);
+                    //Debug.Log(baseChance + treeHealthModifier);
+                    //Success - new seed spawns
+                    //Determine location
+                    List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates, 1);
+                    List<Vector3> validLocations = new List<Vector3>();
+                    foreach (Vector3 possibleLocation in possibleLocations)
+                    {
+                        //determine possible locations for spreading
+                        Vector2 offset = HexCoords.Cube2Offset(possibleLocation);
+                        //offset.x = Mathf.Clamp(offset.x, 0, 14);
+                        //offset.x = Mathf.Clamp(offset.y, 0, 14);
+                        if ((int) offset.x > 0 && (int) offset.x < 14 && (int) offset.y > 0 &&
+                            (int) offset.y < 14 && grid.TileArray[(int) offset.x, (int) offset.y].PlacedTree == null)
+                        {
+                            validLocations.Add(possibleLocation);
+                        }
+                    }
+                    if (validLocations.Count > 0)
+                    {
+                        //If there is at least one valid location, proceed with planting a tree
+                        int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
+                        Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
+                        //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
+                        healthyTile.PlacedTree.Plant(grid.TileArray, validLocations[plantIndex]);
+                        ActiveTiles.Add(grid.TileArray[(int) offset.x, (int) offset.y]);
+                    }
                 }
             }
         }

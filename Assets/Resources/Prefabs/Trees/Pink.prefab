@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4857607045755856}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PinkTree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4296962318466312}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 4454287327040606}
   - component: {fileID: 33730618588761210}
   - component: {fileID: 23965521213309496}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.036
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4953956024521030}
   - component: {fileID: 33656254199797482}
   - component: {fileID: 23894763223644562}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.037
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 4935177777604206}
   - component: {fileID: 33926936400242626}
   - component: {fileID: 23019892810747732}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.038
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4714681521352982}
   - component: {fileID: 33643695321420758}
   - component: {fileID: 23252912580738922}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4628649972901554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PinkTree_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4645140408759108}
   - component: {fileID: 33972757906286344}
   - component: {fileID: 23992747847020670}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.041
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4032083745307546}
   - component: {fileID: 33967751760929724}
   - component: {fileID: 23751555062854280}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4437985138698826}
   - component: {fileID: 33900774148540578}
   - component: {fileID: 23659465356889942}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.040
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4761192955495600}
   - component: {fileID: 33178606334373726}
   - component: {fileID: 23480943279048112}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube.035
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4714380757945676}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PinkTree_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4377572889762454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PinkTree_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,6 +21,9 @@ public class Pink : Tree
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
         Score = 200;
+        TimePlanted = GameStats.Turn;
+        TimeToGrow = 3;
+
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMaskPositive)

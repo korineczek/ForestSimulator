@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4651490082533124}
   - component: {fileID: 33991520923174468}
   - component: {fileID: 23185173275903284}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PineTree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4869623635767536}
   - component: {fileID: 33456305706996864}
   - component: {fileID: 23365722929089788}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PineTree_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4814402191654222}
   - component: {fileID: 33814113887343384}
   - component: {fileID: 23248303210055806}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PineTree_5 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4222578725949434}
   - component: {fileID: 33756264357172712}
   - component: {fileID: 23147111069906404}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PineTree_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4140695779301450}
   - component: {fileID: 33338007412041986}
   - component: {fileID: 23082312667305040}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PineTree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4041862813291128}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

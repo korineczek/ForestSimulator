@@ -23,6 +23,7 @@ public class Pink : Tree
         Score = 200;
         TimePlanted = GameStats.Turn;
         TimeToGrow = 3;
+        OxygenInterval = 6;
 
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;

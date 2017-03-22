@@ -12,13 +12,16 @@ public abstract class Tree
 {
     public int Cost;
     public int Score;
-    public int Health;
+    public int BaseHealth = 10;
+    public int Health = 10;
     public int Upkeep;
     public int AreaOfInfluence;
     public int TimePlanted;
     public int TimeToGrow;
     public bool IsMature;
     public bool IsActive;
+    public int LastOxygen;
+    public int OxygenInterval;
     
 
     public abstract void Plant(Tile[,] grid, Vector3 position);

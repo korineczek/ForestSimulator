@@ -23,6 +23,7 @@ public class Leaf : Tree
         TimePlanted = GameStats.Turn;
         TimeToGrow = 3;
         IsMature = false;
+        OxygenInterval = 2;
 
 
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);

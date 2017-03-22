@@ -8,17 +8,23 @@ public class Overlay : MonoBehaviour
 
     private Text score;
     private Text turn;
+    private Text oxygen;
+    private Text weather;
 
     private void Start()
     {
-        score = this.transform.GetChild(0).GetChild(0).GetComponent<Text>();
-        turn = this.transform.GetChild(0).GetChild(1).GetComponent<Text>();
+        score = this.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>();
+        turn = this.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>();
+        oxygen = this.transform.GetChild(0).GetChild(0).GetChild(2).GetComponent<Text>();
+        weather = this.transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<Text>();
     }
 
     public void UpdateCanvas()
     {
         UpdateScore();
         UpdateTurn();
+        UpdateOxygen();
+        UpdateWeather();
     }
 
     public void UpdateScore()
@@ -29,5 +35,15 @@ public class Overlay : MonoBehaviour
     public void UpdateTurn()
     {
         turn.text = "TURN: " + GameStats.Turn;
+    }
+
+    public void UpdateOxygen()
+    {
+        oxygen.text = "OXYGEN: " + GameStats.Oxygen;
+    }
+
+    public void UpdateWeather()
+    {
+        weather.text = "WEATHER: " + GameStats.CurrentWeather;
     }
 }

@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
 
     private void ShowTreeMenu(Vector3 worldPos)
     {
-        RectTransform treeMenu = this.transform.GetChild(0).GetChild(2).GetComponent<RectTransform>();
+        RectTransform treeMenu = this.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>();
         treeMenu.gameObject.SetActive(true);
         Debug.Log(Camera.main.WorldToScreenPoint(worldPos));
         Vector2 camScreenPos = Camera.main.WorldToScreenPoint(worldPos);
@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
         }
         //Debug.Log("setting false");
         //inMenu = false;
-        this.transform.GetChild(0).GetChild(2).GetComponent<RectTransform>().gameObject.SetActive(false);
+        this.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>().gameObject.SetActive(false);
         StartCoroutine(ClearInput());
     }
 

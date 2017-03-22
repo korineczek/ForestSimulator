@@ -23,6 +23,7 @@ public class Pine : Tree
         TimePlanted = GameStats.Turn;
         TimeToGrow = 2;
         IsMature = false;
+        OxygenInterval = 4;
 
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;

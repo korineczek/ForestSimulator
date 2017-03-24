@@ -7,7 +7,6 @@ using Tree = UnityEngine.Tree;
 [RequireComponent(typeof(GameManager))]
 public class GameController : MonoBehaviour
 {
-
     private Vector3 cubeSelection = new Vector3();
     private RectTransform selectionCanvas;
     private float selectionSensitivity = 5f;
@@ -16,7 +15,6 @@ public class GameController : MonoBehaviour
     private Vector2 offsetPosClamped;
     private GameManager manager;
     private HexGrid grid;
-
 
     // Use this for initialization
     void Start()
@@ -55,7 +53,7 @@ public class GameController : MonoBehaviour
             offsetPosClamped = offsetPos;
             Vector3 worldPos = HexCoords.Offset2World(offsetPosClamped, 0);
 
-            selectionCanvas.position = new Vector3(worldPos.x, 0.1f, worldPos.z);
+            selectionCanvas.position = new Vector3(worldPos.x, grid.TileArray[(int)offsetPosClamped.x,(int)offsetPosClamped.y].WorldCoordinates.y+0.1f, worldPos.z);
             //Debug.Log(cubeSelection);
        
 

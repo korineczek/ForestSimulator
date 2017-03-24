@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(HexGrid))]
 [RequireComponent(typeof(GameRenderer))]
+[RequireComponent(typeof(Overlay))]
 public class GameManager : MonoBehaviour
 {
     private WaitForSeconds interval;

@@ -124,7 +124,7 @@ public class HexGrid : MonoBehaviour
             for (int j = 0; j < gridSize; j++)
             {
                 //get random height for tiles based on noise
-                float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale +(UnityEngine.Random.Range(-0.1f,0.1f)/2))*0f;
+                float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale +(UnityEngine.Random.Range(-0.1f,0.1f)/2))*0.25f;
                 Transform hex = Instantiate(tile);
                 hex.position = HexCoords.Offset2World(i, randomHeight, j);
                 //assign transforms to the appropriate arrays

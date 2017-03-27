@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ForestSimulator;
 
 public class Pine : Tree
 {
@@ -15,7 +16,7 @@ public class Pine : Tree
         AreaOfInfluence = 1;
     }
 
-    public Pine(Tile[,] grid, Vector3 position)
+    public Pine(Vector3 position)
     {
         Score = 50;
         Upkeep = PineUpkeep;
@@ -37,21 +38,21 @@ public class Pine : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[0]++;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]++;
             }
         }
         
 
     }
 
-    public override void Plant(Tile[,] grid, Vector3 position)
+    public override void Plant(Vector3 position)
     {
         Vector2 offset = HexCoords.Cube2Offset(position);
-        grid[(int) offset.x, (int) offset.y].PlacedTree = new Pine(grid, position);
-        grid[(int) offset.x, (int) offset.y].IsActive = true;
+        BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree = new Pine(position);
+        BoardData.Map[(int)offset.x, (int)offset.y].IsActive = true;
     }
 
-    public override void Destroy(Tile[,] grid, Vector3 position)
+    public override void Destroy(Vector3 position)
     {
         //revert process of building a pine
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
@@ -65,7 +66,7 @@ public class Pine : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[0]--;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]--;
             }
         }
     }

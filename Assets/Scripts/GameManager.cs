@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ForestSimulator;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -144,18 +145,17 @@ public class GameManager : MonoBehaviour
         //TODO: CLEANUP THIS PART AFTER BASE COLORING WORKS
         //reset score to 0
         GameStats.Score = 0;
-        for (int i = 0; i < grid.TileArray.GetLength(0); i++)
+        for (int i = 0; i < BoardData.Map.GetLength(0); i++)
         {
-            for (int j = 0; j < grid.TileArray.GetLength(0); j++)
+            for (int j = 0; j < BoardData.Map.GetLength(0); j++)
             {
                 //calc score
-                if (grid.TileArray[i, j].PlacedTree != null) { GameStats.Score += grid.TileArray[i, j].PlacedTree.Score; }
-                grid.TileArray[i, j].Resource = grid.TileArray[i, j].EvaluateResource();
-                grid.HexesTransforms[i, j].GetComponent<Renderer>().material.color = new Color(1 - ((grid.TileArray[i, j].Resource * 20f) / 255f), 1, 1 - ((grid.TileArray[i, j].Resource * 20f) / 255f));
-                grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].CubeCoordinates + "\n" + grid.TileArray[i, j].Resource;
-                //grid.HexesTransforms[i, j].GetChild(0).GetChild(0).GetComponent<Text>().text = grid.TileArray[i, j].Resource.ToString();
+                if (BoardData.Map[i, j].PlacedTree != null) { GameStats.Score += BoardData.Map[i, j].PlacedTree.Score; }
+                BoardData.Map[i, j].Resource = BoardData.Map[i, j].EvaluateResource();
+                
+                BoardData.Map[i, j].Controller.UpdateInfo(BoardData.Map[i, j]);
                 //cleanup and repaint trees
-                gameRenderer.UpdateTreeModel(grid.TileArray[i, j]);
+                gameRenderer.UpdateTreeModel(BoardData.Map[i, j]);
             }
         }
         //End of update
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("tree dead");
                 dyingTile[i].IsActive = false;
-                dyingTile[i].PlacedTree.Destroy(grid.TileArray, dyingTile[i].CubeCoordinates);
+                dyingTile[i].PlacedTree.Destroy( dyingTile[i].CubeCoordinates);
                 dyingTile[i].PlacedTree = null;
                 DyingTiles.RemoveAt(i);
                 return;
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
                 //offset.x = Mathf.Clamp(offset.x, 0, 14);
                 //offset.x = Mathf.Clamp(offset.y, 0, 14);
                 if ((int)offset.x > 0 && (int)offset.x < 14 && (int)offset.y > 0 &&
-                    (int)offset.y < 14 && grid.TileArray[(int)offset.x, (int)offset.y].PlacedTree == null)
+                    (int)offset.y < 14 && BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree == null)
                 {
                     validLocations.Add(possibleLocation);
                 }
@@ -222,8 +222,8 @@ public class GameManager : MonoBehaviour
                 int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
                 Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
                 //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
-                healthyTile.PlacedTree.Plant(grid.TileArray, validLocations[plantIndex]);
-                ActiveTiles.Add(grid.TileArray[(int)offset.x, (int)offset.y]);
+                healthyTile.PlacedTree.Plant(validLocations[plantIndex]);
+                ActiveTiles.Add(BoardData.Map[(int)offset.x, (int)offset.y]);
             }
         }
     }
@@ -240,11 +240,11 @@ public class GameManager : MonoBehaviour
     public void PlantTree(Tree type, Vector2 position)
     {
         //check if tile is active so we cannot plant the same tree twice
-        if (!grid.TileArray[(int)position.x, (int)position.y].IsActive)
+        if (!BoardData.Map[(int)position.x, (int)position.y].IsActive)
         {
-            grid.TileArray[(int)position.x, (int)position.y].IsActive = true;
-            grid.TileArray[(int)position.x, (int)position.y].PlacedTree = type;
-            ActiveTiles.Add(grid.TileArray[(int)position.x, (int)position.y]);
+            BoardData.Map[(int)position.x, (int)position.y].IsActive = true;
+            BoardData.Map[(int)position.x, (int)position.y].PlacedTree = type;
+            ActiveTiles.Add(BoardData.Map[(int)position.x, (int)position.y]);
         }
     }
 

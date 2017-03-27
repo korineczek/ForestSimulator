@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ForestSimulator;
 using UnityEngine;
 
 public class Pink : Tree
@@ -16,7 +17,7 @@ public class Pink : Tree
         Score = 200;
     }
 
-    public Pink(Tile[,] grid, Vector3 position)
+    public Pink(Vector3 position)
     {
         Upkeep = PinkUpkeep;
         AreaOfInfluence = 2;
@@ -36,7 +37,7 @@ public class Pink : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[2]++;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]++;
             }
         }
         foreach (int index in aoeMaskNegative)
@@ -48,21 +49,21 @@ public class Pink : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[3]++;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3]++;
             }
         }
 
 
     }
 
-    public override void Plant(Tile[,] grid, Vector3 position) 
+    public override void Plant(Vector3 position) 
     {
         Vector2 offset = HexCoords.Cube2Offset(position);
-        grid[(int)offset.x, (int)offset.y].PlacedTree = new Pink(grid, position);
-        grid[(int)offset.x, (int)offset.y].IsActive = true;
+        BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree = new Pink(position);
+        BoardData.Map[(int)offset.x, (int)offset.y].IsActive = true;
     }
 
-    public override void Destroy(Tile[,] grid, Vector3 position)
+    public override void Destroy(Vector3 position)
     {
         //revert process of building a pine
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
@@ -76,7 +77,7 @@ public class Pink : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[2]--;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]--;
             }
         }
         foreach (int index in aoeMaskNegative)
@@ -88,7 +89,7 @@ public class Pink : Tree
             if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
                 (int) offsetCoord.y < 14)
             {
-                grid[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[3]--;
+                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3]--;
             }
         }
     }

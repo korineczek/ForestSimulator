@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ForestSimulator;
 using Tree = UnityEngine.Tree;
 
 [RequireComponent(typeof(GameManager))]
@@ -53,7 +54,7 @@ public class GameController : MonoBehaviour
             offsetPosClamped = offsetPos;
             Vector3 worldPos = HexCoords.Offset2World(offsetPosClamped, 0);
 
-            selectionCanvas.position = new Vector3(worldPos.x, grid.TileArray[(int)offsetPosClamped.x,(int)offsetPosClamped.y].WorldCoordinates.y+0.1f, worldPos.z);
+            selectionCanvas.position = new Vector3(worldPos.x, BoardData.Map[(int)offsetPosClamped.x,(int)offsetPosClamped.y].WorldCoordinates.y+0.1f, worldPos.z);
             //Debug.Log(cubeSelection);
        
 
@@ -89,13 +90,13 @@ public class GameController : MonoBehaviour
         switch (treeIndex)
         {
             case 0:
-                manager.PlantTree(new Pine(grid.TileArray, HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
+                manager.PlantTree(new Pine(HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
                 break;
             case 1:
-                manager.PlantTree(new Leaf(grid.TileArray, HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
+                manager.PlantTree(new Leaf(HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
                 break;
             case 2:
-                manager.PlantTree(new Pink(grid.TileArray, HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
+                manager.PlantTree(new Pink(HexCoords.Offset2Cube((int)offsetPos.x, (int)offsetPos.y)), new Vector2(offsetPos.x, offsetPos.y));
                 break;
         }
         //Debug.Log("setting false");

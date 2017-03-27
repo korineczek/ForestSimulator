@@ -24,6 +24,6 @@ public abstract class Tree
     public int OxygenInterval;
     
 
-    public abstract void Plant(Tile[,] grid, Vector3 position);
-    public abstract void Destroy(Tile[,] grid, Vector3 position);
+    public abstract void Plant(Vector3 position);
+    public abstract void Destroy(Vector3 position);
 }

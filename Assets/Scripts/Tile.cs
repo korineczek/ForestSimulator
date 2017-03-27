@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ForestSimulator;
 using UnityEngine;
 
 /// <summary>
@@ -9,11 +10,6 @@ using UnityEngine;
 [System.Serializable]
 public class Tile
 {
-    public enum State
-    {
-        Healthy, Dying, Dead, Inactive
-    }
-
     //Coordinate systems of tiles
     public Vector2 OffsetCoordinates;
     public Vector3 CubeCoordinates;
@@ -26,8 +22,9 @@ public class Tile
     public int BaseResource = 10;
     public Tree PlacedTree;
     public bool IsActive = false;
-    public State TileState = State.Inactive;
-    
+
+    //Physical Tile Controller
+    [NonSerialized] public TileController Controller;
 
     //Tile buffs
     //TODO: REWORK TO A LOOKUP TABLE OF BUFFS INSTEAD OF THIS STUPID SHIT
@@ -51,7 +48,6 @@ public class Tile
     {
         
     }
-
 
     public int EvaluateResource()
     {

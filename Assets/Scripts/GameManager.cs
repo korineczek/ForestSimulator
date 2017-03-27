@@ -65,36 +65,26 @@ public class GameManager : MonoBehaviour
 
     private void UpkeepPhase()
     {
-        //string s = string.Format("Entering Upkeep Phase, there are {0} active tiles", ActiveTiles.Count);
-        //Debug.Log(s);
         //pay upkeep and move trees to the right lists
         foreach (Tile ActiveTile in ActiveTiles.ToArray())
         {
             if (ActiveTile.PlacedTree.Upkeep < ActiveTile.Resource + ActiveTile.PlacedTree.Upkeep) //check if after paying upkeep the tree still lives
             {
                 //tree has enough energy to sustain itself, move to heatly trees
-                //ActiveTile.TileState = Tile.State.Healthy;
-                //gameRenderer.ChangeState(ActiveTile);
                 HealthyTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
             }
             else
             {
                 //tree doesnt have enough energy to sustain itself - move to dying
-                //ActiveTile.TileState = Tile.State.Dying;
-                //gameRenderer.ChangeState(ActiveTile);
                 DyingTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
             }
         }
-        //s = string.Format("Upkeep phase finished, there are {0} healthy and {1} dying tiles.",HealthyTiles.Count, DyingTiles.Count);
-        //Debug.Log(s);
     }
 
     private void ExecutionPhase()
     {
-        //string s = string.Format("Killing trees, there are {0} dying tiles", DyingTiles.Count);
-        //Debug.Log(s);
         //kill trees
         KillTrees();
         //spread trees
@@ -128,8 +118,6 @@ public class GameManager : MonoBehaviour
 
     private void CleanupPhase()
     {
-        //string s = string.Format("Entering Cleanup Phase, there are {0} healthy and {1} dying tiles.", HealthyTiles.Count, DyingTiles.Count);
-        //Debug.Log(s);
         //move all trees back into active trees
         foreach (Tile healthyTile in HealthyTiles)
         {
@@ -141,9 +129,8 @@ public class GameManager : MonoBehaviour
             ActiveTiles.Add(dyingTile);
         }
         DyingTiles.Clear();
-        //recalculate
-        //TODO: CLEANUP THIS PART AFTER BASE COLORING WORKS
-        //reset score to 0
+
+
         GameStats.Score = 0;
         for (int i = 0; i < BoardData.Map.GetLength(0); i++)
         {
@@ -160,11 +147,7 @@ public class GameManager : MonoBehaviour
         }
         //End of update
         UI.UpdateCanvas();
-        //s = string.Format("Cleanup phase finished, there are {0} active tiles for next turn.", ActiveTiles.Count);
-        //Debug.Log(s);
     }
-
-
 
     private void KillTrees() //Killing trees had to be changed to a specific for loop instead of foreach because removing at 0 no longer works
     {
@@ -199,7 +182,6 @@ public class GameManager : MonoBehaviour
         //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
         if (baseChance + treeHealthModifier >= fertilityThreshold)
         {
-            //Debug.Log(baseChance + treeHealthModifier);
             //Success - new seed spawns
             //Determine location
             List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates, 1);
@@ -208,8 +190,6 @@ public class GameManager : MonoBehaviour
             {
                 //determine possible locations for spreading
                 Vector2 offset = HexCoords.Cube2Offset(possibleLocation);
-                //offset.x = Mathf.Clamp(offset.x, 0, 14);
-                //offset.x = Mathf.Clamp(offset.y, 0, 14);
                 if ((int)offset.x > 0 && (int)offset.x < 14 && (int)offset.y > 0 &&
                     (int)offset.y < 14 && BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree == null)
                 {
@@ -247,26 +227,4 @@ public class GameManager : MonoBehaviour
             ActiveTiles.Add(BoardData.Map[(int)position.x, (int)position.y]);
         }
     }
-
-    public void GameStart()
-    {
-
-    }
-
-    public void GamePause()
-    {
-
-    }
-
-    public void GameResume()
-    {
-
-    }
-
-    public void GameStop()
-    {
-
-    }
-
-
 }

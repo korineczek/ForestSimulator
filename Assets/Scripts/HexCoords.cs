@@ -95,7 +95,6 @@ namespace ForestSimulator
         /// <param name="col"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        /// //TODO: MAKE OVERLOAD THAT ACCEPTS VECTOR2();
         public static Vector3 Offset2Cube(int col, int row)
         {
             float x, y, z;
@@ -103,6 +102,15 @@ namespace ForestSimulator
             z = row;
             y = -x - z;
             return new Vector3(x, y, z);
+        }
+
+        public static Vector3 Offset2Cube(Vector2 offset)
+        {
+            float x, y, z;
+            x = (int)offset.x - ((int)offset.y - ((int)offset.y & 1)) / 2;
+            z = (int)offset.y;
+            y = -x - z;
+            return new Vector3(x, y, z);  
         }
 
         /// <summary>

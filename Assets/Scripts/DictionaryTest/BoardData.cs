@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace ForestSimulator
 {
+    public enum WeatherState
+    {
+        Sunny, Overcast, Raining, HeavyWind, SunClouds, Earthquake
+    }   
+
     internal static class BoardData
     {
         public static readonly int BOARDSIZE = 15;

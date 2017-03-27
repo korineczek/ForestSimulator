@@ -1,7 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Weather;
+using ForestSimulator;
+
+namespace ForestSimulator
+{
+    public enum UIStatus { None, TreePlanting }
+}
+
 
 static class GameStats
 {
@@ -14,4 +20,6 @@ static class GameStats
     public static WeatherState CurrentWeather = WeatherState.Sunny;
     public static int WeatherIndex = 0;
     public static int WeatherInterval = 5;
+    //UI Related
+    public static UIStatus UIstate = UIStatus.None;
 }

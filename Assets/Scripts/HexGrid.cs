@@ -15,7 +15,7 @@ public class HexGrid : MonoBehaviour
     private Transform tile;
     public Transform[,] TreeTransforms;
 
-    private float perlinScale = 10f;
+    private float perlinScale = 5f;
 
     private void Awake()
     {

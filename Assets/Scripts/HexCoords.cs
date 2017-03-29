@@ -195,6 +195,5 @@ namespace ForestSimulator
             float slope = (height / dist);
             return slope;
         }
-
     }
 }

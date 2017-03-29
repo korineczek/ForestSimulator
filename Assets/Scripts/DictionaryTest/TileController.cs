@@ -6,6 +6,17 @@ using UnityEngine.UI;
 
 public class TileController : MonoBehaviour
 {
+    private Transform pine;
+    private Transform leaf;
+    private Transform pink;
+
+    public void Start()
+    {
+        //TODO: MOVE THIS LOADING TO SOME NOT SO RETARDED PLACE
+       pine = (Transform)Resources.Load("Prefabs/Trees/Pine", typeof(Transform));
+       leaf = (Transform)Resources.Load("Prefabs/Trees/Leaf", typeof(Transform));
+       pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
+    }
 
     public void UpdateInfo(Tile tile)
     {
@@ -27,8 +38,51 @@ public class TileController : MonoBehaviour
 
     }
 
+    public void AvailableToggle(bool entry)
+    {
+
+        if (entry)
+        {
+            this.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        }
+
+    }
+
     public void PlantMenu()
     {
-        GameObject.Find("GameManager").GetComponent<GameController>().ShowTreeMenu(transform.position);
+        GameController controller = GameObject.Find("GameManager").GetComponent<GameController>();
+        controller.ShowTreeMenu(transform.position);
+    }
+
+    public void UpdateTreeModel(Tile tile)
+    {
+        Transform spawnedTree;
+        if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pine) && tile.TreeTransform == null)
+        {
+            //spawn pine
+            spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
+            tile.TreeTransform = spawnedTree;
+        }
+        else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Leaf) && tile.TreeTransform == null)
+        {
+            //spawn leaf
+            spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
+            tile.TreeTransform = spawnedTree;
+        }
+        else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pink) && tile.TreeTransform == null)
+        {
+            //spawn leaf
+            spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
+            tile.TreeTransform = spawnedTree;
+        }
+        //kill tree lul
+        if (tile.TreeTransform != null && tile.PlacedTree == null)
+        {
+            Destroy(tile.TreeTransform.gameObject);
+        }
     }
 }

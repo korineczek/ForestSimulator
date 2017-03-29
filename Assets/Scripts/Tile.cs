@@ -25,6 +25,7 @@ public class Tile
 
     //Physical Tile Controller
     [NonSerialized] public TileController Controller;
+    [NonSerialized] public Transform TreeTransform;
 
     //Tile buffs
     //TODO: REWORK TO A LOOKUP TABLE OF BUFFS INSTEAD OF THIS STUPID SHIT

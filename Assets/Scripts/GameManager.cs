@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HexGrid))]
-[RequireComponent(typeof(GameRenderer))]
 [RequireComponent(typeof(Overlay))]
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +16,6 @@ public class GameManager : MonoBehaviour
     //Internal clock represents the amount of time that has passed since the start of the game.
     private int InternalClock = 0;
     private HexGrid grid;
-    private GameRenderer gameRenderer;
     private Overlay UI;
     private bool gameStarted = false;
 
@@ -30,7 +28,6 @@ public class GameManager : MonoBehaviour
     {
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
-        gameRenderer = this.GetComponent<GameRenderer>();
         UI = this.GetComponent<Overlay>();
         //StartCoroutine(GameClock());
     }
@@ -142,7 +139,7 @@ public class GameManager : MonoBehaviour
                 
                 BoardData.Map[i, j].Controller.UpdateInfo(BoardData.Map[i, j]);
                 //cleanup and repaint trees
-                gameRenderer.UpdateTreeModel(BoardData.Map[i, j]);
+                BoardData.Map[i,j].Controller.UpdateTreeModel(BoardData.Map[i,j]);
             }
         }
         //End of update

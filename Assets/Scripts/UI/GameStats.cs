@@ -5,7 +5,7 @@ using ForestSimulator;
 
 namespace ForestSimulator
 {
-    public enum UIStatus { None, TreePlanting }
+    public enum UIStatus { None, TreePlanting, AcornPlanting }
 }
 
 

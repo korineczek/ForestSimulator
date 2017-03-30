@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: fdb833cf7a4732d45aa5920872aecbea
+timeCreated: 1490817224
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature.002
+    100004: Bone
+    100006: Bone 1
+    100008: Bone 2
+    100010: Bone.001
+    100012: Bone.001 1
+    100014: Bone.001 2
+    100016: Bone.002
+    100018: Bone.002 1
+    100020: Bone.002 2
+    100022: Bone.003
+    100024: Bone.003 1
+    100026: Bone.003 2
+    100028: Bone.003_end
+    100030: Bone.003_end 1
+    100032: Bone.003_end 2
+    100034: Bone.004
+    100036: Bone.004_end
+    100038: //RootNode
+    100040: I am ROOT
+    100042: stamme
+    100044: stamme.001
+    100046: stamme.002
+    100048: stamme.003
+    100050: stamme.004
+    100052: tree gr
+    100054: tree gre
+    100056: tree green
+    100058: tree green.001
+    100060: tree green.002
+    400000: Armature
+    400002: Armature.002
+    400004: Bone
+    400006: Bone 1
+    400008: Bone 2
+    400010: Bone.001
+    400012: Bone.001 1
+    400014: Bone.001 2
+    400016: Bone.002
+    400018: Bone.002 1
+    400020: Bone.002 2
+    400022: Bone.003
+    400024: Bone.003 1
+    400026: Bone.003 2
+    400028: Bone.003_end
+    400030: Bone.003_end 1
+    400032: Bone.003_end 2
+    400034: Bone.004
+    400036: Bone.004_end
+    400038: //RootNode
+    400040: I am ROOT
+    400042: stamme
+    400044: stamme.001
+    400046: stamme.002
+    400048: stamme.003
+    400050: stamme.004
+    400052: tree gr
+    400054: tree gre
+    400056: tree green
+    400058: tree green.001
+    400060: tree green.002
+    4300000: stamme.003
+    4300002: tree green.001
+    4300004: stamme.002
+    4300006: tree gr
+    4300008: tree green.002
+    4300010: stamme.004
+    4300012: tree gre
+    4300014: stamme.001
+    4300016: tree green
+    4300018: stamme
+    7400000: I am ROOT|Action
+    7400002: I am ROOT|Armature.001Action
+    7400004: I am ROOT|Armature.002Action
+    7400006: I am ROOT|ArmatureAction
+    7400008: Armature|Action
+    7400010: Armature|Armature.001Action
+    7400012: Armature|Armature.002Action
+    7400014: Armature|ArmatureAction
+    7400016: Armature.002|Action
+    7400018: Armature.002|Armature.001Action
+    7400020: Armature.002|Armature.002Action
+    7400022: Armature.002|ArmatureAction
+    9500000: //RootNode
+    13700000: stamme
+    13700002: stamme.001
+    13700004: stamme.002
+    13700006: stamme.003
+    13700008: stamme.004
+    13700010: tree gr
+    13700012: tree gre
+    13700014: tree green
+    13700016: tree green.001
+    13700018: tree green.002
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: I am ROOT
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

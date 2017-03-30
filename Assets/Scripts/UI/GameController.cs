@@ -58,9 +58,10 @@ public class GameController : MonoBehaviour
     {
         GameStats.UIstate = UIStatus.AcornPlanting;
         CubePos = position;
-        positionList = HexCoords.HexRange(CubePos, 1);
+        positionList = HexCoords.HexRange(CubePos, 2);
         foreach (Vector3 availableTile in positionList)
         {
+            //TODO: MARK TILES VIABLE FOR PLANTING
             Vector2 offset = HexCoords.Cube2Offset(availableTile);
             BoardData.Map[(int)offset.x,(int)offset.y].Controller.AvailableToggle(show);
         }

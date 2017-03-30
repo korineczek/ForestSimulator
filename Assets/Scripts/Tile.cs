@@ -16,16 +16,19 @@ public class Tile
     public Vector3 WorldCoordinates;
     //Physical properties
     public float Slope;
-    
+
     //Tile properties
     public int Resource = 10;
     public int BaseResource = 10;
     public Tree PlacedTree;
     public bool IsActive = false;
+    public bool IsAvailable = true;
 
     //Physical Tile Controller
-    [NonSerialized] public TileController Controller;
-    [NonSerialized] public Transform TreeTransform;
+    [NonSerialized]
+    public TileController Controller;
+    [NonSerialized]
+    public Transform TreeTransform;
 
     //Tile buffs
     //TODO: REWORK TO A LOOKUP TABLE OF BUFFS INSTEAD OF THIS STUPID SHIT
@@ -40,14 +43,14 @@ public class Tile
 
     public Tile(int col, int row, float height)
     {
-        OffsetCoordinates = new Vector2(col,row);
+        OffsetCoordinates = new Vector2(col, row);
         CubeCoordinates = HexCoords.Offset2Cube(col, row);
         WorldCoordinates = HexCoords.Offset2World(col, height, row);
     }
 
     public Tile()
     {
-        
+
     }
 
     public int EvaluateResource()
@@ -59,23 +62,36 @@ public class Tile
         //check for pine debuff
         if (Buffs[0] > 0 && Buffs[1] == 0)
         {
-            finalResource -= Pine.PineUpkeep*Buffs[0];
+            finalResource -= Pine.PineUpkeep * Buffs[0];
         }
         else if (Buffs[0] > 0 && Buffs[1] > 0)
         {
-            finalResource += (Pine.PineUpkeep - Pine.PineUpkeep*Buffs[0]);
+            finalResource += (Pine.PineUpkeep - Pine.PineUpkeep * Buffs[0]);
         }
         else if (Buffs[0] == 0 && Buffs[1] > 0)
         {
-            finalResource -= Leaf.LeafUpkeep*Buffs[1];
+            finalResource -= Leaf.LeafUpkeep * Buffs[1];
         }
         if (Buffs[2] > 0)
         {
-            finalResource += Pink.PinkUpkeep*Buffs[2];
+            finalResource += Pink.PinkUpkeep * Buffs[2];
         }
         if (Buffs[3] > 0)
         {
-            finalResource -= Pink.PinkUpkeep*Buffs[3];
+            finalResource -= Pink.PinkUpkeep * Buffs[3];
+        }
+
+        switch (GameStats.CurrentWeather)
+        {
+            case WeatherState.Sunny:
+                finalResource += 2;
+                break;
+            case WeatherState.Raining:
+                finalResource += 3 - (int)(WorldCoordinates.y / 5f);
+                break;
+            case WeatherState.SunClouds:
+                finalResource += 1;
+                break;
         }
         return finalResource;
     }

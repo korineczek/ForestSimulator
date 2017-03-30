@@ -23,7 +23,7 @@ namespace ForestSimulator
                 for (int j = 0; j < BOARDSIZE; j++)
                 {
                     //get random height for tiles based on noise
-                    float randomHeight = (Mathf.PerlinNoise(i / 5f, j / 5f) * perlinScale + (UnityEngine.Random.Range(-0.1f, 0.1f) / 2)) * 0.25f;
+                    float randomHeight = (Mathf.PerlinNoise(i / 7f, j / 4f) * perlinScale + (UnityEngine.Random.Range(-0.1f, 0.1f) / 2)) * 0.7f;
                     Map[i,j] = new Tile(i,j,randomHeight);
                 }
             }
@@ -35,7 +35,7 @@ namespace ForestSimulator
                     Map[i, j].Slope = GetMaxSlope(i, j);
                     //Debug.Log(TileArray[i, j].Slope);
                     //TODO: NORMALIZE SLOPES SO THAT THE COLOR DOENST OVERFLOW
-                    Map[i, j].BaseResource = (int)(Map[i, j].BaseResource * (1 - (Map[i, j].Slope * 2))) + (int)(10 - Map[i, j].WorldCoordinates.y);
+                    Map[i, j].BaseResource = (int)(Map[i, j].BaseResource * (1 - (Map[i, j].Slope * 2))) + (int)((10 - Map[i, j].WorldCoordinates.y)/5);
                     Map[i, j].Resource = Map[i, j].BaseResource;
                 }
             }

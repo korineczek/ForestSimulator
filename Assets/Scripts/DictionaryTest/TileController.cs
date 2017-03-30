@@ -9,13 +9,15 @@ public class TileController : MonoBehaviour
     private Transform pine;
     private Transform leaf;
     private Transform pink;
+    private Transform acorn;
 
     public void Start()
     {
         //TODO: MOVE THIS LOADING TO SOME NOT SO RETARDED PLACE
-       pine = (Transform)Resources.Load("Prefabs/Trees/Pine", typeof(Transform));
-       leaf = (Transform)Resources.Load("Prefabs/Trees/Leaf", typeof(Transform));
-       pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
+        pine = (Transform)Resources.Load("Prefabs/Trees/Pine", typeof(Transform));
+        leaf = (Transform)Resources.Load("Prefabs/Trees/Leaf", typeof(Transform));
+        pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
+        acorn = (Transform)Resources.Load("Prefabs/Trees/Acorn", typeof(Transform));
     }
 
     public void UpdateInfo(Tile tile)
@@ -54,8 +56,11 @@ public class TileController : MonoBehaviour
 
     public void PlantMenu()
     {
-        GameController controller = GameObject.Find("GameManager").GetComponent<GameController>();
-        controller.ShowTreeMenu(transform.position);
+        //if (GameStats.UIstate == UIStatus.AcornPlanting)
+        {
+            GameController controller = GameObject.Find("GameManager").GetComponent<GameController>();
+            controller.ShowTreeMenu(transform.position);
+        }
     }
 
     public void UpdateTreeModel(Tile tile)
@@ -84,5 +89,10 @@ public class TileController : MonoBehaviour
         {
             Destroy(tile.TreeTransform.gameObject);
         }
+    }
+
+    public void SpawnAcorn()
+    {
+        Instantiate(acorn, transform.position + Vector3.up*5f, Quaternion.identity);
     }
 }

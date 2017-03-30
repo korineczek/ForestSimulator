@@ -148,9 +148,7 @@ namespace ForestSimulator
         /// <returns></returns>
         public static float HexDistance(Vector3 a, Vector3 b)
         {
-
             return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
-
         }
 
         /// <summary>

@@ -29,7 +29,7 @@ public class CameraScript : MonoBehaviour {
 	void Start () {
         defaultRotation = transform.rotation;
 	    rotationX = transform.rotation.eulerAngles.y;
-	    rotationY = transform.rotation.eulerAngles.x;
+	    rotationY = -transform.rotation.eulerAngles.x;
 	}
 	
 	// Update is called once per frame
@@ -42,35 +42,36 @@ public class CameraScript : MonoBehaviour {
         transform.position += transform.right * moveX;
         transform.position += flatForward * moveZ;
         rotationX += rotate * sensX/2f * Time.deltaTime;
-        rotationX = Mathf.Clamp(rotationX, leftLimit, rightLimit);
-        transform.localEulerAngles = new Vector3(rotationY, rotationX, 0);
+        //rotationX = Mathf.Clamp(rotationX, leftLimit, rightLimit);
+        //transform.localEulerAngles = new Vector3(rotationY, rotationX, 0);
 
         //Vector3 newposition = new Vector3(moveX, 0, moveZ);
         //transform.position += newposition;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         //Xbox controller zoom
-	    float zoom = Input.GetAxis("Zoom")*scrollSpeed;
-	    Vector3 xboxZoom = transform.forward*zoom;
-        Vector3 zoomVector = transform.forward * scroll;
-	    transform.position += xboxZoom;
+	 //   float zoom = Input.GetAxis("Zoom")*scrollSpeed;
+	 //   Vector3 xboxZoom = transform.forward*zoom;
+       Vector3 zoomVector = transform.forward * scroll;
+	   // transform.position += xboxZoom;
 
-        Vector3 whereWeTryToGo = (transform.position + zoomVector);
-        if (whereWeTryToGo.y > minZoom && whereWeTryToGo.y < maxZoom)
+       Vector3 whereWeTryToGo = (transform.position + zoomVector);
+      if (whereWeTryToGo.y > minZoom && whereWeTryToGo.y < maxZoom)
         {
-            transform.position += zoomVector;
-        }
+           transform.position += zoomVector;
+       }
 
-        //if (transform.position.y + scroll * -zoomS > minZoom && transform.position.y + scroll * -zoomS < maxZoom) {
-        //    transform.Translate(0, scroll * -zoomS, scroll * zoomS, Space.World);
-        //}
+   //     if (transform.position.y + scroll * -zoomS > minZoom && transform.position.y + scroll * -zoomS < maxZoom) {
+     //       transform.Translate(0, scroll * -zoomS, scroll * zoomS, Space.World);
+     //   }
         if (Input.GetMouseButton(2))
         {
             rotationX += Input.GetAxis("Mouse X") * sensX * Time.deltaTime;
-            rotationX = Mathf.Clamp(rotationX, leftLimit, rightLimit);
+            //rotationX = Mathf.Clamp(rotationX, leftLimit, rightLimit);
             rotationY += Input.GetAxis("Mouse Y") * sensY * Time.deltaTime;
-            rotationY = Mathf.Clamp(rotationY, downLimit, upLimit);
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+            //rotationY = Mathf.Clamp(rotationY, downLimit, upLimit);
+            
         }
+        transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0); 
     }
 }

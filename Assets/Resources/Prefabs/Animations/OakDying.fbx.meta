@@ -73,7 +73,7 @@ ModelImporter:
     4300014: stamme
     4300016: tree gre
     4300018: stamme.001
-    7400000: Armature|ArmatureAction
+    7400000: OakDying
     9500000: //RootNode
     13700000: stamme
     13700002: stamme.001
@@ -95,6 +95,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -107,7 +109,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|ArmatureAction
+      name: OakDying
       takeName: Armature|ArmatureAction
       firstFrame: 0
       lastFrame: 281

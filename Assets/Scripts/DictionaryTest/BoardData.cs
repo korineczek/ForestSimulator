@@ -11,16 +11,17 @@ namespace ForestSimulator
 
     internal static class BoardData
     {
-        public static readonly int BOARDSIZE = 15;
+        public static readonly int[] BOARDSIZE = new int[]{ 15,15,15,15,15,15 };
+        public static readonly int CURRENTBOARD = 0;
         public static Tile[,] Map;
 
         public static void GenerateBoardData(float perlinScale)
         {
-            Map = new Tile[BOARDSIZE, BOARDSIZE];
+            Map = new Tile[BOARDSIZE[CURRENTBOARD], BOARDSIZE[CURRENTBOARD]];
             //generate board data
-            for (int i = 0; i < BOARDSIZE; i++)
+            for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
             {
-                for (int j = 0; j < BOARDSIZE; j++)
+                for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
                 {
                     //get random height for tiles based on noise
                     float randomHeight = (Mathf.PerlinNoise(i / 7f, j / 4f) * perlinScale + (UnityEngine.Random.Range(-0.1f, 0.1f) / 2)) * 0.7f;
@@ -28,9 +29,9 @@ namespace ForestSimulator
                 }
             }
             //generate slope data
-            for (int i = 1; i < BOARDSIZE - 1; i++)
+            for (int i = 1; i < BOARDSIZE[CURRENTBOARD] - 1; i++)
             {
-                for (int j = 1; j < BOARDSIZE - 1; j++)
+                for (int j = 1; j < BOARDSIZE[CURRENTBOARD] - 1; j++)
                 {
                     Map[i, j].Slope = GetMaxSlope(i, j);
                     //Debug.Log(TileArray[i, j].Slope);

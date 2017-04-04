@@ -56,7 +56,7 @@ ModelImporter:
     4300012: pink3
     4300014: Cube
     4300016: pink
-    7400000: Armature.001|Armature.001Action
+    7400000: MoveNormalPink
     9500000: //RootNode
     13700000: Cube
     13700002: Cube.001
@@ -77,6 +77,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -87,7 +89,77 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: MoveNormalPink
+      takeName: Armature.001|Armature.001Action
+      firstFrame: 0
+      lastFrame: 251
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/Bone
+        weight: 1
+      - path: Armature.001/Bone/Bone.001
+        weight: 1
+      - path: Armature.001/Bone/Bone.001/Bone.002
+        weight: 1
+      - path: Armature.001/Bone/Bone.001/Bone.002/Bone.003
+        weight: 1
+      - path: Armature.001/Bone/Bone.001/Bone.002/Bone.003/Bone.003_end
+        weight: 1
+      - path: Armature.001/Bone/Bone.004
+        weight: 1
+      - path: Armature.001/Bone/Bone.004/Bone.005
+        weight: 1
+      - path: Armature.001/Bone/Bone.004/Bone.005/Bone.006
+        weight: 1
+      - path: Armature.001/Bone/Bone.004/Bone.005/Bone.006/Bone.007
+        weight: 1
+      - path: Armature.001/Bone/Bone.004/Bone.005/Bone.006/Bone.007/Bone.007_end
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Cube.001
+        weight: 1
+      - path: Cube.003
+        weight: 1
+      - path: Cube.040
+        weight: 1
+      - path: pink
+        weight: 1
+      - path: pink1
+        weight: 1
+      - path: pink2
+        weight: 1
+      - path: pink3
+        weight: 1
+      - path: pink4
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

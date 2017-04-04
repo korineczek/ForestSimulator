@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameStats.PlantedTrees > 0 && gameStarted == false)
+        if (GameStats.PlantedTrees > 2 && gameStarted == false)
         {
             gameStarted = true;
             StartCoroutine(GameClock());
@@ -180,10 +180,10 @@ public class GameManager : MonoBehaviour
         if (baseChance + treeHealthModifier >= fertilityThreshold)
         {
             //Acorn - Manual tree spawn control
-            healthyTile.Controller.SpawnAcorn();
+            //healthyTile.Controller.SpawnAcorn();
             //Success - new seed spawns
             //Determine location
-            /*
+            
             List<Vector3> possibleLocations = HexCoords.HexRange(healthyTile.CubeCoordinates, 1);
             List<Vector3> validLocations = new List<Vector3>();
             foreach (Vector3 possibleLocation in possibleLocations)
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
                 healthyTile.PlacedTree.Plant(validLocations[plantIndex]);
                 ActiveTiles.Add(BoardData.Map[(int)offset.x, (int)offset.y]);
             }
-            */
+            
         }
     }
 

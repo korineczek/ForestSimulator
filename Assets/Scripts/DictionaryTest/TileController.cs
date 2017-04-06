@@ -95,4 +95,25 @@ public class TileController : MonoBehaviour
     {
         Instantiate(acorn, transform.position + Vector3.up*5f, Quaternion.identity);
     }
+
+    public void SetAnimationState(Tile tile, AnimState state)
+    {
+        Animator animator = tile.TreeTransform.GetComponent<Animator>();
+        switch (state)
+        {
+                case AnimState.Idle:
+                animator.SetBool("dying", false);
+                animator.SetBool("fastwind", false);
+                break;
+                case AnimState.Dying:
+                animator.SetBool("dying", true);
+                break;
+                case AnimState.Wind:
+                animator.SetBool("fastwind", true);
+                break;
+                case AnimState.Dead:
+                animator.SetBool("dead", true);
+                break;
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class HexGrid : MonoBehaviour
     {
         //fetch prefab from resources
         tile = (Transform)Resources.Load("Prefabs/Hex", typeof(Transform));
-        TreeTransforms = new Transform[BoardData.BOARDSIZE, BoardData.BOARDSIZE];
+        TreeTransforms = new Transform[BoardData.BOARDSIZE[BoardData.CURRENTBOARD], BoardData.BOARDSIZE[BoardData.CURRENTBOARD]];
     }
 
     // Use this for initialization
@@ -37,9 +37,9 @@ public class HexGrid : MonoBehaviour
     /// </summary>
     private void InstantiateBoard()
     {
-        for (int i = 0; i < BoardData.BOARDSIZE; i++)
+        for (int i = 0; i < BoardData.BOARDSIZE[BoardData.CURRENTBOARD]; i++)
         {
-            for (int j = 0; j < BoardData.BOARDSIZE; j++)
+            for (int j = 0; j < BoardData.BOARDSIZE[BoardData.CURRENTBOARD]; j++)
             {
                 Transform hex = Instantiate(tile);
                 hex.position = BoardData.Map[i,j].WorldCoordinates;
@@ -49,9 +49,9 @@ public class HexGrid : MonoBehaviour
         
         //Generate slope data
         //TODO: REWORK FOR BETTER BORDER PROTECTION
-        for (int i = 1; i < BoardData.BOARDSIZE - 1; i++)
+        for (int i = 1; i < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1; i++)
         {
-            for (int j = 1; j < BoardData.BOARDSIZE - 1; j++)
+            for (int j = 1; j < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1; j++)
             {
                 BoardData.Map[i, j].Controller.UpdateInfo(BoardData.Map[i, j]);
             }

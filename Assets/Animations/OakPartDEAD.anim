@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pinkdyingparticles
+  m_Name: OakPartDEAD
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -26,7 +26,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -35,7 +35,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_2/PinkLeavesDying
+    path: LeafTree_1/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -48,7 +48,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -57,7 +57,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_4/PinkLeavesDying
+    path: LeafTree_4/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -70,7 +70,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -79,7 +79,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_3/PinkLeavesDying
+    path: LeafTree_2/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -92,7 +92,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -101,7 +101,29 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_5/PinkLeavesDying
+    path: LeafTree_5/OakDie
+    classID: 1
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      - serializedVersion: 2
+        time: 10
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: LeafTree_3/OakDie
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -113,28 +135,35 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2010367066
+      path: 1326064525
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3504829266
+      path: 132787689
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4034203417
+      path: 3246728302
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1463924753
+      path: 3409980791
+      attribute: 2086281974
+      script: {fileID: 0}
+      typeID: 1
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 221193456
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -146,7 +175,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 121.88333
+    m_StopTime: 10
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -172,7 +201,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -181,7 +210,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_2/PinkLeavesDying
+    path: LeafTree_1/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -194,7 +223,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -203,7 +232,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_4/PinkLeavesDying
+    path: LeafTree_4/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -216,7 +245,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -225,7 +254,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_3/PinkLeavesDying
+    path: LeafTree_2/OakDie
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -238,7 +267,7 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 121.88333
+        time: 10
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -247,7 +276,29 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: PinkTree_5/PinkLeavesDying
+    path: LeafTree_5/OakDie
+    classID: 1
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      - serializedVersion: 2
+        time: 10
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: LeafTree_3/OakDie
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ForestSimulator;
 using UnityEngine;
 using UnityEngine.UI;
+using Tree = UnityEngine.Tree;
 
 public class TileController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class TileController : MonoBehaviour
     private Transform leaf;
     private Transform pink;
     private Transform acorn;
+
+    private Animator treeAnimator;
 
     public void Start()
     {
@@ -71,23 +74,27 @@ public class TileController : MonoBehaviour
             //spawn pine
             spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
             tile.TreeTransform = spawnedTree;
+            treeAnimator = spawnedTree.GetComponent<Animator>();
         }
         else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Leaf) && tile.TreeTransform == null)
         {
             //spawn leaf
             spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
             tile.TreeTransform = spawnedTree;
+            treeAnimator = spawnedTree.GetComponent<Animator>();
         }
         else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pink) && tile.TreeTransform == null)
         {
             //spawn leaf
             spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
             tile.TreeTransform = spawnedTree;
+            treeAnimator = spawnedTree.GetComponent<Animator>();
         }
         //kill tree lul
         if (tile.TreeTransform != null && tile.PlacedTree == null)
         {
             Destroy(tile.TreeTransform.gameObject);
+            treeAnimator = null;
         }
     }
 
@@ -98,21 +105,22 @@ public class TileController : MonoBehaviour
 
     public void SetAnimationState(Tile tile, AnimState state)
     {
-        Animator animator = tile.TreeTransform.GetComponent<Animator>();
         switch (state)
         {
-                case AnimState.Idle:
-                animator.SetBool("dying", false);
-                animator.SetBool("fastwind", false);
+                case AnimState.Alive:
+                treeAnimator.SetBool("dying", false);
                 break;
                 case AnimState.Dying:
-                animator.SetBool("dying", true);
+                treeAnimator.SetBool("dying", true);
                 break;
                 case AnimState.Wind:
-                animator.SetBool("fastwind", true);
+                treeAnimator.SetBool("fastwind", true);
+                break;
+                case AnimState.Idle:
+                treeAnimator.SetBool("fastwind", false);
                 break;
                 case AnimState.Dead:
-                animator.SetBool("dead", true);
+                treeAnimator.SetBool("dead", true);
                 break;
         }
     }

@@ -13,7 +13,7 @@ public class WeatherReader : MonoBehaviour
     {
         weatherForecast = (WeatherForecast)WeatherForecast.CreateInstance(typeof (WeatherForecast));
         //for debug purposes create a dummy object to test on
-        weatherForecast.Forecast = new List<WeatherState>() { WeatherState.Sunny, WeatherState.SunClouds, WeatherState.Raining, WeatherState.Earthquake };
+        weatherForecast.Forecast = new List<WeatherState>() { WeatherState.HeavyWind, WeatherState.HeavyWind, WeatherState.Sunny, WeatherState.Earthquake };
     }
 
     void Update()

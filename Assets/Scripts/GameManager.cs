@@ -68,12 +68,14 @@ public class GameManager : MonoBehaviour
             if (ActiveTile.PlacedTree.Upkeep < ActiveTile.Resource + ActiveTile.PlacedTree.Upkeep) //check if after paying upkeep the tree still lives
             {
                 //tree has enough energy to sustain itself, move to heatly trees
+                //ActiveTile.Controller.SetAnimationState(ActiveTile,AnimState.Alive);
                 HealthyTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
             }
             else
             {
                 //tree doesnt have enough energy to sustain itself - move to dying
+               // ActiveTile.Controller.SetAnimationState(ActiveTile, AnimState.Dying);
                 DyingTiles.Add(ActiveTile);
                 ActiveTiles.RemoveAt(0);
             }
@@ -102,10 +104,22 @@ public class GameManager : MonoBehaviour
                     //Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
+                    healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
                 }
             }
             else if (healthyTile.PlacedTree.IsMature) //only mature trees can spread and produce oxygen
             {
+                healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
+
+                if (GameStats.CurrentWeather == WeatherState.HeavyWind)
+                {
+                    healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Wind);
+                }
+                else
+                {
+                    healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Idle);
+                }
+
                 SpreadTrees(healthyTile);
                 SpawnOxygen(healthyTile);
             }
@@ -151,6 +165,16 @@ public class GameManager : MonoBehaviour
         Tile[] dyingTile = DyingTiles.ToArray();
         for (int i = 0; i < dyingTile.Length; i++)
         {
+            dyingTile[i].Controller.SetAnimationState(dyingTile[i], AnimState.Dying);
+
+            if (GameStats.CurrentWeather == WeatherState.HeavyWind)
+            {
+                dyingTile[i].Controller.SetAnimationState(dyingTile[i], AnimState.Wind);
+            }
+            else
+            {
+                dyingTile[i].Controller.SetAnimationState(dyingTile[i], AnimState.Idle);
+            }
             if (dyingTile[i].PlacedTree.Health <= 0)
             {
                 Debug.Log("tree dead");

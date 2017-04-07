@@ -81,6 +81,7 @@ public class Tile
             finalResource -= Pink.PinkUpkeep * Buffs[3];
         }
 
+        //reset wind before checking weather
         switch (GameStats.CurrentWeather)
         {
             case WeatherState.Sunny:

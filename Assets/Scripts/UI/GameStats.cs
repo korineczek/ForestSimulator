@@ -6,7 +6,9 @@ using ForestSimulator;
 namespace ForestSimulator
 {
     public enum UIStatus { None, TreePlanting, AcornPlanting }
-    public enum AnimState { Idle, Dying, Wind, Dead}
+    public enum AnimState { Idle, Dying, Wind, Dead,
+        Alive
+    }
 }
 
 

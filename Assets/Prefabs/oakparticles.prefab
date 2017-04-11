@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4318730860350296}
   - component: {fileID: 95725979652272204}
   m_Layer: 2
-  m_Name: LeafOld
+  m_Name: oakparticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

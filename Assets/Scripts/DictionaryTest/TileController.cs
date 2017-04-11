@@ -75,6 +75,7 @@ public class TileController : MonoBehaviour
             spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
             tile.TreeTransform = spawnedTree;
             treeAnimator = spawnedTree.GetComponent<Animator>();
+            spawnedTree.parent = this.transform;
         }
         else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Leaf) && tile.TreeTransform == null)
         {
@@ -82,6 +83,7 @@ public class TileController : MonoBehaviour
             spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
             tile.TreeTransform = spawnedTree;
             treeAnimator = spawnedTree.GetComponent<Animator>();
+            spawnedTree.parent = this.transform;
         }
         else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pink) && tile.TreeTransform == null)
         {
@@ -89,6 +91,7 @@ public class TileController : MonoBehaviour
             spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
             tile.TreeTransform = spawnedTree;
             treeAnimator = spawnedTree.GetComponent<Animator>();
+            spawnedTree.parent = this.transform;
         }
         //kill tree lul
         if (tile.TreeTransform != null && tile.PlacedTree == null)

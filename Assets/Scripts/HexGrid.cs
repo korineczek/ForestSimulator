@@ -13,15 +13,14 @@ public class HexGrid : MonoBehaviour
 {
 
     private Transform tile;
-    public Transform[,] TreeTransforms;
-
     private float perlinScale = 5f;
+
+    private GameObject boardContainer;
 
     private void Awake()
     {
         //fetch prefab from resources
         tile = (Transform)Resources.Load("Prefabs/Hex", typeof(Transform));
-        TreeTransforms = new Transform[BoardData.BOARDSIZE[BoardData.CURRENTBOARD], BoardData.BOARDSIZE[BoardData.CURRENTBOARD]];
     }
 
     // Use this for initialization
@@ -37,6 +36,7 @@ public class HexGrid : MonoBehaviour
     /// </summary>
     private void InstantiateBoard()
     {
+        boardContainer = new GameObject("Board"+BoardData.CURRENTBOARD);
         for (int i = 0; i < BoardData.BOARDSIZE[BoardData.CURRENTBOARD]; i++)
         {
             for (int j = 0; j < BoardData.BOARDSIZE[BoardData.CURRENTBOARD]; j++)
@@ -44,6 +44,8 @@ public class HexGrid : MonoBehaviour
                 Transform hex = Instantiate(tile);
                 hex.position = BoardData.Map[i,j].WorldCoordinates;
                 BoardData.Map[i, j].Controller = hex.GetComponent<TileController>();
+                hex.parent = boardContainer.transform;
+                hex.name = i + " " + j;
             }
         }
         

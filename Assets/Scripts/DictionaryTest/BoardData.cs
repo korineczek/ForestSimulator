@@ -11,8 +11,8 @@ namespace ForestSimulator
 
     internal static class BoardData
     {
-        public static readonly int[] BOARDSIZE = new int[]{ 15,15,15,15,15,15 };
-        public static readonly int CURRENTBOARD = 0;
+        public static readonly int[] BOARDSIZE = new int[]{ 8,15,15,15,15,15 };
+        public static int CURRENTBOARD = 0;
         public static Tile[,] Map;
 
         public static void GenerateBoardData(float perlinScale)

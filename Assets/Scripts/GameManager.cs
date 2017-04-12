@@ -29,17 +29,9 @@ public class GameManager : MonoBehaviour
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
         UI = this.GetComponent<Overlay>();
-        //StartCoroutine(GameClock());
+        StartCoroutine(GameClock());
     }
 
-    public void Update()
-    {
-        if (GameStats.PlantedTrees > 2 && gameStarted == false)
-        {
-            gameStarted = true;
-            StartCoroutine(GameClock());
-        }
-    }
 
     //MAIN GAME ROUTINE
     public IEnumerator GameClock()
@@ -103,6 +95,7 @@ public class GameManager : MonoBehaviour
                 {
                     //Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
+                    GameStats.PlantedTrees++;
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
                 }

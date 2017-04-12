@@ -26,6 +26,8 @@ public class Pink : Tree
         TimeToGrow = 3;
         OxygenInterval = 6;
 
+        Debug.Log(TimePlanted);
+
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMaskPositive)
@@ -34,8 +36,8 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
-                (int) offsetCoord.y < 14)
+            if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 && (int)offsetCoord.y > 0 &&
+                (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]++;
             }
@@ -46,8 +48,8 @@ public class Pink : Tree
             offsetCoord = HexCoords.Cube2Offset(areaOfInfluence[index]);
             //throw out a buff
             //TODO: DO THE FUCKING BUFF LOL I HAVE NO IDEA HOW
-            if ((int) offsetCoord.x > 0 && (int) offsetCoord.x < 14 && (int) offsetCoord.y > 0 &&
-                (int) offsetCoord.y < 14)
+            if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 && (int)offsetCoord.y > 0 &&
+                (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3]++;
             }

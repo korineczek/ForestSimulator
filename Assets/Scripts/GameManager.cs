@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             InternalClock++;
             GameStats.Turn = InternalClock;
-            Debug.Log("Turn " + InternalClock);
+            //Debug.Log("Turn " + InternalClock);
             //yield return interval;
             //Execute game phases each tick
             UpkeepPhase();
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                 //grow trees
                 if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock) //mature a tree if it has been growing long enough
                 {
-                    //Debug.Log(healthyTile.PlacedTree + " finished growing");
+                    Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
                     GameStats.PlantedTrees++;
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
             }
             if (dyingTile[i].PlacedTree.Health <= 0)
             {
-                Debug.Log("tree dead");
+                //Debug.Log("tree dead");
                 dyingTile[i].IsActive = false;
                 dyingTile[i].PlacedTree.Destroy( dyingTile[i].CubeCoordinates);
                 dyingTile[i].PlacedTree = null;
@@ -207,8 +207,8 @@ public class GameManager : MonoBehaviour
             {
                 //determine possible locations for spreading
                 Vector2 offset = HexCoords.Cube2Offset(possibleLocation);
-                if ((int)offset.x > 0 && (int)offset.x < 14 && (int)offset.y > 0 &&
-                    (int)offset.y < 14 && BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree == null)
+                if ((int)offset.x > 0 && (int)offset.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 && (int)offset.y > 0 &&
+                    (int)offset.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 && BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree == null)
                 {
                     validLocations.Add(possibleLocation);
                 }

@@ -33,6 +33,25 @@ public class ObjectiveTracker : MonoBehaviour {
 
     public IEnumerator LevelTwo()
     {
+        //plant all different trees
+        yield break;
+
+    }
+
+    public IEnumerator LevelThree()
+    {
+        //Plant trees, some tiles are bad
+        yield break;
+    }
+
+    public IEnumerator LevelFour()
+    {
+        //Trees can spread
+        yield break;
+    }
+
+    public IEnumerator LevelFive()
+    {
         yield break;
     }
 

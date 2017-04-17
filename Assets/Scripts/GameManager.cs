@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         //ROLL CHANCE FOR SPREADING
         float baseChance = UnityEngine.Random.Range(0f, 0.75f);
         float treeHealthModifier = (float)healthyTile.Resource / healthyTile.BaseResource;
-        //increases with tile healt
+        //increases with tile health
         //TODO: REVISE THIS SPREADING METHOD TO REDUCE RUNTIME COMPLEXITY
         if (baseChance + treeHealthModifier >= fertilityThreshold)
         {

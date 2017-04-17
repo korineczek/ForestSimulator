@@ -15,29 +15,53 @@ namespace ForestSimulator
         public static int CURRENTBOARD = 0;
         public static Tile[,] Map;
 
-        public static void GenerateBoardData(float perlinScale)
+        public static void GenerateBoardData(float perlinScale, bool manualOverride)
         {
             Map = new Tile[BOARDSIZE[CURRENTBOARD], BOARDSIZE[CURRENTBOARD]];
             //generate board data
-            for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
+            //if overrride off
+            if (!manualOverride)
             {
-                for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
+                for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
                 {
-                    //get random height for tiles based on noise
-                    float randomHeight = (Mathf.PerlinNoise(i / 7f, j / 4f) * perlinScale + (UnityEngine.Random.Range(-0.1f, 0.1f) / 2)) * 0.7f;
-                    Map[i,j] = new Tile(i,j,randomHeight);
+                    for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
+                    {
+                        //get random height for tiles based on noise
+                        float randomHeight = (Mathf.PerlinNoise(i/7f, j/4f)*perlinScale +
+                                              (UnityEngine.Random.Range(-0.1f, 0.1f)/2))*0.7f;
+                        Map[i, j] = new Tile(i, j, randomHeight);
+                    }
+                }
+            }
+            else
+            {
+                //load specific array
+                for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
+                {
+                    for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
+                    {
+                        //get random height for tiles based on noise
+                        float randomHeight = 0; //TODO: REMOVE DUMMY VARIABLE WITH SPECIFIC HEIGHT
+                        Map[i, j] = new Tile(i, j, randomHeight);
+                        
+                    }
                 }
             }
             //generate slope data
-            for (int i = 1; i < BOARDSIZE[CURRENTBOARD] - 1; i++)
+            //Only generate when manual override is off
+            if (!manualOverride)
             {
-                for (int j = 1; j < BOARDSIZE[CURRENTBOARD] - 1; j++)
+                for (int i = 1; i < BOARDSIZE[CURRENTBOARD] - 1; i++)
                 {
-                    Map[i, j].Slope = GetMaxSlope(i, j);
-                    //Debug.Log(TileArray[i, j].Slope);
-                    //TODO: NORMALIZE SLOPES SO THAT THE COLOR DOENST OVERFLOW
-                    Map[i, j].BaseResource = (int)(Map[i, j].BaseResource * (1 - (Map[i, j].Slope * 2))) + (int)((10 - Map[i, j].WorldCoordinates.y)/5);
-                    Map[i, j].Resource = Map[i, j].BaseResource;
+                    for (int j = 1; j < BOARDSIZE[CURRENTBOARD] - 1; j++)
+                    {
+                        Map[i, j].Slope = GetMaxSlope(i, j);
+                        //Debug.Log(TileArray[i, j].Slope);
+                        //TODO: NORMALIZE SLOPES SO THAT THE COLOR DOENST OVERFLOW
+                        Map[i, j].BaseResource = (int) (Map[i, j].BaseResource*(1 - (Map[i, j].Slope*2))) +
+                                                 (int) ((10 - Map[i, j].WorldCoordinates.y)/5);
+                        Map[i, j].Resource = Map[i, j].BaseResource;
+                    }
                 }
             }
         }

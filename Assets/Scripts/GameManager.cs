@@ -26,6 +26,13 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        //Load Questionnaire if not found in the level
+        if (GameObject.Find("Questionnaire") == null && GameObject.Find("Questionnaire(Clone)") == null)
+        {
+            Debug.Log("Questionnaire not found - Instantiating");
+            Instantiate(Resources.Load("Prefabs/Questionnaire"));
+        }
+
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
         UI = this.GetComponent<Overlay>();

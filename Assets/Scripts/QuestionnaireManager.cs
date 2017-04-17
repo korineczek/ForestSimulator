@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuestionnaireManager : MonoBehaviour {
@@ -34,6 +35,14 @@ public class QuestionnaireManager : MonoBehaviour {
         {
             Debug.Log(i);
         }
+
+        questionnaireMenu.SetActive(false);
+        //Load another scene from the scene list
+        Debug.Log("Loading new scene");
+        GameStats.ResetStats();
+        SceneManager.LoadScene("xd");
+
+
     }
 
     public void EnableMenu()

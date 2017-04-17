@@ -12,7 +12,7 @@ public class ObjectiveTracker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(GameStats.PlantedTrees);
+        //Debug.Log(GameStats.PlantedTrees);
 
 	}
 
@@ -20,6 +20,7 @@ public class ObjectiveTracker : MonoBehaviour {
     //Plant tree and watch it grow.
     public IEnumerator LevelOne()
     {
+        Debug.Log("Starting Level 1");
         int treesPlantedObjective = 1;
         while (GameStats.PlantedTrees < treesPlantedObjective)
         {
@@ -27,6 +28,7 @@ public class ObjectiveTracker : MonoBehaviour {
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
+        Debug.Log("Level 1 finished, planted trees:" + GameStats.PlantedTrees);
         InitiateSceneSwitch();
         yield break;
     }
@@ -78,6 +80,12 @@ public class ObjectiveTracker : MonoBehaviour {
             QuestionnaireManager questionnaire = GameObject.Find("Questionnaire").GetComponent<QuestionnaireManager>();
             questionnaire.EnableMenu();
 
+        }
+        else if (GameObject.Find("Questionnaire(Clone)") != null)
+        {
+            Debug.Log("opening questionnaire");
+            QuestionnaireManager questionnaire = GameObject.Find("Questionnaire(Clone)").GetComponent<QuestionnaireManager>();
+            questionnaire.EnableMenu();
         }
     }
 

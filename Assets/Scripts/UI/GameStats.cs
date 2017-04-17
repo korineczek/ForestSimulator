@@ -26,4 +26,14 @@ static class GameStats
     public static int WeatherInterval = 5;
     //UI Related
     public static UIStatus UIstate = UIStatus.None;
+
+    public static void ResetStats()
+    {
+        Score = 0;
+        Turn = 0;
+        Oxygen = 0;
+        PlantedTrees = 0;
+        WeatherIndex = 0;
+        UIstate = UIStatus.None;
+    }
 }

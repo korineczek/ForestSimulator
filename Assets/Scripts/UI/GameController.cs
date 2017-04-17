@@ -37,7 +37,6 @@ public class GameController : MonoBehaviour
     public void PlantButton(int treeIndex)
     {
         Debug.Log(offsetPos);
-        GameStats.PlantedTrees++;
         switch (treeIndex)
         {
             case 0:

@@ -10,6 +10,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Overlay))]
 public class GameManager : MonoBehaviour
 {
+
+    public int GameType = 0;
     private WaitForSeconds interval;
     private float fertilityThreshold = 0.5f;
     private float intervalLength = 0.25f;
@@ -24,6 +26,11 @@ public class GameManager : MonoBehaviour
     private List<Tile> HealthyTiles = new List<Tile>();
     private List<Tile> DyingTiles = new List<Tile>();
 
+    public void Awake()
+    {
+        GameStats.GameType = GameType;
+    }
+
     public void Start()
     {
         //Load Questionnaire if not found in the level
@@ -32,6 +39,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Questionnaire not found - Instantiating");
             Instantiate(Resources.Load("Prefabs/Questionnaire"));
         }
+        //TODO: LOAD PROPER CAMERA ON STARTUP
+
 
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
@@ -98,13 +107,18 @@ public class GameManager : MonoBehaviour
             if (!healthyTile.PlacedTree.IsMature)
             {
                 //grow trees
-                if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock) //mature a tree if it has been growing long enough
+                if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock)
+                    //mature a tree if it has been growing long enough
                 {
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
                     GameStats.PlantedTrees++;
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
+                }
+                else
+                {
+                    //scale tree based on time to grow
                 }
             }
             else if (healthyTile.PlacedTree.IsMature) //only mature trees can spread and produce oxygen

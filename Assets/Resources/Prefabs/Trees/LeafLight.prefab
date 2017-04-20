@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 4312828791407120}
   - component: {fileID: 95660179773093328}
   m_Layer: 2
-  m_Name: OakLight
+  m_Name: LeafLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

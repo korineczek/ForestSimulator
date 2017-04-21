@@ -33,9 +33,20 @@ public class ObjectiveTracker : MonoBehaviour {
         yield break;
     }
 
+    //LEVEL TWO
+    //PLANT ONE OF EACH TYPE
     public IEnumerator LevelTwo()
     {
-        //plant all different trees
+        Debug.Log("Starting Level 2");
+        int treesPlantedObjective = 1;
+        while (GameStats.PlantedPines < 1 || GameStats.PlantedLeaves < 1 || GameStats.PlantedPinks < 1)
+        {
+            //just wait
+            yield return new WaitForSeconds(1f);
+        }
+        //spawn victory screen and move on
+        Debug.Log("Level 2 finished, planted trees:" + GameStats.PlantedTrees);
+        InitiateSceneSwitch();
         yield break;
 
     }
@@ -66,6 +77,18 @@ public class ObjectiveTracker : MonoBehaviour {
         {
             case 0:
                 StartCoroutine(LevelOne());
+                break;
+            case 1:
+                StartCoroutine(LevelTwo());
+                break;
+            case 2:
+                StartCoroutine(LevelThree());
+                break;
+            case 3:
+                StartCoroutine(LevelFour());
+                break;
+            case 4:
+                StartCoroutine(LevelFive());
                 break;
         }
     }

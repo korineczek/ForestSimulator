@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
-                    GameStats.PlantedTrees++;
+                    GameStats.AddPlantedTree(healthyTile.PlacedTree);
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
                 }
@@ -133,8 +133,12 @@ public class GameManager : MonoBehaviour
                 {
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Idle);
                 }
+                //only spread trees in specific boards
+                if (BoardData.CURRENTBOARD > 3)
+                {
+                    SpreadTrees(healthyTile);
+                }
 
-                SpreadTrees(healthyTile);
                 SpawnOxygen(healthyTile);
             }
         }

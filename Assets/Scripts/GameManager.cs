@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         UI.UpdateCanvas();
     }
 
-    private void KillTrees() //Killing trees had to be changed to a specific for loop instead of foreach because removing at 0 no longer works
+    private void KillTrees()
     {
         Tile[] dyingTile = DyingTiles.ToArray();
         for (int i = 0; i < dyingTile.Length; i++)
@@ -200,6 +200,7 @@ public class GameManager : MonoBehaviour
                 dyingTile[i].PlacedTree.Destroy( dyingTile[i].CubeCoordinates);
                 dyingTile[i].PlacedTree = null;
                 DyingTiles.RemoveAt(i);
+                GameStats.DeadTrees++;
                 return;
             }
             dyingTile[i].PlacedTree.Health -= 2;

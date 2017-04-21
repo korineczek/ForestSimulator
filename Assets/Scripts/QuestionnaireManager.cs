@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ForestSimulator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ public class QuestionnaireManager : MonoBehaviour {
         //Load another scene from the scene list
         Debug.Log("Loading new scene");
         GameStats.ResetStats();
-        SceneManager.LoadScene("xd");
+        SceneManager.LoadScene(BoardData.CURRENTBOARD+1);
 
 
     }

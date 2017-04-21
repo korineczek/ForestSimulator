@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ForestSimulator;
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class ObjectiveTracker : MonoBehaviour {
@@ -38,7 +39,6 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelTwo()
     {
         Debug.Log("Starting Level 2");
-        int treesPlantedObjective = 1;
         while (GameStats.PlantedPines < 1 || GameStats.PlantedLeaves < 1 || GameStats.PlantedPinks < 1)
         {
             //just wait
@@ -53,8 +53,17 @@ public class ObjectiveTracker : MonoBehaviour {
 
     public IEnumerator LevelThree()
     {
-        //Plant trees, some tiles are bad
-        //must be able to design a specific map
+        Debug.Log("Starting Level 3");
+        int treesPlantedObjective = 1;
+        int treesDeadObjective = 1;
+        while (GameStats.DeadTrees < treesDeadObjective || GameStats.PlantedTrees < treesPlantedObjective)
+        {
+            //just wait
+            yield return new WaitForSeconds(1f);
+        }
+        //spawn victory screen and move on
+        Debug.Log("Level 3 finished");
+        InitiateSceneSwitch();
         yield break;
     }
 

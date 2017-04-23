@@ -41,8 +41,14 @@ public class QuestionnaireManager : MonoBehaviour {
         //Load another scene from the scene list
         Debug.Log("Loading new scene");
         GameStats.ResetStats();
-        SceneManager.LoadScene(BoardData.CURRENTBOARD+1);
-
+        if (BoardData.CURRENTBOARD < 4)
+        {
+            SceneManager.LoadScene(BoardData.CURRENTBOARD + 1);
+        }
+        else
+        {
+            Application.OpenURL("http://google.com");
+        }
 
     }
 

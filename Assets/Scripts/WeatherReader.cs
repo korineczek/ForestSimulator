@@ -145,16 +145,20 @@ public class WeatherReader : MonoBehaviour
 
     void Update()
     {
-        //check timing for switching weathers
-        if (GameStats.Turn >= lastWeatherSwitch + GameStats.WeatherInterval)
+        //block weather switching until later levels
+        if (BoardData.CURRENTBOARD > 3)
         {
-            lastWeatherSwitch = GameStats.Turn; 
-            ChangeWeather(GameStats.WeatherIndex);
+            //check timing for switching weathers
+            if (GameStats.Turn >= lastWeatherSwitch + GameStats.WeatherInterval)
+            {
+                lastWeatherSwitch = GameStats.Turn;
+                ChangeWeather(GameStats.WeatherIndex);
+            }
+            //Debug.Log(GameStats.CurrentWeather);
         }
-        //Debug.Log(GameStats.CurrentWeather);
-
         //check if current weather is different
         SetWeatherSounds(GameStats.CurrentWeather);
+
     }
 
     public void ChangeWeather(int index)

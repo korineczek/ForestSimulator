@@ -70,11 +70,22 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelFour()
     {
         //Trees can spread
+        //TODO: FIGURE OUT PROPER CONDITION
+        Debug.Log("Starting Level 4");
+        int treesSpreadObjective = 1;
+        while (GameStats.SpreadTrees < treesSpreadObjective )
+        {
+            //just wait
+            yield return new WaitForSeconds(1f);
+        }
+        InitiateSceneSwitch();
         yield break;
     }
 
     public IEnumerator LevelFive()
     {
+        //TODO: FIGURE OUT THE PROPER
+        InitiateSceneSwitch();
         yield break;
     }
 

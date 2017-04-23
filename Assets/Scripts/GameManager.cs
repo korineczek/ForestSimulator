@@ -113,6 +113,12 @@ public class GameManager : MonoBehaviour
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
                     GameStats.AddPlantedTree(healthyTile.PlacedTree);
+
+                    if (!healthyTile.PlacedTree.PlantedManually)
+                    {
+                        GameStats.SpreadTrees++;
+                    }
+
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
                 }
@@ -134,7 +140,7 @@ public class GameManager : MonoBehaviour
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Idle);
                 }
                 //only spread trees in specific boards
-                if (BoardData.CURRENTBOARD > 3)
+                if (BoardData.CURRENTBOARD > 2)
                 {
                     SpreadTrees(healthyTile);
                 }
@@ -245,7 +251,7 @@ public class GameManager : MonoBehaviour
                 int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
                 Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
                 //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
-                healthyTile.PlacedTree.Plant(validLocations[plantIndex]);
+                healthyTile.PlacedTree.Plant(validLocations[plantIndex], false);
                 ActiveTiles.Add(BoardData.Map[(int)offset.x, (int)offset.y]);
             }
             
@@ -268,6 +274,7 @@ public class GameManager : MonoBehaviour
         {
             BoardData.Map[(int)position.x, (int)position.y].IsActive = true;
             BoardData.Map[(int)position.x, (int)position.y].PlacedTree = type;
+            BoardData.Map[(int) position.x, (int) position.y].PlacedTree.PlantedManually = true;
             ActiveTiles.Add(BoardData.Map[(int)position.x, (int)position.y]);
         }
     }

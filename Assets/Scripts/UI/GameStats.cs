@@ -29,6 +29,7 @@ static class GameStats
     public static int PlantedLeaves = 0;
     public static int PlantedPinks = 0;
     public static int DeadTrees = 0;
+    public static int SpreadTrees = 0;
     //Weather System
     public static WeatherState CurrentWeather = WeatherState.Sunny;
     public static int WeatherIndex = 0;
@@ -46,6 +47,7 @@ static class GameStats
         PlantedPines = 0;
         PlantedPinks = 0;
         DeadTrees = 0;
+        SpreadTrees = 0;
         WeatherIndex = 0;
         UIstate = UIStatus.None;
     }

@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 92622171111504668}
   - component: {fileID: 81620785103472574}
   m_Layer: 0
-  m_Name: Camera Light
+  m_Name: CameraLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

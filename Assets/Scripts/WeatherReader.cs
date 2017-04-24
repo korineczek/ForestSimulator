@@ -17,7 +17,7 @@ public class WeatherReader : MonoBehaviour
     {
         weatherForecast = (WeatherForecast)WeatherForecast.CreateInstance(typeof (WeatherForecast));
         //for debug purposes create a dummy object to test on
-        weatherForecast.Forecast = new List<WeatherState>() { WeatherState.HeavyWind, WeatherState.HeavyWind, WeatherState.Sunny, WeatherState.Earthquake };
+        weatherForecast.Forecast = new List<WeatherState>() { WeatherState.HeavyWind, WeatherState.SunClouds, WeatherState.Raining, WeatherState.Sunny };
 
     }
     
@@ -154,7 +154,7 @@ public class WeatherReader : MonoBehaviour
                 lastWeatherSwitch = GameStats.Turn;
                 ChangeWeather(GameStats.WeatherIndex);
             }
-            //Debug.Log(GameStats.CurrentWeather);
+            Debug.Log(GameStats.CurrentWeather);
         }
         //check if current weather is different
         SetWeatherSounds(GameStats.CurrentWeather);

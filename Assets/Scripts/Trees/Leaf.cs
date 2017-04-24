@@ -44,11 +44,12 @@ public class Leaf : Tree
 
     }
 
-    public override void Plant(Vector3 position)
+    public override void Plant(Vector3 position, bool isManual)
     {
         Vector2 offset = HexCoords.Cube2Offset(position);
         BoardData.Map[(int)offset.x, (int)offset.y].PlacedTree = new Leaf(position);
         BoardData.Map[(int)offset.x, (int)offset.y].IsActive = true;
+        PlantedManually = isManual;
     }
 
     public override void Destroy(Vector3 position)

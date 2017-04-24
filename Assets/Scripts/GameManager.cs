@@ -10,6 +10,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Overlay))]
 public class GameManager : MonoBehaviour
 {
+
+    public int GameType = 0;
     private WaitForSeconds interval;
     private float fertilityThreshold = 0.5f;
     private float intervalLength = 0.25f;
@@ -24,6 +26,11 @@ public class GameManager : MonoBehaviour
     private List<Tile> HealthyTiles = new List<Tile>();
     private List<Tile> DyingTiles = new List<Tile>();
 
+    public void Awake()
+    {
+        GameStats.GameType = GameType;
+    }
+
     public void Start()
     {
         //Load Questionnaire if not found in the level
@@ -32,6 +39,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Questionnaire not found - Instantiating");
             Instantiate(Resources.Load("Prefabs/Questionnaire"));
         }
+        //TODO: LOAD PROPER CAMERA ON STARTUP
+
 
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
@@ -98,13 +107,24 @@ public class GameManager : MonoBehaviour
             if (!healthyTile.PlacedTree.IsMature)
             {
                 //grow trees
-                if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock) //mature a tree if it has been growing long enough
+                if (healthyTile.PlacedTree.TimePlanted + healthyTile.PlacedTree.TimeToGrow <= InternalClock)
+                    //mature a tree if it has been growing long enough
                 {
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
                     healthyTile.PlacedTree.IsMature = true;
-                    GameStats.PlantedTrees++;
+                    GameStats.AddPlantedTree(healthyTile.PlacedTree);
+
+                    if (!healthyTile.PlacedTree.PlantedManually)
+                    {
+                        GameStats.SpreadTrees++;
+                    }
+
                     healthyTile.PlacedTree.LastOxygen = GameStats.Turn;
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Alive);
+                }
+                else
+                {
+                    //scale tree based on time to grow
                 }
             }
             else if (healthyTile.PlacedTree.IsMature) //only mature trees can spread and produce oxygen
@@ -119,8 +139,12 @@ public class GameManager : MonoBehaviour
                 {
                     healthyTile.Controller.SetAnimationState(healthyTile, AnimState.Idle);
                 }
+                //only spread trees in specific boards
+                if (BoardData.CURRENTBOARD > 2)
+                {
+                    SpreadTrees(healthyTile);
+                }
 
-                SpreadTrees(healthyTile);
                 SpawnOxygen(healthyTile);
             }
         }
@@ -160,7 +184,7 @@ public class GameManager : MonoBehaviour
         UI.UpdateCanvas();
     }
 
-    private void KillTrees() //Killing trees had to be changed to a specific for loop instead of foreach because removing at 0 no longer works
+    private void KillTrees()
     {
         Tile[] dyingTile = DyingTiles.ToArray();
         for (int i = 0; i < dyingTile.Length; i++)
@@ -182,6 +206,7 @@ public class GameManager : MonoBehaviour
                 dyingTile[i].PlacedTree.Destroy( dyingTile[i].CubeCoordinates);
                 dyingTile[i].PlacedTree = null;
                 DyingTiles.RemoveAt(i);
+                GameStats.DeadTrees++;
                 return;
             }
             dyingTile[i].PlacedTree.Health -= 2;
@@ -226,7 +251,7 @@ public class GameManager : MonoBehaviour
                 int plantIndex = UnityEngine.Random.Range(0, validLocations.Count);
                 Vector2 offset = HexCoords.Cube2Offset(validLocations[plantIndex]);
                 //TODO: FIGURE OUT A SMART WAY TO GET THE CORRECT TYPE OF TREE FOR PLANTING
-                healthyTile.PlacedTree.Plant(validLocations[plantIndex]);
+                healthyTile.PlacedTree.Plant(validLocations[plantIndex], false);
                 ActiveTiles.Add(BoardData.Map[(int)offset.x, (int)offset.y]);
             }
             
@@ -249,6 +274,7 @@ public class GameManager : MonoBehaviour
         {
             BoardData.Map[(int)position.x, (int)position.y].IsActive = true;
             BoardData.Map[(int)position.x, (int)position.y].PlacedTree = type;
+            BoardData.Map[(int) position.x, (int) position.y].PlacedTree.PlantedManually = true;
             ActiveTiles.Add(BoardData.Map[(int)position.x, (int)position.y]);
         }
     }

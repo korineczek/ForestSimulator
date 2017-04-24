@@ -11,7 +11,7 @@ using ForestSimulator;
 [RequireComponent(typeof(GameManager))]
 public class HexGrid : MonoBehaviour
 {
-
+    public int LEVEL;
     private Transform tile;
     private float perlinScale = 5f;
 
@@ -27,6 +27,7 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         //TODO: POSSIBLY MOVE THIS TO SOMEWHERE ELSE TO ALLOW FOR MULTIPLE LEVEL LOADING
+        BoardData.CURRENTBOARD = LEVEL;
         BoardData.GenerateBoardData(perlinScale,false);
         InstantiateBoard();
 

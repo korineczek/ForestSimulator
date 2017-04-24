@@ -22,8 +22,9 @@ public abstract class Tree
     public bool IsActive;
     public int LastOxygen;
     public int OxygenInterval;
+    public bool PlantedManually;
     
 
-    public abstract void Plant(Vector3 position);
+    public abstract void Plant(Vector3 position, bool isManual);
     public abstract void Destroy(Vector3 position);
 }

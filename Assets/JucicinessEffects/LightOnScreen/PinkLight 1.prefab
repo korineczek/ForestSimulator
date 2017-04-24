@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4079834635383604}
   - component: {fileID: 95754747390807504}
   m_Layer: 2
-  m_Name: PinkLight
+  m_Name: PinkLight 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

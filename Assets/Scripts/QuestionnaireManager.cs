@@ -1,5 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using ForestSimulator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -40,9 +44,32 @@ public class QuestionnaireManager : MonoBehaviour {
         //Load another scene from the scene list
         Debug.Log("Loading new scene");
         GameStats.ResetStats();
-        SceneManager.LoadScene("xd");
+        if (BoardData.CURRENTBOARD < 4)
+        {
+            SceneManager.LoadScene(BoardData.CURRENTBOARD + 1);
+        }
+        else
+        {
+            Application.OpenURL("http://google.com");
+        }
 
+    }
 
+    private void SaveLevel()
+    {
+        List<int> continuation = continuationDesire;
+        XmlSerializer xsSubmit = new XmlSerializer(typeof(Level));
+        string xml = "";
+        using (StringWriter sww = new StringWriter())
+        {
+            using (XmlWriter writer = XmlWriter.Create(sww))
+            {
+                xsSubmit.Serialize(writer, continuation);
+                xml = sww.ToString();
+                Debug.Log(xml);
+            }
+        }
+        File.WriteAllText(Application.dataPath + "\\Result.xml", xml);
     }
 
     public void EnableMenu()

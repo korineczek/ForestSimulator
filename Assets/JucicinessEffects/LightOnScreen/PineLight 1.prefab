@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4273648244256384}
   - component: {fileID: 95454742778763074}
   m_Layer: 2
-  m_Name: PineLight
+  m_Name: PineLight 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

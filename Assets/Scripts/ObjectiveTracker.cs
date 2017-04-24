@@ -84,8 +84,9 @@ public class ObjectiveTracker : MonoBehaviour {
 
     public IEnumerator LevelFive()
     {
+        Debug.Log("Starting level 5");
         //TODO: FIGURE OUT THE PROPER
-        //InitiateSceneSwitch();
+        InitiateSceneSwitch();
         yield break;
     }
 
@@ -128,7 +129,7 @@ public class ObjectiveTracker : MonoBehaviour {
                 camera.FindChild("VictoryParticles").gameObject.SetActive(true);
                 break;
             case 2:
-                camera.FindChild("VictoryLights").gameObject.SetActive(true);
+                camera.FindChild("VictoryLight").gameObject.SetActive(true);
                 break;
         }
         //end current objective when menu opens

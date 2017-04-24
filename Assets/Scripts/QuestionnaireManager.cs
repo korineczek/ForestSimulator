@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Serialization;
 using ForestSimulator;
@@ -13,6 +15,13 @@ public class QuestionnaireManager : MonoBehaviour {
     public List<int> continuationDesire = new List<int>();
     private Slider continuationSlider;
     private GameObject questionnaireMenu;
+
+    [Serializable]
+    public struct ExportData
+    {
+        public string ParticipantID;
+        public List<int> Results;
+    }
 
     private void Awake()
     {
@@ -51,26 +60,29 @@ public class QuestionnaireManager : MonoBehaviour {
         }
         else
         {
-            Application.OpenURL("http://google.com");
+            //Application.OpenURL("http://google.com");
+            SaveData();
         }
 
     }
 
-    private void SaveLevel()
+    private void SaveData()
     {
-        List<int> continuation = continuationDesire;
-        XmlSerializer xsSubmit = new XmlSerializer(typeof(Level));
+        ExportData data = new ExportData();
+        data.ParticipantID = GameStats.ParticipantID;
+        data.Results = continuationDesire;
+        XmlSerializer xsSubmit = new XmlSerializer(typeof(ExportData));
         string xml = "";
         using (StringWriter sww = new StringWriter())
         {
             using (XmlWriter writer = XmlWriter.Create(sww))
             {
-                xsSubmit.Serialize(writer, continuation);
+                xsSubmit.Serialize(writer, data);
                 xml = sww.ToString();
                 Debug.Log(xml);
             }
         }
-        File.WriteAllText(Application.dataPath + "\\Result.xml", xml);
+        File.WriteAllText(Application.dataPath + "\\"+data.ParticipantID+".xml", xml);
     }
 
     public void EnableMenu()

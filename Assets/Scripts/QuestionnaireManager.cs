@@ -39,6 +39,7 @@ public class QuestionnaireManager : MonoBehaviour {
         {
             Debug.Log(i);
         }
+        Debug.Log(GameStats.ParticipantID);
 
         questionnaireMenu.SetActive(false);
         //Load another scene from the scene list

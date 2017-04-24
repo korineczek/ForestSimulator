@@ -39,8 +39,6 @@ public class GameManager : MonoBehaviour
             Instantiate(Resources.Load("Prefabs/Questionnaire"));
         }
         //TODO: LOAD PROPER CAMERA ON STARTUP
-
-
         interval = new WaitForSeconds(intervalLength);
         grid = this.GetComponent<HexGrid>();
         UI = this.GetComponent<Overlay>();
@@ -110,6 +108,8 @@ public class GameManager : MonoBehaviour
                     //mature a tree if it has been growing long enough
                 {
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
+                    healthyTile.Controller.ScaleTree(healthyTile, true);
+                  
                     healthyTile.PlacedTree.IsMature = true;
                     GameStats.AddPlantedTree(healthyTile.PlacedTree);
 
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    //scale tree based on time to grow
+                   healthyTile.Controller.ScaleTree(healthyTile, false);
                 }
             }
             else if (healthyTile.PlacedTree.IsMature) //only mature trees can spread and produce oxygen
@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour
             ActiveTiles.Add(dyingTile);
         }
         DyingTiles.Clear();
-
 
         GameStats.Score = 0;
         for (int i = 0; i < BoardData.Map.GetLength(0); i++)

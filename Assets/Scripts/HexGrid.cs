@@ -21,13 +21,15 @@ public class HexGrid : MonoBehaviour
     {
         //fetch prefab from resources
         tile = (Transform)Resources.Load("Prefabs/Hex", typeof(Transform));
+        BoardData.CURRENTBOARD = LEVEL;
+        Debug.Log(BoardData.CURRENTBOARD);
     }
 
     // Use this for initialization
     void Start()
     {
         //TODO: POSSIBLY MOVE THIS TO SOMEWHERE ELSE TO ALLOW FOR MULTIPLE LEVEL LOADING
-        BoardData.CURRENTBOARD = LEVEL;
+        
         BoardData.GenerateBoardData(perlinScale,false);
         InstantiateBoard();
 

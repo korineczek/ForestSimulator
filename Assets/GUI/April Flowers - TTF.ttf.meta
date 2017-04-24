@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: dc66bfb71ef359241b549b66f7e124e2
+timeCreated: 1493036609
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: April Flowers
+  fontNames:
+  - April Flowers
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 249c96c45aa8cea4f98214f4eff64d39, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

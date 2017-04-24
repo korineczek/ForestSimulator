@@ -133,6 +133,7 @@ public class ObjectiveTracker : MonoBehaviour {
         }
         //end current objective when menu opens
         StopAllCoroutines();
+        /*
         if (GameObject.Find("Questionnaire") != null)
         {
             Debug.Log("opening questionnaire");
@@ -146,6 +147,7 @@ public class ObjectiveTracker : MonoBehaviour {
             QuestionnaireManager questionnaire = GameObject.Find("Questionnaire(Clone)").GetComponent<QuestionnaireManager>();
             questionnaire.EnableMenu();
         }
+         */
     }
 
     

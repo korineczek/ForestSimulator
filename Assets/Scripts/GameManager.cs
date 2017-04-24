@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HexGrid))]
-[RequireComponent(typeof(Overlay))]
 public class GameManager : MonoBehaviour
 {
 
@@ -181,7 +180,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //End of update
-        UI.UpdateCanvas();
+        //UI.UpdateCanvas();
     }
 
     private void KillTrees()

@@ -25,12 +25,12 @@ public class TileController : MonoBehaviour
                 pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
                 break;
             case 1:
-                pine = (Transform)Resources.Load("Prefabs/Trees/PineParticles", typeof(Transform));
+                pine = (Transform)Resources.Load("Prefabs/Trees/PineParticlesTest", typeof(Transform));
                 leaf = (Transform)Resources.Load("Prefabs/Trees/LeafParticles", typeof(Transform));
                 pink = (Transform)Resources.Load("Prefabs/Trees/PinkParticles", typeof(Transform));
                 break;
             case 2:
-                pine = (Transform)Resources.Load("Prefabs/Trees/PineLight", typeof(Transform));
+                pine = (Transform)Resources.Load("Prefabs/Trees/PineLightTest", typeof(Transform));
                 leaf = (Transform)Resources.Load("Prefabs/Trees/LeafLight", typeof(Transform));
                 pink = (Transform)Resources.Load("Prefabs/Trees/PinkLight", typeof(Transform));
                 break;
@@ -85,29 +85,33 @@ public class TileController : MonoBehaviour
     public void UpdateTreeModel(Tile tile)
     {
         Transform spawnedTree;
-        if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pine) && tile.TreeTransform == null)
+        if (tile.PlacedTree != null && tile.TreeTransform == null)
         {
-            //spawn pine
-            spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
-            tile.TreeTransform = spawnedTree;
-            treeAnimator = spawnedTree.GetComponent<Animator>();
-            //spawnedTree.parent = this.transform;
-        }
-        else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Leaf) && tile.TreeTransform == null)
-        {
-            //spawn leaf
-            spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
-            tile.TreeTransform = spawnedTree;
-            treeAnimator = spawnedTree.GetComponent<Animator>();
-            //spawnedTree.parent = this.transform;
-        }
-        else if (tile.PlacedTree != null && tile.PlacedTree.GetType() == typeof(Pink) && tile.TreeTransform == null)
-        {
-            //spawn leaf
-            spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
-            tile.TreeTransform = spawnedTree;
-            treeAnimator = spawnedTree.GetComponent<Animator>();
-            ///spawnedTree.parent = this.transform;
+            if (tile.PlacedTree.GetType() == typeof (Pine))
+            {
+                //spawn pine
+                spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
+                tile.TreeTransform = spawnedTree;
+                treeAnimator = spawnedTree.GetComponent<Animator>();
+                //spawnedTree.parent = this.transform;
+            }
+            else if (tile.PlacedTree.GetType() == typeof (Leaf))
+            {
+                //spawn leaf
+                spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
+                tile.TreeTransform = spawnedTree;
+                treeAnimator = spawnedTree.GetComponent<Animator>();
+                //spawnedTree.parent = this.transform;
+            }
+            else if (tile.PlacedTree.GetType() == typeof (Pink))
+            {
+                //spawn leaf
+                spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
+                tile.TreeTransform = spawnedTree;
+                treeAnimator = spawnedTree.GetComponent<Animator>();
+                ///spawnedTree.parent = this.transform;
+            }
+            ScaleTree(tile,false);
         }
         //kill tree lul
         if (tile.TreeTransform != null && tile.PlacedTree == null)
@@ -144,17 +148,25 @@ public class TileController : MonoBehaviour
         }
     }
 
-    public void ScaleTree(Tile tile)
+    public void ScaleTree(Tile tile, bool adult)
     {
-        //if tree is growing scale to show the progress
-        if (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow >= GameStats.Turn)
+        if (tile.TreeTransform != null && tile.PlacedTree.JustPlanted)
         {
-            int difference = GameStats.Turn - (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow);
-            float scaleMultiplier = 1 - ((float)difference / tile.PlacedTree.TimeToGrow);
-            tile.TreeTransform.localScale *= scaleMultiplier;
+            tile.PlacedTree.JustPlanted = false;
+            tile.TreeTransform.localScale = Vector3.one/tile.PlacedTree.TimeToGrow;
         }
-        else
+        //if tree is growing scale to show the progress
+        else if (tile.TreeTransform != null && tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow >= GameStats.Turn)
         {
+            Debug.Log("TREE NOT OLD ENOUGH " + tile.PlacedTree.TimePlanted + " " + GameStats.Turn);
+            int difference = (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow) -  GameStats.Turn;
+            float scaleMultiplier = 1 - ((float)difference / tile.PlacedTree.TimeToGrow);
+            Debug.Log(difference + " " + scaleMultiplier);
+            tile.TreeTransform.localScale = Vector3.one * scaleMultiplier;
+        }
+        if (tile.TreeTransform != null && adult)
+        {
+            //Debug.Log("TREE ADULT");
             tile.TreeTransform.localScale = Vector3.one; //TODO: THIS IS A PLACEHOLDER VALUE
         }
     }

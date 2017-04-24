@@ -93,6 +93,7 @@ public class ObjectiveTracker : MonoBehaviour {
     {
         //Clear all possible previous objectives before starting a new one
         StopAllCoroutines();
+        Debug.Log(BoardData.CURRENTBOARD);
         switch (BoardData.CURRENTBOARD)
         {
             case 0:
@@ -116,6 +117,20 @@ public class ObjectiveTracker : MonoBehaviour {
     public void InitiateSceneSwitch()
     {
         Debug.Log("Trying to switch scene");
+        int gameType = GameObject.Find("GameManager").GetComponent<GameManager>().GameType;
+        Transform camera = GameObject.Find("Camera").transform;
+        switch (gameType)
+        {
+            case 0:
+                camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
+                break;
+            case 1:
+                camera.FindChild("VictoryParticles").gameObject.SetActive(true);
+                break;
+            case 2:
+                camera.FindChild("VictoryLights").gameObject.SetActive(true);
+                break;
+        }
         //end current objective when menu opens
         StopAllCoroutines();
         if (GameObject.Find("Questionnaire") != null)

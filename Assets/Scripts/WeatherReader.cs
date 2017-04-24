@@ -37,7 +37,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!WindPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", WindPlayer);
+                    WindPlayer.Play();
                 }
                 break;
             case WeatherState.SunClouds:
@@ -52,7 +52,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!SunnyPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", SunnyPlayer);
+                    SunnyPlayer.Play();
                 }
                 break;
             case WeatherState.Sunny:
@@ -67,7 +67,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!SunnyPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", SunnyPlayer);
+                    SunnyPlayer.Play();
                 }
                 break;
             case WeatherState.Raining:
@@ -82,7 +82,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!RainPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", RainPlayer);
+                    RainPlayer.Play();
                 }
                 break;
             case WeatherState.Earthquake:
@@ -97,7 +97,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!WindPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", WindPlayer);
+                    WindPlayer.Play();
                 }
                 break;
             case WeatherState.Overcast:
@@ -112,7 +112,7 @@ public class WeatherReader : MonoBehaviour
                 }
                 if (!RainPlayer.isPlaying) //sound to play
                 {
-                    StartCoroutine("FadeInSound", RainPlayer);
+                    RainPlayer.Play();
                 }
                 break;
 
@@ -129,7 +129,6 @@ public class WeatherReader : MonoBehaviour
             player.volume = t;
             yield return null;
         }
-        player.volume = 1f;
     }
 
     IEnumerator FadeOutSound(AudioSource player)
@@ -141,7 +140,6 @@ public class WeatherReader : MonoBehaviour
             player.volume = t;
             yield return null;
         }
-        player.volume = 0f;
         player.Stop();
     }
 
@@ -156,7 +154,7 @@ public class WeatherReader : MonoBehaviour
                 lastWeatherSwitch = GameStats.Turn;
                 ChangeWeather(GameStats.WeatherIndex);
             }
-            Debug.Log(GameStats.CurrentWeather);
+            //Debug.Log(GameStats.CurrentWeather);
         }
         //check if current weather is different
         SetWeatherSounds(GameStats.CurrentWeather);

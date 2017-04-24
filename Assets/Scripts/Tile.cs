@@ -20,7 +20,7 @@ public class Tile
     //Tile properties
     public int Resource = 10;
     public int BaseResource = 10;
-    public Tree PlacedTree;
+    public Tree PlacedTree = null;
     public bool IsActive = false;
     public bool IsAvailable = true;
 

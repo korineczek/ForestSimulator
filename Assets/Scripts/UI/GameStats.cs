@@ -19,6 +19,7 @@ static class GameStats
 {
     //GameType
     public static int GameType = 0;
+    public static string ParticipantID;
     //General Stats
     public static int Score;
     public static int Turn;

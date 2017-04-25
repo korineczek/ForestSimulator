@@ -35,17 +35,43 @@ namespace ForestSimulator
             }
             else
             {
-                //load specific array
-                for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
+                switch (CURRENTBOARD)
                 {
-                    for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
-                    {
-                        //get random height for tiles based on noise
-                        float randomHeight = 0; //TODO: REMOVE DUMMY VARIABLE WITH SPECIFIC HEIGHT
-                        Map[i, j] = new Tile(i, j, randomHeight);
-                        
-                    }
+                    case 2:
+                        Debug.Log("GENERATING CUSTOM TERRAIN");
+                        //load specific array
+                        for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
+                        {
+                            for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
+                            {
+                                //get random height for tiles based on noise
+                                float randomHeight = (Mathf.PerlinNoise(i/7f, j/4f)*perlinScale +
+                                              (UnityEngine.Random.Range(-0.1f, 0.1f)/2))*0.7f;
+                                Map[i, j] = new Tile(i, j, randomHeight);
+                                if (i < BOARDSIZE[CURRENTBOARD]/2)
+                                {
+                                    Map[i, j].BaseResource = 0;
+                                }
+
+                            }
+                        }
+                        break;
+
+                    default:
+                        //load specific array
+                        for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
+                        {
+                            for (int j = 0; j < BOARDSIZE[CURRENTBOARD]; j++)
+                            {
+                                //get random height for tiles based on noise
+                                float randomHeight = 0; //TODO: REMOVE DUMMY VARIABLE WITH SPECIFIC HEIGHT
+                                Map[i, j] = new Tile(i, j, randomHeight);
+
+                            }
+                        }
+                        break;
                 }
+                
             }
             //generate slope data
             //Only generate when manual override is off

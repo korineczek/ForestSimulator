@@ -26,8 +26,6 @@ public class Pink : Tree
         TimeToGrow = 3;
         OxygenInterval = 6;
 
-        Debug.Log(TimePlanted);
-
         List<Vector3> areaOfInfluence = HexCoords.HexRange(position, AreaOfInfluence);
         Vector2 offsetCoord;
         foreach (int index in aoeMaskPositive)

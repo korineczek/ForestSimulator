@@ -29,8 +29,28 @@ public class HexGrid : MonoBehaviour
     void Start()
     {
         //TODO: POSSIBLY MOVE THIS TO SOMEWHERE ELSE TO ALLOW FOR MULTIPLE LEVEL LOADING
-        
-        BoardData.GenerateBoardData(perlinScale,false);
+
+        switch (BoardData.CURRENTBOARD)
+        {
+            case 0: 
+                BoardData.GenerateBoardData(perlinScale, true);
+                break;
+            case 1:
+                BoardData.GenerateBoardData(perlinScale, true);
+                break;
+            case 2:
+                BoardData.GenerateBoardData(perlinScale, true);
+                break;
+            case 3:
+                BoardData.GenerateBoardData(perlinScale, false);
+                break;
+            case 4:
+                BoardData.GenerateBoardData(perlinScale, false);
+                break;
+            default:
+                BoardData.GenerateBoardData(perlinScale, false);
+                break;
+        }
         InstantiateBoard();
 
     }

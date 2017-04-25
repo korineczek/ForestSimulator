@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        GameStats.GameType = GameType;
+        GameType = GameStats.GameType;
     }
 
     public void Start()

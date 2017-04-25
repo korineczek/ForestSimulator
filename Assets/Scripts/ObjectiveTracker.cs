@@ -72,7 +72,7 @@ public class ObjectiveTracker : MonoBehaviour {
         //Trees can spread
         //TODO: FIGURE OUT PROPER CONDITION
         Debug.Log("Starting Level 4");
-        int treesSpreadObjective = 1;
+        int treesSpreadObjective = 2;
         while (GameStats.SpreadTrees < treesSpreadObjective )
         {
             //just wait
@@ -86,6 +86,14 @@ public class ObjectiveTracker : MonoBehaviour {
     {
         Debug.Log("Starting level 5");
         //TODO: FIGURE OUT THE PROPER
+        int treesSpreadObjective = 5;
+        int pinkPlantedObjective = 1;
+        while (GameStats.SpreadTrees < treesSpreadObjective || GameStats.PlantedPinks < pinkPlantedObjective )
+        {
+            //just wait
+            Debug.Log(GameStats.SpreadTrees + " " + GameStats.PlantedPinks);
+            yield return new WaitForSeconds(1f);
+        }
         InitiateSceneSwitch();
         yield break;
     }
@@ -118,9 +126,8 @@ public class ObjectiveTracker : MonoBehaviour {
     public void InitiateSceneSwitch()
     {
         Debug.Log("Trying to switch scene");
-        int gameType = GameObject.Find("GameManager").GetComponent<GameManager>().GameType;
         Transform camera = GameObject.Find("Camera").transform;
-        switch (gameType)
+        switch (GameStats.GameType)
         {
             case 0:
                 camera.FindChild("VictoryAnimation").gameObject.SetActive(true);

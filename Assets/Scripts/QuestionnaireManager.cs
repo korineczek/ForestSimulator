@@ -56,12 +56,13 @@ public class QuestionnaireManager : MonoBehaviour {
         GameStats.ResetStats();
         if (BoardData.CURRENTBOARD < 4)
         {
-            SceneManager.LoadScene(BoardData.CURRENTBOARD + 1);
+            SceneManager.LoadScene(BoardData.CURRENTBOARD + 2);
         }
         else
         {
-            //Application.OpenURL("http://google.com");
+            Application.OpenURL("http://google.com");
             SaveData();
+            Application.Quit();
         }
 
     }

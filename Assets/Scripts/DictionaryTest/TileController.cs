@@ -158,10 +158,10 @@ public class TileController : MonoBehaviour
         //if tree is growing scale to show the progress
         else if (tile.TreeTransform != null && tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow >= GameStats.Turn)
         {
-            Debug.Log("TREE NOT OLD ENOUGH " + tile.PlacedTree.TimePlanted + " " + GameStats.Turn);
+            //Debug.Log("TREE NOT OLD ENOUGH " + tile.PlacedTree.TimePlanted + " " + GameStats.Turn);
             int difference = (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow) -  GameStats.Turn;
             float scaleMultiplier = 1 - ((float)difference / tile.PlacedTree.TimeToGrow);
-            Debug.Log(difference + " " + scaleMultiplier);
+            //Debug.Log(difference + " " + scaleMultiplier);
             tile.TreeTransform.localScale = Vector3.one * scaleMultiplier;
         }
         if (tile.TreeTransform != null && adult)

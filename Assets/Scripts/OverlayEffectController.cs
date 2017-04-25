@@ -9,7 +9,7 @@ public class OverlayEffectController : MonoBehaviour
 
     private void Awake()
     {
-        switch (GameObject.Find("GameManager").GetComponent<GameManager>().GameType)
+        switch (GameStats.GameType)
         {
             case 0:
                 targetAnimator = transform.GetComponent<Animator>();

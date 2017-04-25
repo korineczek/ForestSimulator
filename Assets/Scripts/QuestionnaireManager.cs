@@ -60,7 +60,7 @@ public class QuestionnaireManager : MonoBehaviour {
         }
         else
         {
-            Application.OpenURL("http://google.com");
+            Application.OpenURL("https://goo.gl/forms/RKSxGncJ52xKpKj52");
             SaveData();
             Application.Quit();
         }

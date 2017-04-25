@@ -319,7 +319,16 @@ MonoBehaviour:
   m_Text: 'TASK FIVE
 
 
-    TO BE DECIDED'
+    Have trees spread a total of 5 times.
+
+    Grow a Pink tree.
+
+
+    Using the knowledge from previous tasks, plant trees in suitable positions so
+    they can reproduce. Remember that Pink trees are especially demanding.
+
+
+    You can observe the weather changing during this task.'
 --- !u!222 &776969874
 CanvasRenderer:
   m_ObjectHideFlags: 0

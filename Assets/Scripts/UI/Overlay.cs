@@ -14,17 +14,20 @@ public class Overlay : MonoBehaviour
     private Text pine;
     private Text leaf;
     private Text pink;
+    private Text objectives;
 
 
     private void Start()
     {
-        score = this.transform.GetChild(0).GetChild(0).FindChild("Score").GetComponent<Text>();
-        //turn = this.transform.GetChild(0).GetChild(0).FindChild("Score").GetComponent<Text>();
-        oxygen = this.transform.GetChild(0).GetChild(0).FindChild("Oxygen").GetComponent<Text>();
-        weather = this.transform.GetChild(0).GetChild(0).FindChild("Weather").GetComponent<Text>();
-        pine = this.transform.GetChild(0).GetChild(0).FindChild("PineCount").GetComponent<Text>();
-        leaf = this.transform.GetChild(0).GetChild(0).FindChild("LeafCount").GetComponent<Text>();
-        pink = this.transform.GetChild(0).GetChild(0).FindChild("PinkCount").GetComponent<Text>();
+
+        Transform overlayNumbersCanvas = this.transform.FindChild("OverlayCanvas").FindChild("OverlayNumbers");
+        score       = overlayNumbersCanvas.FindChild("Score").GetComponent<Text>();
+        oxygen      = overlayNumbersCanvas.FindChild("Oxygen").GetComponent<Text>();
+        weather     = overlayNumbersCanvas.FindChild("Weather").GetComponent<Text>();
+        pine        = overlayNumbersCanvas.FindChild("PineCount").GetComponent<Text>();
+        leaf        = overlayNumbersCanvas.FindChild("LeafCount").GetComponent<Text>();
+        pink        = overlayNumbersCanvas.FindChild("PinkCount").GetComponent<Text>();
+        objectives  = overlayNumbersCanvas.FindChild("ObjectiveTracker").GetComponent<Text>();
     }
 
     public void Update()
@@ -35,13 +38,18 @@ public class Overlay : MonoBehaviour
     public void UpdateCanvas()
     {
         UpdateScore();
-        //UpdateTurn();
         UpdateOxygen();
         UpdateWeather();
         UpdatePine();
         UpdateLeaf();
         UpdatePink();
+        UpdateObjectives();
 
+    }
+
+    public void UpdateObjectives()
+    {
+        objectives.text = GameStats.ObjectiveProgress;
     }
 
     public void UpdateScore()

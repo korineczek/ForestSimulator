@@ -6,7 +6,7 @@ using ForestSimulator;
 using Tree = UnityEngine.Tree;
 
 [RequireComponent(typeof(GameManager))]
-public class GameController : MonoBehaviour
+public class GameController : ClickHandler
 {
     private float selectionSensitivity = 5f;
     private Vector2 offsetPos;
@@ -34,19 +34,37 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void HideTreeMenu()
+    {
+        RectTransform treeMenu = this.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>();
+        treeMenu.gameObject.SetActive(false);
+    }
+
     public void PlantButton(int treeIndex)
     {
         Debug.Log(offsetPos);
         switch (treeIndex)
         {
             case 0:
-                manager.PlantTree(new Pine(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                if (GameStats.AvailablePines > 0)
+                {
+                    GameStats.AvailablePines--;
+                    manager.PlantTree(new Pine(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                }
                 break;
             case 1:
-                manager.PlantTree(new Leaf(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                if (GameStats.AvailableLeaves > 0)
+                {
+                    GameStats.AvailableLeaves--;
+                    manager.PlantTree(new Leaf(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                }
                 break;
             case 2:
-                manager.PlantTree(new Pink(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                if (GameStats.AvailablePinks > 0)
+                {
+                    GameStats.AvailablePinks--;
+                    manager.PlantTree(new Pink(HexCoords.Offset2Cube(offsetPos)), offsetPos);
+                }
                 break;
         }
         this.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>().gameObject.SetActive(false);
@@ -64,5 +82,12 @@ public class GameController : MonoBehaviour
             Vector2 offset = HexCoords.Cube2Offset(availableTile);
             BoardData.Map[(int)offset.x,(int)offset.y].Controller.AvailableToggle(show);
         }
+    }
+
+    //Control Overrides
+
+    public override void OnRightSingleClick(GameObject pressed)
+    {
+        HideTreeMenu();
     }
 }

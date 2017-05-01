@@ -64,6 +64,11 @@ public class Pink : Tree
         PlantedManually = isManual;
     }
 
+    public override void PlantManual()
+    {
+        GameStats.AvailablePinks++;
+    }
+
     public override void Destroy(Vector3 position)
     {
         //revert process of building a pine

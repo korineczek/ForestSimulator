@@ -52,6 +52,11 @@ public class Leaf : Tree
         PlantedManually = isManual;
     }
 
+    public override void PlantManual()
+    {
+        GameStats.AvailableLeaves++;
+    }
+
     public override void Destroy(Vector3 position)
     {
         //revert process of building a pine

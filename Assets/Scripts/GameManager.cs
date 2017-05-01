@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
                 //only spread trees in specific boards
                 if (BoardData.CURRENTBOARD > 2)
                 {
-                    SpreadTrees(healthyTile);
+                    SpreadTreesManual(healthyTile);
                 }
 
                 SpawnOxygen(healthyTile);
@@ -253,6 +253,15 @@ public class GameManager : MonoBehaviour
                 ActiveTiles.Add(BoardData.Map[(int)offset.x, (int)offset.y]);
             }
             
+        }
+    }
+
+    private void SpreadTreesManual(Tile healthyTile)
+    {
+        if (healthyTile.PlacedTree.TimesSpread < healthyTile.PlacedTree.TimesSpreadMax)
+        {
+            healthyTile.PlacedTree.TimesSpread++;
+            healthyTile.PlacedTree.PlantManual();
         }
     }
 

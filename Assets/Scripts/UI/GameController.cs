@@ -6,7 +6,7 @@ using ForestSimulator;
 using Tree = UnityEngine.Tree;
 
 [RequireComponent(typeof(GameManager))]
-public class GameController : MonoBehaviour
+public class GameController : ClickHandler
 {
     private float selectionSensitivity = 5f;
     private Vector2 offsetPos;
@@ -32,6 +32,12 @@ public class GameController : MonoBehaviour
             Debug.Log("hiding UI");
             ShowViableArea(CubePos, false);
         }
+    }
+
+    public void HideTreeMenu()
+    {
+        RectTransform treeMenu = this.transform.GetChild(0).GetChild(1).GetComponent<RectTransform>();
+        treeMenu.gameObject.SetActive(false);
     }
 
     public void PlantButton(int treeIndex)
@@ -64,5 +70,11 @@ public class GameController : MonoBehaviour
             Vector2 offset = HexCoords.Cube2Offset(availableTile);
             BoardData.Map[(int)offset.x,(int)offset.y].Controller.AvailableToggle(show);
         }
+    }
+
+    public override void OnRightSingleClick(GameObject pressed)
+    {
+        HideTreeMenu();
+        Debug.Log("RightClicked");
     }
 }

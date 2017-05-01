@@ -33,8 +33,8 @@ static class GameStats
     public static int SpreadTrees = 0;
     //Resource Tracking
     public static int AvailablePines = 5;
-    public static int AvailableLeaves = 5;
-    public static int AvailablePinks = 5;
+    public static int AvailableLeaves = 0;
+    public static int AvailablePinks = 1;
     //Weather System
     public static WeatherState CurrentWeather = WeatherState.Sunny;
     public static int WeatherIndex = 0;

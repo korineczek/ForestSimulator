@@ -97,7 +97,7 @@ public class ObjectiveTracker : MonoBehaviour {
          
          */
         //TESTING NEW OBJECTIVE SYSTEM
-        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
+        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new PlantTreeObjective(3,typeof(Tree)),new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
         while (LevelFive.IsCompleted == false)
         {
             LevelFive.EvaluateList();

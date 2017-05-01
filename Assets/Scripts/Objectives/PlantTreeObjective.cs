@@ -29,6 +29,11 @@ public class PlantTreeObjective : Objective
             TargetType = typeof (Pink);
             typeDesc = "Cherry";
         }
+        else if (type == typeof (Tree))
+        {
+            TargetType = typeof (Tree);
+            typeDesc = "Tree";
+        }
     }
 
     public override bool EvaluateObjective()
@@ -46,6 +51,10 @@ public class PlantTreeObjective : Objective
         else if (TargetType == typeof(Pink))
         {
             currentAmount = GameStats.PlantedPinks;
+        }
+        else if (TargetType == typeof (Tree))
+        {
+            currentAmount = GameStats.PlantedTrees;
         }
 
         Progress = string.Format("Plant {0} {1}: {2}/{0}", TargetAmount, typeDesc, currentAmount);

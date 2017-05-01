@@ -14,6 +14,7 @@ public class TileController : MonoBehaviour
 
     private Animator treeAnimator;
 
+
     public void Start()
     {
         //TODO: MOVE THIS LOADING TO SOME NOT SO RETARDED PLACE
@@ -41,8 +42,13 @@ public class TileController : MonoBehaviour
 
     public void UpdateInfo(Tile tile)
     {
+        //TODO: Redo so that the values are not retarded
+        this.GetComponent<Renderer>().material.color = BoardData.TileGradient.Evaluate((float)tile.Resource/BoardData.MaxResource);
+        /*
         this.GetComponent<Renderer>().material.color = new Color(1 - ((tile.Resource * 20f) / 255f), 1, 1 - ((tile.Resource * 20f) / 255f));
         this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = tile.OffsetCoordinates + "\n" + tile.Resource;
+    
+         */
     }
 
     public void SelectionToggle(bool entry)

@@ -84,6 +84,7 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelFive()
     {
         Debug.Log("Starting level 5");
+        /*
         //TODO: FIGURE OUT THE PROPER
         int treesSpreadObjective = 5;
         int pinkPlantedObjective = 1;
@@ -93,6 +94,17 @@ public class ObjectiveTracker : MonoBehaviour {
             Debug.Log(GameStats.SpreadTrees + " " + GameStats.PlantedPinks);
             yield return new WaitForSeconds(1f);
         }
+         
+         */
+        //TESTING NEW OBJECTIVE SYSTEM
+        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new PlantTreeObjective(3,typeof(Tree)),new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
+        while (LevelFive.IsCompleted == false)
+        {
+            LevelFive.EvaluateList();
+            GameStats.ObjectiveProgress = LevelFive.ProgressSummary;
+            yield return new WaitForSeconds(1f);
+        }
+        Debug.Log("SHIT IT ACTUALLY WORKS");
         InitiateSceneSwitch();
         yield break;
     }

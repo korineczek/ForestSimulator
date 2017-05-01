@@ -31,6 +31,7 @@ static class GameStats
     public static int PlantedPinks = 0;
     public static int DeadTrees = 0;
     public static int SpreadTrees = 0;
+    public static string ObjectiveProgress;
     //Resource Tracking
     public static int AvailablePines = 5;
     public static int AvailableLeaves = 0;
@@ -56,7 +57,8 @@ static class GameStats
         WeatherIndex = 0;
         AvailablePines = 5;
         AvailableLeaves = 5;
-        AvailablePinks = 5; 
+        AvailablePinks = 5;
+        ObjectiveProgress = "";
         UIstate = UIStatus.None;
     }
 

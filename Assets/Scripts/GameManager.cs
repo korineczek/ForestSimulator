@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
     private List<Tile> HealthyTiles = new List<Tile>();
     private List<Tile> DyingTiles = new List<Tile>();
 
+    private void Update()
+    {
+        //Debug.Log(GameStats.GrowingTrees);
+    }
+
     public void Awake()
     {
         GameType = GameStats.GameType;
@@ -108,6 +113,7 @@ public class GameManager : MonoBehaviour
                     //mature a tree if it has been growing long enough
                 {
                     Debug.Log(healthyTile.PlacedTree + " finished growing");
+                    GameStats.GrowingTrees--;
                     healthyTile.Controller.ScaleTree(healthyTile, true);
                   
                     healthyTile.PlacedTree.IsMature = true;
@@ -200,6 +206,10 @@ public class GameManager : MonoBehaviour
             if (dyingTile[i].PlacedTree.Health <= 0)
             {
                 //Debug.Log("tree dead");
+                if (dyingTile[i].PlacedTree.IsMature == false)
+                {
+                    GameStats.GrowingTrees--;
+                }
                 dyingTile[i].IsActive = false;
                 dyingTile[i].PlacedTree.Destroy( dyingTile[i].CubeCoordinates);
                 dyingTile[i].PlacedTree = null;
@@ -279,6 +289,7 @@ public class GameManager : MonoBehaviour
         //check if tile is active so we cannot plant the same tree twice
         if (!BoardData.Map[(int)position.x, (int)position.y].IsActive)
         {
+            GameStats.GrowingTrees++;
             BoardData.Map[(int)position.x, (int)position.y].IsActive = true;
             BoardData.Map[(int)position.x, (int)position.y].PlacedTree = type;
             BoardData.Map[(int) position.x, (int) position.y].PlacedTree.PlantedManually = true;

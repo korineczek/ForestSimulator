@@ -66,6 +66,10 @@ public class Tile
         }
         else if (Buffs[0] > 0 && Buffs[1] > 0)
         {
+            if (GameStats.PineOakBuff == 0)
+            {
+                GameStats.PineOakBuff++;
+            }
             finalResource += (Pine.PineUpkeep - Pine.PineUpkeep * Buffs[0]);
         }
         else if (Buffs[0] == 0 && Buffs[1] > 0)

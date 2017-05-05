@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ForestSimulator;
+using UnityEngine.SceneManagement;
 using Tree = UnityEngine.Tree;
 
 [RequireComponent(typeof(GameManager))]
@@ -33,6 +34,13 @@ public class GameController : ClickHandler
             ShowViableArea(CubePos, false);
         }
     }
+
+    public void RestartLevel()
+    {
+        GameStats.ResetStats(); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 
     public void HideTreeMenu()
     {

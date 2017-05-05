@@ -21,10 +21,11 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelOne()
     {
         Debug.Log("Starting Level 1");
-        int treesPlantedObjective = 1;
-        while (GameStats.PlantedTrees < treesPlantedObjective)
+        ObjectiveList LevelOne = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(1, typeof(Tree))});
+        while (LevelOne.IsCompleted == false)
         {
             //just wait
+            LevelOne.EvaluateList();
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
@@ -38,9 +39,10 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelTwo()
     {
         Debug.Log("Starting Level 2");
-        while (GameStats.PlantedPines < 1 || GameStats.PlantedLeaves < 1 || GameStats.PlantedPinks < 1)
+        ObjectiveList LevelTwo = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(1, typeof(Pine)), new PlantTreeObjective(1, typeof(Leaf)), new PlantTreeObjective(1, typeof(Pink))});
+        while (LevelTwo.IsCompleted == false)
         {
-            //just wait
+            LevelTwo.EvaluateList();
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
@@ -97,7 +99,7 @@ public class ObjectiveTracker : MonoBehaviour {
          
          */
         //TESTING NEW OBJECTIVE SYSTEM
-        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new PlantTreeObjective(3,typeof(Tree)),new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
+        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new GetEffectObjective(), new GetTreeObjective(10, typeof(Pine)), new PlantTreeObjective(3,typeof(Tree)),new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
         while (LevelFive.IsCompleted == false)
         {
             LevelFive.EvaluateList();

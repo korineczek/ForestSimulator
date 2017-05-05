@@ -7,6 +7,7 @@ public class ObjectiveList
 {
     public List<Objective> Objectives;
     public bool IsCompleted = false;
+    public bool IsWinnable = true;
     public string ProgressSummary;
 
     private StringBuilder stringBuilder = new StringBuilder();
@@ -20,6 +21,7 @@ public class ObjectiveList
     {
         int objectiveCount = Objectives.Count;
         int completedObjectives = 0;
+        int winnableObjectives = objectiveCount;
         
         foreach (Objective objective in Objectives)
         {
@@ -27,11 +29,19 @@ public class ObjectiveList
             {
                 completedObjectives++;
             }
+            if (!objective.IsWinnable())
+            {
+                winnableObjectives--;
+            }
             stringBuilder.AppendLine(objective.Progress);
         }
         if (completedObjectives == objectiveCount)
         {
             IsCompleted = true;
+        }
+        if (winnableObjectives < objectiveCount)
+        {
+            IsWinnable = false;
         }
         ProgressSummary = stringBuilder.ToString();
         stringBuilder.Length = 0;

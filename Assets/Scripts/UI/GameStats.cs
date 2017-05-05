@@ -25,6 +25,7 @@ static class GameStats
     public static int Turn;
     public static int Oxygen = 0;
     //Objective Tracking
+    public static int GrowingTrees = 0;
     public static int PlantedTrees = 0;
     public static int PlantedPines = 0;
     public static int PlantedLeaves = 0;
@@ -32,6 +33,7 @@ static class GameStats
     public static int DeadTrees = 0;
     public static int SpreadTrees = 0;
     public static string ObjectiveProgress;
+    public static int PineOakBuff = 0;
     //Resource Tracking
     public static int AvailablePines = 5;
     public static int AvailableLeaves = 0;
@@ -48,6 +50,7 @@ static class GameStats
         Score = 0;
         Turn = 0;
         Oxygen = 0;
+        GrowingTrees = 0;
         PlantedTrees = 0;
         PlantedLeaves = 0;
         PlantedPines = 0;
@@ -59,6 +62,7 @@ static class GameStats
         AvailableLeaves = 5;
         AvailablePinks = 5;
         ObjectiveProgress = "";
+        PineOakBuff = 0;
         UIstate = UIStatus.None;
     }
 

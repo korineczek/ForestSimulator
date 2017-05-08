@@ -54,7 +54,8 @@ public class QuestionnaireManager : MonoBehaviour {
         //Load another scene from the scene list
         Debug.Log("Loading new scene");
         GameStats.ResetStats();
-        if (BoardData.CURRENTBOARD < 4)
+        BoardData.CURRENTBOARD++;
+        if (BoardData.CURRENTBOARD < 5)
         {
             SceneManager.LoadScene(BoardData.CURRENTBOARD + 2);
         }

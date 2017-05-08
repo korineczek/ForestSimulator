@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    public int GameType = 0;
+    private int GameType = 0;
     private WaitForSeconds interval;
     private float fertilityThreshold = 0.5f;
     private float intervalLength = 0.25f;
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         //pay upkeep and move trees to the right lists
         foreach (Tile ActiveTile in ActiveTiles.ToArray())
         {
+            Debug.Log(ActiveTile.PlacedTree.Upkeep + " " +ActiveTile.Resource);
             if (ActiveTile.PlacedTree.Upkeep < ActiveTile.Resource + ActiveTile.PlacedTree.Upkeep) //check if after paying upkeep the tree still lives
             {
                 //tree has enough energy to sustain itself, move to heatly trees
@@ -219,11 +220,6 @@ public class GameManager : MonoBehaviour
             }
             dyingTile[i].PlacedTree.Health -= 2;
         }
-    }
-
-    public void EvaluateWeather()
-    {
-
     }
 
     private void SpreadTrees(Tile healthyTile)

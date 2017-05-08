@@ -38,10 +38,17 @@ public class Pine : Tree
             if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 && (int)offsetCoord.y > 0 &&
                 (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
             {
-                BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]++;
+                BoardData.Map[(int) offsetCoord.x, (int) offsetCoord.y].Buffs[0]++;
             }
         }
-        
+
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]++;
+        }
 
     }
 
@@ -74,6 +81,13 @@ public class Pine : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]--;
             }
+        }
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[0]--;
         }
     }
 }

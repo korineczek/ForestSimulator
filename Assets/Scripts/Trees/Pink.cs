@@ -7,7 +7,7 @@ public class Pink : Tree
 {
     private int[] aoeMaskPositive = new[] {5, 8, 14};
     private int[] aoeMaskNegative = new[] {1, 6, 9, 15, 17, 12, 3};
-    public static int PinkUpkeep = 8;
+    public static int PinkUpkeep = 5;
 
 
     public Pink()
@@ -39,6 +39,7 @@ public class Pink : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]++;
             }
+            
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -51,6 +52,15 @@ public class Pink : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3]++;
             }
+          
+        }
+
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]++;
         }
 
 
@@ -85,6 +95,7 @@ public class Pink : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]--;
             }
+          
         }
         foreach (int index in aoeMaskNegative)
         {
@@ -97,6 +108,15 @@ public class Pink : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[3]--;
             }
+            
+        }
+
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[2]--;
         }
     }
 }

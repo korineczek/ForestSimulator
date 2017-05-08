@@ -21,11 +21,15 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelOne()
     {
         Debug.Log("Starting Level 1");
+        GameStats.AvailableLeaves = 3;
+        GameStats.AvailablePines = 3;
+        GameStats.AvailablePinks = 3;
         ObjectiveList LevelOne = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(1, typeof(Tree))});
         while (LevelOne.IsCompleted == false)
         {
             //just wait
             LevelOne.EvaluateList();
+            GameStats.ObjectiveProgress = LevelOne.ProgressSummary;
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
@@ -38,11 +42,15 @@ public class ObjectiveTracker : MonoBehaviour {
     //PLANT ONE OF EACH TYPE
     public IEnumerator LevelTwo()
     {
+        GameStats.AvailableLeaves = 5;
+        GameStats.AvailablePines = 5;
+        GameStats.AvailablePinks = 5;
         Debug.Log("Starting Level 2");
         ObjectiveList LevelTwo = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(1, typeof(Pine)), new PlantTreeObjective(1, typeof(Leaf)), new PlantTreeObjective(1, typeof(Pink))});
         while (LevelTwo.IsCompleted == false)
         {
             LevelTwo.EvaluateList();
+            GameStats.ObjectiveProgress = LevelTwo.ProgressSummary;
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
@@ -55,11 +63,14 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelThree()
     {
         Debug.Log("Starting Level 3");
-        int treesPlantedObjective = 1;
-        int treesDeadObjective = 1;
-        while (GameStats.DeadTrees < treesDeadObjective || GameStats.PlantedTrees < treesPlantedObjective)
+        GameStats.AvailableLeaves = 3;
+        GameStats.AvailablePines = 3;
+        GameStats.AvailablePinks = 0;
+        ObjectiveList LevelThree = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(2, typeof(Pine)), new PlantTreeObjective(1,typeof(Leaf)),new GetEffectObjective()});
+        while (LevelThree.IsCompleted == false)
         {
-            //just wait
+            LevelThree.EvaluateList();
+            GameStats.ObjectiveProgress = LevelThree.ProgressSummary;
             yield return new WaitForSeconds(1f);
         }
         //spawn victory screen and move on
@@ -73,10 +84,14 @@ public class ObjectiveTracker : MonoBehaviour {
         //Trees can spread
         //TODO: FIGURE OUT PROPER CONDITION
         Debug.Log("Starting Level 4");
-        int treesSpreadObjective = 2;
-        while (GameStats.SpreadTrees < treesSpreadObjective )
+        GameStats.AvailableLeaves = 0;
+        GameStats.AvailablePines = 10;
+        GameStats.AvailablePinks = 0;
+        ObjectiveList levelFour = new ObjectiveList(new List<Objective>(){new PlantTreeObjective(3,typeof(Tree)),new KillTreeObjective(1)});
+        while (levelFour.IsCompleted == false)
         {
-            //just wait
+            levelFour.EvaluateList();
+            GameStats.ObjectiveProgress = levelFour.ProgressSummary;
             yield return new WaitForSeconds(1f);
         }
         InitiateSceneSwitch();
@@ -86,20 +101,10 @@ public class ObjectiveTracker : MonoBehaviour {
     public IEnumerator LevelFive()
     {
         Debug.Log("Starting level 5");
-        /*
-        //TODO: FIGURE OUT THE PROPER
-        int treesSpreadObjective = 5;
-        int pinkPlantedObjective = 1;
-        while (GameStats.SpreadTrees < treesSpreadObjective || GameStats.PlantedPinks < pinkPlantedObjective )
-        {
-            //just wait
-            Debug.Log(GameStats.SpreadTrees + " " + GameStats.PlantedPinks);
-            yield return new WaitForSeconds(1f);
-        }
-         
-         */
-        //TESTING NEW OBJECTIVE SYSTEM
-        ObjectiveList LevelFive = new ObjectiveList(new List<Objective> {new GetEffectObjective(), new GetTreeObjective(10, typeof(Pine)), new PlantTreeObjective(3,typeof(Tree)),new PlantTreeObjective(1, typeof (Pine)), new PlantTreeObjective(1, typeof(Pink))});
+        GameStats.AvailableLeaves = 0;
+        GameStats.AvailablePines = 3;
+        GameStats.AvailablePinks = 0;
+        ObjectiveList LevelFive = new ObjectiveList(new List<Objective>() {new GetTreeObjective(10, typeof (Pine))});
         while (LevelFive.IsCompleted == false)
         {
             LevelFive.EvaluateList();
@@ -154,22 +159,5 @@ public class ObjectiveTracker : MonoBehaviour {
         }
         //end current objective when menu opens
         StopAllCoroutines();
-        /*
-        if (GameObject.Find("Questionnaire") != null)
-        {
-            Debug.Log("opening questionnaire");
-            QuestionnaireManager questionnaire = GameObject.Find("Questionnaire").GetComponent<QuestionnaireManager>();
-            questionnaire.EnableMenu();
-
-        }
-        else if (GameObject.Find("Questionnaire(Clone)") != null)
-        {
-            Debug.Log("opening questionnaire");
-            QuestionnaireManager questionnaire = GameObject.Find("Questionnaire(Clone)").GetComponent<QuestionnaireManager>();
-            questionnaire.EnableMenu();
-        }
-         */
-    }
-
-    
+    }   
 }

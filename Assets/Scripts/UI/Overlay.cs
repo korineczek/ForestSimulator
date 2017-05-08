@@ -10,7 +10,7 @@ public class Overlay : MonoBehaviour
     private Text score;
     private Text turn;
     private Text oxygen;
-    private Text weather;
+    //private Text weather;
     private Text pine;
     private Text leaf;
     private Text pink;
@@ -23,7 +23,7 @@ public class Overlay : MonoBehaviour
         Transform overlayNumbersCanvas = this.transform.FindChild("OverlayCanvas").FindChild("OverlayNumbers");
         score       = overlayNumbersCanvas.FindChild("Score").GetComponent<Text>();
         oxygen      = overlayNumbersCanvas.FindChild("Oxygen").GetComponent<Text>();
-        weather     = overlayNumbersCanvas.FindChild("Weather").GetComponent<Text>();
+        //weather     = overlayNumbersCanvas.FindChild("Weather").GetComponent<Text>();
         pine        = overlayNumbersCanvas.FindChild("PineCount").GetComponent<Text>();
         leaf        = overlayNumbersCanvas.FindChild("LeafCount").GetComponent<Text>();
         pink        = overlayNumbersCanvas.FindChild("PinkCount").GetComponent<Text>();
@@ -39,7 +39,7 @@ public class Overlay : MonoBehaviour
     {
         UpdateScore();
         UpdateOxygen();
-        UpdateWeather();
+        //UpdateWeather();
         UpdatePine();
         UpdateLeaf();
         UpdatePink();
@@ -66,25 +66,25 @@ public class Overlay : MonoBehaviour
     {
         oxygen.text = "OXYGEN: " + GameStats.Oxygen;
     }
-
+/*
     public void UpdateWeather()
     {
         weather.text = "WEATHER: " + GameStats.CurrentWeather;
     }
-
+    */
     public void UpdatePine()
     {
-        pine.text = "PINE COUNT " + GameStats.AvailablePines;
+        pine.text = GameStats.AvailablePines.ToString();
     }
 
 
     public void UpdateLeaf()
     {
-        leaf.text = "LEAF COUNT " + GameStats.AvailableLeaves;
+        leaf.text = GameStats.AvailableLeaves.ToString();
     }
 
     public void UpdatePink()
     {
-        pink.text = "PINK COUNT " + GameStats.AvailablePinks;
+        pink.text = GameStats.AvailablePinks.ToString();
     }
 }

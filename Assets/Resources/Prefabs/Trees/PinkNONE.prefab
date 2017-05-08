@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 95059921081185198}
   - component: {fileID: 82725431874719416}
   m_Layer: 0
-  m_Name: Pink
+  m_Name: PinkNONE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,7 +718,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720514888974852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: eb9f9cd84bfbc0a46b0c0bbe89f41331, type: 3}
   m_Controller: {fileID: 9100000, guid: ea960917ba03729489757058de7e45bc, type: 2}
   m_CullingMode: 1

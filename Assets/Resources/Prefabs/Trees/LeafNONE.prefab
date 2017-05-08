@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 95044750969016928}
   - component: {fileID: 82546295691140506}
   m_Layer: 0
-  m_Name: Leaf 1
+  m_Name: LeafNONE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -951,7 +951,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1232944337330732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: ed700f4e43c435847a2187f845f789e7, type: 3}
   m_Controller: {fileID: 9100000, guid: 13309f623f1e5404084fc6c50c077b1e, type: 2}
   m_CullingMode: 1

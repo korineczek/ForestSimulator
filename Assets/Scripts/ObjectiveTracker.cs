@@ -111,9 +111,25 @@ public class ObjectiveTracker : MonoBehaviour {
             GameStats.ObjectiveProgress = LevelFive.ProgressSummary;
             yield return new WaitForSeconds(1f);
         }
-        Debug.Log("SHIT IT ACTUALLY WORKS");
         InitiateSceneSwitch();
         yield break;
+    }
+
+    public IEnumerator LevelSix()
+    {
+        Debug.Log("Starting level 6");
+        GameStats.AvailableLeaves = 2;
+        GameStats.AvailablePines = 2;
+        GameStats.AvailablePinks = 2;
+        ObjectiveList levelSix = new ObjectiveList(new List<Objective>() { new TimeLimitObjective(120)});
+        while (levelSix.IsCompleted == false)
+        {
+            levelSix.EvaluateList();
+            GameStats.ObjectiveProgress = levelSix.ProgressSummary;
+            yield return new WaitForSeconds(1f);
+        }
+        InitiateSceneSwitch();
+        yield break; 
     }
 
     public void StartNewObjective()
@@ -138,6 +154,9 @@ public class ObjectiveTracker : MonoBehaviour {
             case 4:
                 StartCoroutine(LevelFive());
                 break;
+            case 5:
+                StartCoroutine(LevelSix());
+                break;
         }
     }
 
@@ -157,7 +176,7 @@ public class ObjectiveTracker : MonoBehaviour {
                 camera.FindChild("VictoryLight").gameObject.SetActive(true);
                 break;
             case 3:
-                camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
+                camera.FindChild("VictoryParticles").gameObject.SetActive(true);
                 break;
             case 4:
                 camera.FindChild("VictoryNone").gameObject.SetActive(true);

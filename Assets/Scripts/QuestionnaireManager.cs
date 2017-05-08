@@ -55,13 +55,13 @@ public class QuestionnaireManager : MonoBehaviour {
         Debug.Log("Loading new scene");
         GameStats.ResetStats();
         BoardData.CURRENTBOARD++;
-        if (BoardData.CURRENTBOARD < 5)
+        if (BoardData.CURRENTBOARD < 6)
         {
-            SceneManager.LoadScene(BoardData.CURRENTBOARD + 2);
+            SceneManager.LoadScene(BoardData.CURRENTBOARD + 1);
         }
         else
         {
-            Application.OpenURL("https://goo.gl/forms/RKSxGncJ52xKpKj52");
+            Application.OpenURL("https://goo.gl/forms/69NT5E1EGg19NNbJ2");
             SaveData();
             Application.Quit();
         }

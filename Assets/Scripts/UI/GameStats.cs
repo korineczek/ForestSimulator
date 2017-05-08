@@ -18,7 +18,7 @@ namespace ForestSimulator
 static class GameStats
 {
     //GameType
-    public static int GameType = 4;
+    public static int GameType = 3;
     public static string ParticipantID;
     //General Stats
     public static int Score;

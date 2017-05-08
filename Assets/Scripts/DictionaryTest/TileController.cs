@@ -35,6 +35,16 @@ public class TileController : MonoBehaviour
                 leaf = (Transform)Resources.Load("Prefabs/Trees/LeafLight", typeof(Transform));
                 pink = (Transform)Resources.Load("Prefabs/Trees/PinkLight", typeof(Transform));
                 break;
+            case 3:
+                pine = (Transform)Resources.Load("Prefabs/Trees/PineALL", typeof(Transform));
+                leaf = (Transform)Resources.Load("Prefabs/Trees/LeafALL", typeof(Transform));
+                pink = (Transform)Resources.Load("Prefabs/Trees/PinkALL", typeof(Transform));
+                break;
+            case 4:
+                pine = (Transform)Resources.Load("Prefabs/Trees/Pine", typeof(Transform));
+                leaf = (Transform)Resources.Load("Prefabs/Trees/Leaf", typeof(Transform));
+                pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
+                break;
         }
 
         acorn = (Transform)Resources.Load("Prefabs/Trees/Acorn", typeof(Transform));

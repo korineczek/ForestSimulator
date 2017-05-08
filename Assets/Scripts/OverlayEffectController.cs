@@ -6,6 +6,7 @@ using UnityEngine;
 public class OverlayEffectController : MonoBehaviour
 {
     private Animator targetAnimator;
+    private Animator secondaryAnimator;
 
     private void Awake()
     {
@@ -22,6 +23,14 @@ public class OverlayEffectController : MonoBehaviour
                 transform.FindChild("LightOnScreen").gameObject.SetActive(true);
                 targetAnimator = transform.FindChild("LightOnScreen").GetComponent<Animator>();
                 break;
+            case 3:
+                transform.FindChild("ParticlesOnScreen").gameObject.SetActive(true);
+                transform.FindChild("LightOnScreen").gameObject.SetActive(true);
+                targetAnimator = transform.FindChild("ParticlesOnScreen").GetComponent<Animator>();
+                secondaryAnimator = transform.FindChild("LightOnScreen").GetComponent<Animator>();
+                break;
+            case 4:
+                break;
         }
     }
 
@@ -32,13 +41,25 @@ public class OverlayEffectController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (GameStats.CurrentWeather == WeatherState.SunClouds || GameStats.CurrentWeather == WeatherState.Sunny || GameStats.CurrentWeather == WeatherState.Overcast)
+	    if (GameStats.GameType != 4)
 	    {
-	        targetAnimator.SetBool("fastwind",false);
-	    }
-	    else
-	    {
-	        targetAnimator.SetBool("fastwind",true);
+	        if (GameStats.CurrentWeather == WeatherState.SunClouds || GameStats.CurrentWeather == WeatherState.Sunny ||
+	            GameStats.CurrentWeather == WeatherState.Overcast)
+	        {
+	            targetAnimator.SetBool("fastwind", false);
+	            if (secondaryAnimator != null)
+	            {
+	                secondaryAnimator.SetBool("fastwind", false);
+	            }
+	        }
+	        else
+	        {
+	            targetAnimator.SetBool("fastwind", true);
+	            if (secondaryAnimator != null)
+	            {
+	                secondaryAnimator.SetBool("fastwind", true);
+	            }
+	        }
 	    }
 	}
 }

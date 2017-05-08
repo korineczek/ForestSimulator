@@ -156,6 +156,12 @@ public class ObjectiveTracker : MonoBehaviour {
             case 2:
                 camera.FindChild("VictoryLight").gameObject.SetActive(true);
                 break;
+            case 3:
+                camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
+                break;
+            case 4:
+                camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
+                break;
         }
         //end current objective when menu opens
         StopAllCoroutines();

@@ -41,9 +41,9 @@ public class TileController : MonoBehaviour
                 pink = (Transform)Resources.Load("Prefabs/Trees/PinkALL", typeof(Transform));
                 break;
             case 4:
-                pine = (Transform)Resources.Load("Prefabs/Trees/Pine", typeof(Transform));
-                leaf = (Transform)Resources.Load("Prefabs/Trees/Leaf", typeof(Transform));
-                pink = (Transform)Resources.Load("Prefabs/Trees/Pink", typeof(Transform));
+                pine = (Transform)Resources.Load("Prefabs/Trees/PineNONE", typeof(Transform));
+                leaf = (Transform)Resources.Load("Prefabs/Trees/LeafNONE", typeof(Transform));
+                pink = (Transform)Resources.Load("Prefabs/Trees/PinkNONE", typeof(Transform));
                 break;
         }
 
@@ -53,7 +53,7 @@ public class TileController : MonoBehaviour
     public void UpdateInfo(Tile tile)
     {
         //TODO: Redo so that the values are not retarded
-        this.GetComponent<Renderer>().material.color = BoardData.TileGradient.Evaluate((float)tile.Resource/BoardData.MaxResource);
+        this.GetComponent<Renderer>().material.color = BoardData.TileGradient.Evaluate((float)tile.Resource / BoardData.MaxResource);
         /*
         this.GetComponent<Renderer>().material.color = new Color(1 - ((tile.Resource * 20f) / 255f), 1, 1 - ((tile.Resource * 20f) / 255f));
         this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = tile.OffsetCoordinates + "\n" + tile.Resource;
@@ -103,7 +103,7 @@ public class TileController : MonoBehaviour
         Transform spawnedTree;
         if (tile.PlacedTree != null && tile.TreeTransform == null)
         {
-            if (tile.PlacedTree.GetType() == typeof (Pine))
+            if (tile.PlacedTree.GetType() == typeof(Pine))
             {
                 //spawn pine
                 spawnedTree = Instantiate(pine, tile.WorldCoordinates, pine.rotation);
@@ -111,7 +111,7 @@ public class TileController : MonoBehaviour
                 treeAnimator = spawnedTree.GetComponent<Animator>();
                 //spawnedTree.parent = this.transform;
             }
-            else if (tile.PlacedTree.GetType() == typeof (Leaf))
+            else if (tile.PlacedTree.GetType() == typeof(Leaf))
             {
                 //spawn leaf
                 spawnedTree = Instantiate(leaf, tile.WorldCoordinates, leaf.rotation);
@@ -119,7 +119,7 @@ public class TileController : MonoBehaviour
                 treeAnimator = spawnedTree.GetComponent<Animator>();
                 //spawnedTree.parent = this.transform;
             }
-            else if (tile.PlacedTree.GetType() == typeof (Pink))
+            else if (tile.PlacedTree.GetType() == typeof(Pink))
             {
                 //spawn leaf
                 spawnedTree = Instantiate(pink, tile.WorldCoordinates, pink.rotation);
@@ -127,7 +127,7 @@ public class TileController : MonoBehaviour
                 treeAnimator = spawnedTree.GetComponent<Animator>();
                 ///spawnedTree.parent = this.transform;
             }
-            ScaleTree(tile,false);
+            ScaleTree(tile, false);
         }
         //kill tree lul
         if (tile.TreeTransform != null && tile.PlacedTree == null)
@@ -144,23 +144,28 @@ public class TileController : MonoBehaviour
 
     public void SetAnimationState(Tile tile, AnimState state)
     {
-        switch (state)
+        if (GameStats.GameType != 4)
         {
-            case AnimState.Alive:
-                treeAnimator.SetBool("dying", false);
-                break;
-            case AnimState.Dying:
-                treeAnimator.SetBool("dying", true);
-                break;
-            case AnimState.Wind:
-                treeAnimator.SetBool("fastwind", true);
-                break;
-            case AnimState.Idle:
-                treeAnimator.SetBool("fastwind", false);
-                break;
-            case AnimState.Dead:
-                treeAnimator.SetBool("dead", true);
-                break;
+
+
+            switch (state)
+            {
+                case AnimState.Alive:
+                    treeAnimator.SetBool("dying", false);
+                    break;
+                case AnimState.Dying:
+                    treeAnimator.SetBool("dying", true);
+                    break;
+                case AnimState.Wind:
+                    treeAnimator.SetBool("fastwind", true);
+                    break;
+                case AnimState.Idle:
+                    treeAnimator.SetBool("fastwind", false);
+                    break;
+                case AnimState.Dead:
+                    treeAnimator.SetBool("dead", true);
+                    break;
+            }
         }
     }
 
@@ -169,13 +174,13 @@ public class TileController : MonoBehaviour
         if (tile.TreeTransform != null && tile.PlacedTree.JustPlanted)
         {
             tile.PlacedTree.JustPlanted = false;
-            tile.TreeTransform.localScale = Vector3.one/tile.PlacedTree.TimeToGrow;
+            tile.TreeTransform.localScale = Vector3.one / tile.PlacedTree.TimeToGrow;
         }
         //if tree is growing scale to show the progress
         else if (tile.TreeTransform != null && tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow >= GameStats.Turn)
         {
             //Debug.Log("TREE NOT OLD ENOUGH " + tile.PlacedTree.TimePlanted + " " + GameStats.Turn);
-            int difference = (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow) -  GameStats.Turn;
+            int difference = (tile.PlacedTree.TimePlanted + tile.PlacedTree.TimeToGrow) - GameStats.Turn;
             float scaleMultiplier = 1 - ((float)difference / tile.PlacedTree.TimeToGrow);
             //Debug.Log(difference + " " + scaleMultiplier);
             tile.TreeTransform.localScale = Vector3.one * scaleMultiplier;

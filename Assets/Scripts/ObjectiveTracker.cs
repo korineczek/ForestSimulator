@@ -160,7 +160,7 @@ public class ObjectiveTracker : MonoBehaviour {
                 camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
                 break;
             case 4:
-                camera.FindChild("VictoryAnimation").gameObject.SetActive(true);
+                camera.FindChild("VictoryNone").gameObject.SetActive(true);
                 break;
         }
         //end current objective when menu opens

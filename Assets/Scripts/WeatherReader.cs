@@ -13,14 +13,16 @@ public class WeatherReader : MonoBehaviour
     public AudioSource WindPlayer;
     public AudioSource SunnyPlayer;
 
+    private Transform weatherIcons;
+
     void Awake()
     {
-        weatherForecast = (WeatherForecast)WeatherForecast.CreateInstance(typeof (WeatherForecast));
+        weatherForecast = (WeatherForecast)WeatherForecast.CreateInstance(typeof(WeatherForecast));
         //for debug purposes create a dummy object to test on
         weatherForecast.Forecast = new List<WeatherState>() { WeatherState.HeavyWind, WeatherState.SunClouds, WeatherState.Raining, WeatherState.Sunny };
-
+        weatherIcons = this.transform.FindChild("OverlayCanvas").FindChild("OverlayNumbers").FindChild("Weather");
     }
-    
+
     void SetWeatherSounds(WeatherState state)
     {
         switch (state)
@@ -115,7 +117,6 @@ public class WeatherReader : MonoBehaviour
                     RainPlayer.Play();
                 }
                 break;
-
         }
     }
 
@@ -124,7 +125,7 @@ public class WeatherReader : MonoBehaviour
         float s = 1f;//fadein time
         float startVolume = player.volume;
         player.Play();
-        for(float t=startVolume; t<1f; t+= Time.deltaTime / s)
+        for (float t = startVolume; t < 1f; t += Time.deltaTime / s)
         {
             player.volume = t;
             yield return null;
@@ -135,7 +136,7 @@ public class WeatherReader : MonoBehaviour
     {
         float s = 1f;//fadeout time
         float startVolume = player.volume;
-        for(float t=startVolume; t>0f; t -= Time.deltaTime/s)
+        for (float t = startVolume; t > 0f; t -= Time.deltaTime / s)
         {
             player.volume = t;
             yield return null;
@@ -145,16 +146,11 @@ public class WeatherReader : MonoBehaviour
 
     void Update()
     {
-        //block weather switching until later levels
-        if (BoardData.CURRENTBOARD > 3)
+        //check timing for switching weathers
+        if (GameStats.Turn >= lastWeatherSwitch + GameStats.WeatherInterval)
         {
-            //check timing for switching weathers
-            if (GameStats.Turn >= lastWeatherSwitch + GameStats.WeatherInterval)
-            {
-                lastWeatherSwitch = GameStats.Turn;
-                ChangeWeather(GameStats.WeatherIndex);
-            }
-            //Debug.Log(GameStats.CurrentWeather);
+            lastWeatherSwitch = GameStats.Turn;
+            ChangeWeather(GameStats.WeatherIndex);
         }
         //check if current weather is different
         SetWeatherSounds(GameStats.CurrentWeather);
@@ -167,13 +163,45 @@ public class WeatherReader : MonoBehaviour
         {
             GameStats.CurrentWeather = weatherForecast.Forecast[index + 1];
             GameStats.WeatherIndex = index + 1;
+            ChangeWeatherIcon();
         }
-            //reset weather to the beginning if the weather would
+        //reset weather to the beginning if the weather would
         else
         {
             GameStats.CurrentWeather = weatherForecast.Forecast[0];
             GameStats.WeatherIndex = 0;
+            ChangeWeatherIcon();
         }
     }
 
+    private void ChangeWeatherIcon()
+    {
+        switch (GameStats.CurrentWeather)
+        {
+            case WeatherState.HeavyWind:
+                weatherIcons.GetChild(0).gameObject.SetActive(false);
+                weatherIcons.GetChild(1).gameObject.SetActive(false);
+                weatherIcons.GetChild(2).gameObject.SetActive(false);
+                weatherIcons.GetChild(3).gameObject.SetActive(true);
+                break;
+            case WeatherState.Sunny:
+                weatherIcons.GetChild(0).gameObject.SetActive(true);
+                weatherIcons.GetChild(1).gameObject.SetActive(false);
+                weatherIcons.GetChild(2).gameObject.SetActive(false);
+                weatherIcons.GetChild(3).gameObject.SetActive(false);
+                break;
+            case WeatherState.Raining:
+                weatherIcons.GetChild(0).gameObject.SetActive(false);
+                weatherIcons.GetChild(1).gameObject.SetActive(false);
+                weatherIcons.GetChild(2).gameObject.SetActive(true);
+                weatherIcons.GetChild(3).gameObject.SetActive(false);
+                break;
+            case WeatherState.SunClouds:
+                weatherIcons.GetChild(0).gameObject.SetActive(false);
+                weatherIcons.GetChild(1).gameObject.SetActive(true);
+                weatherIcons.GetChild(2).gameObject.SetActive(false);
+                weatherIcons.GetChild(3).gameObject.SetActive(false);
+                break;
+        }
+    }
 }

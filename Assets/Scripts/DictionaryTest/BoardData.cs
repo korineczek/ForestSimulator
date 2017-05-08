@@ -61,7 +61,7 @@ namespace ForestSimulator
             {
                 switch (CURRENTBOARD)
                 {
-                    case 2:
+                    case 3:
                         Debug.Log("GENERATING CUSTOM TERRAIN");
                         //load specific array
                         for (int i = 0; i < BOARDSIZE[CURRENTBOARD]; i++)
@@ -171,16 +171,6 @@ namespace ForestSimulator
             }
 
             return slopeSum/slopeCount;
-
-            //variant 2 average slope
-            /*
-            return (HexCoords.HexSlope(Map[x + 0, y - 1], Map[x, y]) + 
-                HexCoords.HexSlope(Map[x + 1, y - 1], Map[x, y]) +
-                HexCoords.HexSlope(Map[x + 1, y + 0], Map[x, y]) + 
-                HexCoords.HexSlope(Map[x, y], Map[x + 1, y + 1]) +
-                HexCoords.HexSlope(Map[x, y], Map[x + 0, y + 1]) + 
-                HexCoords.HexSlope(Map[x, y], Map[x - 1, y + 0])) / 6;
-             */
         }
     }
 }

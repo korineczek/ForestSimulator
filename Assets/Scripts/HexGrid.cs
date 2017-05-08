@@ -11,7 +11,7 @@ using ForestSimulator;
 [RequireComponent(typeof(GameManager))]
 public class HexGrid : MonoBehaviour
 {
-    public int LEVEL;
+    //public int LEVEL;
     private Transform tile;
     private float perlinScale = 5f;
 
@@ -21,7 +21,7 @@ public class HexGrid : MonoBehaviour
     {
         //fetch prefab from resources
         tile = (Transform)Resources.Load("Prefabs/Hex", typeof(Transform));
-        BoardData.CURRENTBOARD = LEVEL;
+        //BoardData.CURRENTBOARD = LEVEL;
         Debug.Log(BoardData.CURRENTBOARD);
     }
 
@@ -36,13 +36,13 @@ public class HexGrid : MonoBehaviour
                 BoardData.GenerateBoardData(perlinScale, true);
                 break;
             case 1:
-                BoardData.GenerateBoardData(perlinScale, true);
+                BoardData.GenerateBoardData(perlinScale, false);
                 break;
             case 2:
-                BoardData.GenerateBoardData(perlinScale, true);
+                BoardData.GenerateBoardData(perlinScale, false);
                 break;
             case 3:
-                BoardData.GenerateBoardData(perlinScale, false);
+                BoardData.GenerateBoardData(perlinScale, true);
                 break;
             case 4:
                 BoardData.GenerateBoardData(perlinScale, false);

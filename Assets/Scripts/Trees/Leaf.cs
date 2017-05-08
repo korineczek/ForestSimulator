@@ -42,6 +42,14 @@ public class Leaf : Tree
             }
         }
 
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1]++;
+        }
+
     }
 
     public override void Plant(Vector3 position, bool isManual)
@@ -73,6 +81,14 @@ public class Leaf : Tree
             {
                 BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1]--;
             }
+        }
+
+        offsetCoord = HexCoords.Cube2Offset(position);
+        if ((int)offsetCoord.x > 0 && (int)offsetCoord.x < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1 &&
+                (int)offsetCoord.y > 0 && (int)offsetCoord.y < BoardData.BOARDSIZE[BoardData.CURRENTBOARD] - 1)
+        {
+
+            BoardData.Map[(int)offsetCoord.x, (int)offsetCoord.y].Buffs[1]--;
         }
     }
 }

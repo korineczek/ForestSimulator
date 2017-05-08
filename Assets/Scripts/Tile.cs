@@ -18,8 +18,8 @@ public class Tile
     public float Slope;
 
     //Tile properties
-    public int Resource = 10;
-    public int BaseResource = 10;
+    public int Resource = 15;
+    public int BaseResource = 15;
     public Tree PlacedTree = null;
     public bool IsActive = false;
     public bool IsAvailable = true;

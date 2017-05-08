@@ -3301,6 +3301,47 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 4848948938388460, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 5.5516915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848948938388460, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.47263846
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848948938388460, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.11797651
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069362268697378, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 82.5365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069362268697378, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 14.679535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069362268697378, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 13.7292
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485784697316118, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -71.714836
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485784697316118, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -171.60405
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485784697316118, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -8.276466
+      objectReference: {fileID: 0}
+    - target: {fileID: 95758006168182572, guid: 205461a9c2447a348889f21551d41bf6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205461a9c2447a348889f21551d41bf6, type: 2}
   m_IsPrefabParent: 0
